@@ -43,6 +43,9 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         boolean handled = false;
+        if (keycode == Keys.ESCAPE) {
+            Gdx.app.exit();
+        }
         if (keycode == upKey) {
             verticalModifier += 1;
             handled = true;

@@ -13,9 +13,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import java.util.ArrayList;
-import java.util.List;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.RenderComponent;
 import rosthouse.rosty.components.TiledMapComponent;
@@ -31,25 +32,27 @@ public class RenderSystem extends EntitySystem {
     private final ComponentMapper<TiledMapComponent> cmTiledMap = ComponentMapper.getFor(TiledMapComponent.class);
     private ImmutableArray<Entity> mapEntities;
     private ImmutableArray<Entity> movingObjects;
-    private SpriteBatch batch;
-    List<Entity> renderQueue;
+    private Batch batch;
+    private OrthographicCamera camera;
 
-    public RenderSystem(SpriteBatch batch) {
+    public RenderSystem(Batch batch, OrthographicCamera camera) {
         super();
         this.batch = batch;
-        renderQueue = new ArrayList<Entity>();
+        this.camera = camera;
     }
 
     @Override
     public void removedFromEngine(Engine engine) {
-        super.removedFromEngine(engine); //To change body of generated methods, choose Tools | Templates.
+        mapEntities = null;
+        movingObjects = null;
     }
 
     @Override
     public void addedToEngine(Engine engine) {
-        super.addedToEngine(engine); //To change body of generated methods, choose Tools | Templates.
         mapEntities = engine.getEntitiesFor(Family.getFor(TiledMapComponent.class));
         movingObjects = engine.getEntitiesFor(Family.getFor(RenderComponent.class, PositionComponent.class));
+        camera.update();
+
     }
 
     @Override
@@ -57,12 +60,22 @@ public class RenderSystem extends EntitySystem {
         super.update(deltaTime);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
+        OrthogonalTiledMapRenderer renderer = null;
+        for (int i = 0; i < mapEntities.size(); i++) {
+            TiledMapComponent cpMap = cmTiledMap.get(mapEntities.get(i));
+            renderer = new OrthogonalTiledMapRenderer(cpMap.map, 1f / 32f);
+            renderer.setView(camera);
+            renderer.render();
+        }
+        batch = renderer.getSpriteBatch();
         batch.begin();
-        for (Entity e : renderQueue) {
-            PositionComponent cpPosition = cmPosition.get(e);
-            batch.draw(cmRender.get(e).texture, cpPosition.x, cpPosition.y);
+        for (int i = 0; i < this.movingObjects.size(); i++) {
+            PositionComponent cpPosition = cmPosition.get(movingObjects.get(i));
+            RenderComponent cpRender = cmRender.get(movingObjects.get(i));
+
+            renderer.getSpriteBatch().draw(cpRender.texture, cpPosition.x, cpPosition.y, cpRender.texture.getHeight() * renderer.getUnitScale(), cpRender.texture.getWidth() * renderer.getUnitScale());
         }
         batch.end();
-        renderQueue.clear();
     }
 }

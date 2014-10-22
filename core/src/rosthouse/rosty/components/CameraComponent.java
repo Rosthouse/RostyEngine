@@ -6,18 +6,18 @@
 package rosthouse.rosty.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.graphics.Camera;
 
 /**
  *
  * @author Patrick
  */
-public class TiledMapComponent extends Component {
+public class CameraComponent extends Component {
 
-    public TiledMap map;
+    public final Camera camera;
 
-    public TiledMapComponent(TiledMap map) {
-        this.map = map;
+    public CameraComponent(Camera camera) {
+        this.camera = camera;
     }
 
 }
