@@ -5,14 +5,18 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Polygon;
 import rosthouse.rosty.components.CameraComponent;
+import rosthouse.rosty.components.PolygonComponent;
 import rosthouse.rosty.components.TiledMapComponent;
 import rosthouse.rosty.entities.MovingPicture;
 import rosthouse.rosty.systems.InputSystem;
@@ -42,6 +46,7 @@ public class RostyGame extends ApplicationAdapter {
         try {
             Texture tex = new Texture(Gdx.files.local("../android/assets/badlogic.jpg"));
             MovingPicture entity = new MovingPicture(tex);
+
             entity.add(new CameraComponent(camera));
             engine.addEntity(entity);
             loadMap();
@@ -54,9 +59,22 @@ public class RostyGame extends ApplicationAdapter {
     public void loadMap() {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new LocalFileHandleResolver()));
         assetManager.load("../android/assets/maps/test.tmx", TiledMap.class);
-        // once the asset manager is done loading
         assetManager.finishLoading();
         TiledMap map = assetManager.get("../android/assets/maps/test.tmx");
+        for (MapLayer layer : map.getLayers()) {
+            if (layer.getName().equals("Collisions")) {
+                for (MapObject object : layer.getObjects()) {
+                    if (object instanceof PolygonMapObject) {
+                        PolygonMapObject obj = (PolygonMapObject) object;
+                        Polygon ply = obj.getPolygon();
+                        PolygonComponent plyCmp = new PolygonComponent(ply);
+                        engine.addEntity(new Entity().add(plyCmp));
+                    }
+
+                    System.out.println(object);
+                }
+            }
+        }
         Entity mapEntity = new Entity();
         mapEntity.add(new TiledMapComponent(map));
         engine.addEntity(mapEntity);
