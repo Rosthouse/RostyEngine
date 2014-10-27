@@ -9,6 +9,9 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import rosthouse.rosty.components.CameraComponent;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.VelocityComponent;
@@ -31,16 +34,29 @@ public class MovementSystem extends IteratingSystem {
     public void processEntity(Entity entity, float deltaTime) {
         VelocityComponent cpVelocity = cmMovement.get(entity);
         PositionComponent cpPosition = cmPosition.get(entity);
-        float xTranslation = cpVelocity.horizontal * deltaTime * cpVelocity.speed;
-        float yTranslation = cpVelocity.vertical * deltaTime * cpVelocity.speed;
+        float xTranslation = cpVelocity.xAxis * deltaTime * cpVelocity.speed;
+        float yTranslation = cpVelocity.yAxis * deltaTime * cpVelocity.speed;
         cpPosition.x += xTranslation;
         cpPosition.y += yTranslation;
 
         if (cmCamera.has(entity)) {
             CameraComponent cpCamera = cmCamera.get(entity);
-            cpCamera.camera.position.x = cpPosition.x;
-            cpCamera.camera.position.y = cpPosition.y;
+            updateCamera((OrthographicCamera) cpCamera.camera, cpPosition.x, cpPosition.y, cpVelocity.zAxis * deltaTime);
         }
+    }
+
+    private void updateCamera(OrthographicCamera camera, float x, float y, float zoom) {
+        camera.zoom += zoom;
+        camera.translate(x, y, priority);
+
+        float effectiveViewportWidth = camera.viewportWidth * camera.zoom;
+        float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
+
+        camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 100 / camera.viewportWidth);
+        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
+        Gdx.app.log("Camera Position", String.format("X: %f, Y: %f, Z: %f", camera.position.x, camera.position.y, camera.position.z));
+
     }
 
 }

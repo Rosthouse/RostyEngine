@@ -40,7 +40,7 @@ public class RostyGame extends ApplicationAdapter {
         camera.setToOrtho(false, (w / h) * 10, 10);
         engine.addSystem(new InputSystem());
         engine.addSystem(new MovementSystem());
-        engine.addSystem(new RenderSystem(batch, camera));
+        engine.addSystem(new RenderSystem(camera));
         String localPath = Gdx.files.getLocalStoragePath();
         String internalPath = Gdx.files.getExternalStoragePath();
         try {
@@ -76,7 +76,7 @@ public class RostyGame extends ApplicationAdapter {
             }
         }
         Entity mapEntity = new Entity();
-        mapEntity.add(new TiledMapComponent(map));
+        mapEntity.add(new TiledMapComponent(map, 1f / 32f));
         engine.addEntity(mapEntity);
     }
 

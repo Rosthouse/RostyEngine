@@ -23,20 +23,19 @@ import rosthouse.rosty.components.VelocityComponent;
 public class InputSystem extends IteratingSystem implements InputProcessor {
 
     private ComponentMapper<VelocityComponent> cmVelocity = ComponentMapper.getFor(VelocityComponent.class);
-    private int upKey;
-    private int downKey;
-    private int leftKey;
-    private int rightKey;
+    private int upKey = Keys.W;
+    private int downKey = Keys.S;
+    private int leftKey = Keys.A;
+    private int rightKey = Keys.D;
+    private int riseKey = Keys.UP;
+    private int lowerKey = Keys.DOWN;
 
     private int verticalModifier = 0;
     private int horizontalModifier = 0;
+    private int zoomModifier = 0;
 
     public InputSystem() {
         super(Family.getFor(VelocityComponent.class));
-        upKey = Keys.W;
-        downKey = Keys.S;
-        leftKey = Keys.A;
-        rightKey = Keys.D;
         Gdx.input.setInputProcessor(this);
     }
 
@@ -62,6 +61,14 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             horizontalModifier += 1;
             handled = true;
         }
+        if (keycode == lowerKey) {
+            zoomModifier -= 1;
+            handled = true;
+        }
+        if (keycode == riseKey) {
+            zoomModifier += 1;
+            handled = true;
+        }
 
         return handled;
     }
@@ -83,6 +90,14 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
         }
         if (keycode == rightKey) {
             horizontalModifier -= 1;
+            handled = true;
+        }
+        if (keycode == lowerKey) {
+            zoomModifier += 1;
+            handled = true;
+        }
+        if (keycode == riseKey) {
+            zoomModifier -= 1;
             handled = true;
         }
 
@@ -122,8 +137,9 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         VelocityComponent cpVelocity = cmVelocity.get(entity);
-        cpVelocity.horizontal = horizontalModifier;
-        cpVelocity.vertical = verticalModifier;
+        cpVelocity.xAxis = horizontalModifier;
+        cpVelocity.yAxis = verticalModifier;
+        cpVelocity.zAxis = zoomModifier;
     }
 
 }

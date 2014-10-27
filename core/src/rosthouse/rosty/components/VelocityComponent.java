@@ -13,7 +13,8 @@ import com.badlogic.ashley.core.Component;
  */
 public class VelocityComponent extends Component {
 
-    public int horizontal = 0;
-    public int vertical = 0;
+    public int xAxis = 0;
+    public int yAxis = 0;
+    public int zAxis = 0;
     public int speed = 80;
 }

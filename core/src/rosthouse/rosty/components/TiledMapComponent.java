@@ -7,6 +7,7 @@ package rosthouse.rosty.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 /**
  *
@@ -14,10 +15,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
  */
 public class TiledMapComponent extends Component {
 
-    public TiledMap map;
+    public final TiledMap map;
+    public final OrthogonalTiledMapRenderer renderer;
 
-    public TiledMapComponent(TiledMap map) {
+    public TiledMapComponent(TiledMap map, float unitScale) {
         this.map = map;
+        renderer = new OrthogonalTiledMapRenderer(map, unitScale);
     }
 
 }
