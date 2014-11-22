@@ -7,16 +7,19 @@ package rosthouse.rosty.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import rosthouse.rosty.components.VelocityComponent;
 
 /**
+ * Collects Input from devices and notifies the components that listen for
+ * specific inputs.
+ * <p>
+ * This should later be refactored and adapted for each device, so that
+ * Androidand Desktop have different implementations.</p>
  *
  * @author Patrick
  */

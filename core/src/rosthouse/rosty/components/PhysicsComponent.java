@@ -5,19 +5,18 @@
  */
 package rosthouse.rosty.components;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.physics.box2d.Shape;
 
 /**
  *
  * @author Patrick
  */
-public class RenderComponent extends Component {
+public class PhysicsComponent<T extends Shape> {
 
-    public Texture texture;
+    public final T shape;
 
-    public RenderComponent(Texture texture) {
-        this.texture = texture;
+    public PhysicsComponent(T shape) {
+        this.shape = shape;
     }
 
 }

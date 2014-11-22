@@ -6,8 +6,10 @@
 package rosthouse.rosty.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Entity;
 
 /**
+ * Component representing a position for an {@link Entity}.
  *
  * @author Patrick
  */

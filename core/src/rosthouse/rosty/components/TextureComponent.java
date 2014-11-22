@@ -6,19 +6,19 @@
 package rosthouse.rosty.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Component containing a {@link Polygon}.
+ * Component containing a {@link Texture}.
  *
  * @author Patrick
  */
-public class PolygonComponent extends Component {
+public class TextureComponent extends Component {
 
-    final public Polygon polygon;
+    public final Texture texture;
 
-    public PolygonComponent(Polygon polygon) {
-        this.polygon = polygon;
+    public TextureComponent(Texture texture) {
+        this.texture = texture;
     }
 
 }

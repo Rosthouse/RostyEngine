@@ -8,7 +8,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
@@ -23,17 +22,22 @@ import rosthouse.rosty.systems.InputSystem;
 import rosthouse.rosty.systems.MovementSystem;
 import rosthouse.rosty.systems.RenderSystem;
 
+/**
+ * Main class for the game. Starts all systems and loads the initial map.
+ *
+ * @author Patrick
+ */
 public class RostyGame extends ApplicationAdapter {
 
-    SpriteBatch batch;
     Engine engine;
     AssetManager assetManager;
+
+    private float unitScale = 1f / 32f;
 
     @Override
     public void create() {
         assetManager = new AssetManager();
         engine = new Engine();
-        batch = new SpriteBatch();
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         OrthographicCamera camera = new OrthographicCamera();
@@ -41,12 +45,9 @@ public class RostyGame extends ApplicationAdapter {
         engine.addSystem(new InputSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new RenderSystem(camera));
-        String localPath = Gdx.files.getLocalStoragePath();
-        String internalPath = Gdx.files.getExternalStoragePath();
         try {
             Texture tex = new Texture(Gdx.files.local("../android/assets/badlogic.jpg"));
             MovingPicture entity = new MovingPicture(tex);
-
             entity.add(new CameraComponent(camera));
             engine.addEntity(entity);
             loadMap();
@@ -67,6 +68,16 @@ public class RostyGame extends ApplicationAdapter {
                     if (object instanceof PolygonMapObject) {
                         PolygonMapObject obj = (PolygonMapObject) object;
                         Polygon ply = obj.getPolygon();
+                        /**
+                         * Sadly, Tiled doesn't save the position of objects
+                         * relative to tiles, but rather in world space.
+                         * Meaning, if you scale the world, the tiles will be
+                         * scaled, but not the objects. To resolve this, you
+                         * need to scale the object at runtime, as well as its
+                         * position.
+                         */
+                        ply.setPosition(ply.getX() * unitScale, ply.getY() * unitScale);
+                        ply.setScale(unitScale, unitScale);
                         PolygonComponent plyCmp = new PolygonComponent(ply);
                         engine.addEntity(new Entity().add(plyCmp));
                     }
@@ -76,7 +87,8 @@ public class RostyGame extends ApplicationAdapter {
             }
         }
         Entity mapEntity = new Entity();
-        mapEntity.add(new TiledMapComponent(map, 1f / 32f));
+        mapEntity.add(new TiledMapComponent(map, unitScale));
+//        mapEntity.add(new TiledMapComponent(map, 1));
         engine.addEntity(mapEntity);
     }
 

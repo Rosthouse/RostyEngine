@@ -10,6 +10,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 /**
+ * Component containing a {@link TiledMap} and the corresponding
+ * {@link BatchTiledMapRenderer}.
  *
  * @author Patrick
  */

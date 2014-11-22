@@ -9,6 +9,7 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Camera;
 
 /**
+ * Component containing a {@link Camera}
  *
  * @author Patrick
  */

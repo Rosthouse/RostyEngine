@@ -17,6 +17,7 @@ import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.VelocityComponent;
 
 /**
+ * Moves {@link Entities} with a {@link PositionComponent} around.
  *
  * @author Patrick
  */
@@ -53,8 +54,10 @@ public class MovementSystem extends IteratingSystem {
         float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
 
         camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 100 / camera.viewportWidth);
-        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
+        camera.position.x = MathUtils.clamp(x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
+//        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
+//        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
         Gdx.app.log("Camera Position", String.format("X: %f, Y: %f, Z: %f", camera.position.x, camera.position.y, camera.position.z));
 
     }
