@@ -1,5 +1,5 @@
 
-import sun.org.mozilla.javascript.internal.Node
+//import sun.org.mozilla.javascript.internal.Node
 
 apply plugin: "java"
 

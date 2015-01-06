@@ -12,7 +12,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
-import rosthouse.rosty.components.CameraComponent;
+import rosthouse.rosty.components.OrthographicCameraComponent;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.VelocityComponent;
 
@@ -25,7 +25,7 @@ public class MovementSystem extends IteratingSystem {
 
     private ComponentMapper<PositionComponent> cmPosition = ComponentMapper.getFor(PositionComponent.class);
     private ComponentMapper<VelocityComponent> cmMovement = ComponentMapper.getFor(VelocityComponent.class);
-    private ComponentMapper<CameraComponent> cmCamera = ComponentMapper.getFor(CameraComponent.class);
+    private ComponentMapper<OrthographicCameraComponent> cmCamera = ComponentMapper.getFor(OrthographicCameraComponent.class);
 
     public MovementSystem() {
         super(Family.getFor(PositionComponent.class, VelocityComponent.class));
@@ -35,13 +35,13 @@ public class MovementSystem extends IteratingSystem {
     public void processEntity(Entity entity, float deltaTime) {
         VelocityComponent cpVelocity = cmMovement.get(entity);
         PositionComponent cpPosition = cmPosition.get(entity);
-        float xTranslation = cpVelocity.xAxis * deltaTime * cpVelocity.speed;
-        float yTranslation = cpVelocity.yAxis * deltaTime * cpVelocity.speed;
-        cpPosition.x += xTranslation;
-        cpPosition.y += yTranslation;
+//        float xTranslation = cpVelocity.xAxis * deltaTime * cpVelocity.speed;
+//        float yTranslation = cpVelocity.yAxis * deltaTime * cpVelocity.speed;
+//        cpPosition.x += xTranslation;
+//        cpPosition.y += yTranslation;
 
         if (cmCamera.has(entity)) {
-            CameraComponent cpCamera = cmCamera.get(entity);
+            OrthographicCameraComponent cpCamera = cmCamera.get(entity);
             updateCamera((OrthographicCamera) cpCamera.camera, cpPosition.x, cpPosition.y, cpVelocity.zAxis * deltaTime);
         }
     }

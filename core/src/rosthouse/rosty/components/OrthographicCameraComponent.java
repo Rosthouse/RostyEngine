@@ -7,17 +7,18 @@ package rosthouse.rosty.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 /**
  * Component containing a {@link Camera}
  *
  * @author Patrick
  */
-public class CameraComponent extends Component {
+public class OrthographicCameraComponent extends Component {
 
-    public final Camera camera;
+    public final OrthographicCamera camera;
 
-    public CameraComponent(Camera camera) {
+    public OrthographicCameraComponent(OrthographicCamera camera) {
         this.camera = camera;
     }
 

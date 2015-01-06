@@ -10,16 +10,25 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Polygon;
-import rosthouse.rosty.components.CameraComponent;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.ChainShape;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import rosthouse.rosty.components.OrthographicCameraComponent;
+import rosthouse.rosty.components.PhysicsComponent;
 import rosthouse.rosty.components.PolygonComponent;
 import rosthouse.rosty.components.TiledMapComponent;
 import rosthouse.rosty.entities.MovingPicture;
 import rosthouse.rosty.systems.InputSystem;
 import rosthouse.rosty.systems.MovementSystem;
+import rosthouse.rosty.systems.PhysicsSystem;
 import rosthouse.rosty.systems.RenderSystem;
 
 /**
@@ -31,6 +40,10 @@ public class RostyGame extends ApplicationAdapter {
 
     Engine engine;
     AssetManager assetManager;
+    RenderSystem renderSystem;
+    MovementSystem movementSystem;
+    InputSystem inputSystem;
+    PhysicsSystem physicsSystem;
 
     private float unitScale = 1f / 32f;
 
@@ -38,28 +51,25 @@ public class RostyGame extends ApplicationAdapter {
     public void create() {
         assetManager = new AssetManager();
         engine = new Engine();
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
-        OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false, (w / h) * 10, 10);
-        engine.addSystem(new InputSystem());
-        engine.addSystem(new MovementSystem());
-        engine.addSystem(new RenderSystem(camera));
-        try {
-            Texture tex = new Texture(Gdx.files.local("../android/assets/badlogic.jpg"));
-            MovingPicture entity = new MovingPicture(tex);
-            entity.add(new CameraComponent(camera));
-            engine.addEntity(entity);
-            loadMap();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        renderSystem = new RenderSystem(null);
+        movementSystem = new MovementSystem();
+        inputSystem = new InputSystem();
+        physicsSystem = new PhysicsSystem();
+
+        engine.addSystem(inputSystem);
+        engine.addSystem(physicsSystem);
+        engine.addSystem(movementSystem);
+        engine.addSystem(renderSystem);
+        loadMap();
+        renderSystem.setWorldToDebug(physicsSystem.getWorld());
 
     }
 
     public void loadMap() {
+        TmxMapLoader.Parameters paramters = new TmxMapLoader.Parameters();
+        paramters.convertObjectToTileSpace = true;
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new LocalFileHandleResolver()));
-        assetManager.load("../android/assets/maps/test.tmx", TiledMap.class);
+        assetManager.load("../android/assets/maps/test.tmx", TiledMap.class, paramters);
         assetManager.finishLoading();
         TiledMap map = assetManager.get("../android/assets/maps/test.tmx");
         for (MapLayer layer : map.getLayers()) {
@@ -68,17 +78,55 @@ public class RostyGame extends ApplicationAdapter {
                     if (object instanceof PolygonMapObject) {
                         PolygonMapObject obj = (PolygonMapObject) object;
                         Polygon ply = obj.getPolygon();
-                        /**
-                         * Sadly, Tiled doesn't save the position of objects
-                         * relative to tiles, but rather in world space.
-                         * Meaning, if you scale the world, the tiles will be
-                         * scaled, but not the objects. To resolve this, you
-                         * need to scale the object at runtime, as well as its
-                         * position.
-                         */
-                        ply.setPosition(ply.getX() * unitScale, ply.getY() * unitScale);
-                        ply.setScale(unitScale, unitScale);
                         PolygonComponent plyCmp = new PolygonComponent(ply);
+
+                        ChainShape polygonShape = new ChainShape();
+                        Vector2[] vertices = new Vector2[plyCmp.polygon.getTransformedVertices().length / 2];
+                        for (int i = 0; i < plyCmp.polygon.getTransformedVertices().length; i += 2) {
+                            vertices[i / 2] = new Vector2(plyCmp.polygon.getTransformedVertices()[i], plyCmp.polygon.getTransformedVertices()[i + 1]);
+                        }
+                        try {
+                            polygonShape.createLoop(vertices);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        FixtureDef fixtureDef = new FixtureDef();
+                        fixtureDef.density = 0;
+                        fixtureDef.friction = 1;
+                        fixtureDef.restitution = 0.2f;
+                        PhysicsComponent<ChainShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX() * unitScale, ply.getY() * unitScale), fixtureDef);
+                        engine.addEntity(new Entity().add(plyCmp).add(cmpPhys));
+                    }
+                    System.out.println(object);
+                }
+            } else if (layer.getName().equals("Level")) {
+                for (MapObject object : layer.getObjects()) {
+                    if (object.getName().equals("Start")) {
+                        float w = Gdx.graphics.getWidth();
+                        float h = Gdx.graphics.getHeight();
+                        OrthographicCamera camera = new OrthographicCamera();
+                        camera.setToOrtho(false, (w / h) * 10, 10);
+                        Texture tex = new Texture(Gdx.files.local("../android/assets/level/marble.png"));
+                        Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
+                        MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
+
+                        CircleShape circleShape = new CircleShape();
+                        circleShape.setRadius((tex.getHeight() * unitScale) / 2);
+                        FixtureDef fd = new FixtureDef();
+                        fd.density = 5;
+                        fd.friction = 5;
+                        fd.restitution = 0.3f;
+                        PhysicsComponent<CircleShape> marble = physicsSystem.createPhysicsComponent(BodyDef.BodyType.DynamicBody, circleShape, new Vector2(ellipse.x, ellipse.y), fd);
+                        entity.add(marble);
+                        entity.add(new OrthographicCameraComponent(camera));
+                        engine.addEntity(entity);
+                    }
+                    if (object instanceof PolygonMapObject) {
+                        PolygonMapObject obj = (PolygonMapObject) object;
+                        Polygon ply = obj.getPolygon();
+                        PolygonComponent plyCmp = new PolygonComponent(ply);
+                        plyCmp.polygon.getTransformedVertices();
+
                         engine.addEntity(new Entity().add(plyCmp));
                     }
 

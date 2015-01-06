@@ -20,6 +20,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
+import rosthouse.rosty.components.OrthographicCameraComponent;
 import rosthouse.rosty.components.PolygonComponent;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.TextureComponent;
@@ -36,17 +39,20 @@ public class RenderSystem extends EntitySystem implements EntityListener {
     private final ComponentMapper<PositionComponent> cmPosition = ComponentMapper.getFor(PositionComponent.class);
     private final ComponentMapper<TiledMapComponent> cmTiledMap = ComponentMapper.getFor(TiledMapComponent.class);
     private final ComponentMapper<PolygonComponent> cmPolygon = ComponentMapper.getFor(PolygonComponent.class);
+    private final ComponentMapper<OrthographicCameraComponent> cmCamera = ComponentMapper.getFor(OrthographicCameraComponent.class);
     private ImmutableArray<Entity> spriteEntites;
     private ImmutableArray<Entity> polygonEntites;
+    private ImmutableArray<Entity> cameraEntities;
     private SpriteBatch spriteBatch;
-    private OrthographicCamera camera;
+//    private OrthographicCamera camera;
     private ShapeRenderer shapeRenderer;
     private TiledMapComponent cpMap;
+    private World debugWorld;
+    private Box2DDebugRenderer debugRenderer = null;
 
     public RenderSystem(OrthographicCamera camera) {
         super();
         this.spriteBatch = new SpriteBatch();
-        this.camera = camera;
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
     }
@@ -55,8 +61,8 @@ public class RenderSystem extends EntitySystem implements EntityListener {
     public void removedFromEngine(Engine engine) {
         spriteEntites = null;
         spriteBatch = null;
-        camera = null;
         spriteEntites = null;
+
     }
 
     @Override
@@ -64,7 +70,7 @@ public class RenderSystem extends EntitySystem implements EntityListener {
         engine.addEntityListener(this);
         spriteEntites = engine.getEntitiesFor(Family.getFor(ComponentType.getBitsFor(PositionComponent.class), ComponentType.getBitsFor(TextureComponent.class, PolygonComponent.class), ComponentType.getBitsFor()));
         polygonEntites = engine.getEntitiesFor(Family.getFor(PolygonComponent.class));
-        camera.update();
+        cameraEntities = engine.getEntitiesFor(Family.getFor(OrthographicCameraComponent.class));
     }
 
     @Override
@@ -72,20 +78,32 @@ public class RenderSystem extends EntitySystem implements EntityListener {
         super.update(deltaTime);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.update();
+//        camera.update();
+
+        for (int i = 0; i < cameraEntities.size(); i++) {
+            OrthographicCamera camera = cmCamera.get(cameraEntities.get(i)).camera;
+            camera.update();
+            renderCamera(camera);
+            if (debugRenderer != null) {
+                debugRenderer.render(debugWorld, camera.combined);
+            }
+        }
+
+    }
+
+    private void renderCamera(OrthographicCamera camera) {
         cpMap.renderer.setView(camera);
 
         cpMap.renderer.render();
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
-        for (int i = 0; i < this.spriteEntites.size(); i++) {
-            PositionComponent cpPosition = cmPosition.get(spriteEntites.get(i));
-            TextureComponent cpRender = cmRender.get(spriteEntites.get(i));
+        for (int j = 0; j < this.spriteEntites.size(); j++) {
+            PositionComponent cpPosition = cmPosition.get(spriteEntites.get(j));
+            TextureComponent cpRender = cmRender.get(spriteEntites.get(j));
             spriteBatch.draw(cpRender.texture, cpPosition.x, cpPosition.y, cpRender.texture.getHeight() * cpMap.renderer.getUnitScale(), cpRender.texture.getWidth() * cpMap.renderer.getUnitScale());
-//            spriteBatch.draw(cpRender.texture, cpPosition.x, cpPosition.y, cpRender.texture.getHeight(), cpRender.texture.getWidth());
         }
         spriteBatch.end();
-        renderShapes(camera.combined);
+//        renderShapes(camera.combined);
     }
 
     void renderShapes(Matrix4 projectionMatrix) {
@@ -114,6 +132,11 @@ public class RenderSystem extends EntitySystem implements EntityListener {
         if (cmTiledMap.has(entity)) {
             cpMap = null;
         }
+    }
+
+    public void setWorldToDebug(World world) {
+        this.debugWorld = world;
+        this.debugRenderer = new Box2DDebugRenderer();
     }
 
 }

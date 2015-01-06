@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
  <tileset firstgid="1" source="Terrain.tsx"/>
+ <tileset firstgid="1025" name="Level" tilewidth="32" tileheight="32">
+  <tile id="0">
+   <image width="32" height="32" source="../Level/Start.bmp"/>
+  </tile>
+ </tileset>
  <layer name="Base" width="100" height="100">
   <data encoding="base64" compression="zlib">
    eJztwwEJAAAMBKHL+v1DDJZDwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AUIN9PM=
@@ -22,6 +27,11 @@
     <property name="contactsound" value="raschel"/>
    </properties>
    <polygon points="0,0 -50,2 -52,115 -6,127 49,185 93,190 144,251 194,255 241,315 288,313 290,227 261,219 253,195 201,184 189,161 160,128 109,125 95,98 63,66 8,57"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Level">
+  <object name="Start" x="254" y="104" width="32" height="32">
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

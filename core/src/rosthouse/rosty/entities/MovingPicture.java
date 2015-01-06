@@ -20,8 +20,15 @@ import rosthouse.rosty.components.VelocityComponent;
 public class MovingPicture extends Entity {
 
     public MovingPicture(Texture texture) {
+        this(texture, 0, 0);
+    }
+
+    public MovingPicture(Texture texture, float x, float y) {
         super();
-        this.add(new PositionComponent());
+        PositionComponent pos = new PositionComponent();
+        pos.x = x;
+        pos.y = y;
+        this.add(pos);
         this.add(new VelocityComponent());
         this.add(new TextureComponent(texture));
     }
