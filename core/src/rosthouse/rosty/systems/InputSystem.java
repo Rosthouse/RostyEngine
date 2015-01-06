@@ -11,6 +11,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import rosthouse.rosty.components.VelocityComponent;
 
@@ -25,6 +26,7 @@ import rosthouse.rosty.components.VelocityComponent;
  */
 public class InputSystem extends IteratingSystem implements InputProcessor {
 
+    private InputMultiplexer multiplexer;
     private ComponentMapper<VelocityComponent> cmVelocity = ComponentMapper.getFor(VelocityComponent.class);
     private int upKey = Keys.W;
     private int downKey = Keys.S;
@@ -39,7 +41,16 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     public InputSystem() {
         super(Family.getFor(VelocityComponent.class));
-        Gdx.input.setInputProcessor(this);
+        multiplexer = new InputMultiplexer(this);
+        Gdx.input.setInputProcessor(multiplexer);
+    }
+
+    public void addInputProcessor(InputProcessor processor) {
+        multiplexer.addProcessor(processor);
+    }
+
+    public void removeInputProcessor(InputProcessor processor) {
+        multiplexer.removeProcessor(processor);
     }
 
     @Override

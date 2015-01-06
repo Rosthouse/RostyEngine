@@ -4,8 +4,9 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
@@ -30,6 +31,8 @@ import rosthouse.rosty.systems.InputSystem;
 import rosthouse.rosty.systems.MovementSystem;
 import rosthouse.rosty.systems.PhysicsSystem;
 import rosthouse.rosty.systems.RenderSystem;
+import rosthouse.rosty.systems.debug.PhysicsDebugRenderSystem;
+import rosthouse.rosty.systems.debug.ShapeRenderSystem;
 
 /**
  * Main class for the game. Starts all systems and loads the initial map.
@@ -44,8 +47,37 @@ public class RostyGame extends ApplicationAdapter {
     MovementSystem movementSystem;
     InputSystem inputSystem;
     PhysicsSystem physicsSystem;
+    PhysicsDebugRenderSystem physicsDebugSystem;
+    ShapeRenderSystem shapeRenderSystem;
 
-    private float unitScale = 1f / 32f;
+    private final float unitScale = 1f / 32f;
+
+    private final class GameInputAdapter extends InputAdapter {
+
+        @Override
+        public boolean keyTyped(char character) {
+
+            if (character == 'p') {
+                if (physicsDebugSystem == null) {
+                    physicsDebugSystem = new PhysicsDebugRenderSystem(physicsSystem.getWorld());
+                    engine.addSystem(physicsDebugSystem);
+                } else {
+                    engine.removeSystem(physicsDebugSystem);
+                    physicsDebugSystem = null;
+                }
+            } else if (character == 'o') {
+                if (shapeRenderSystem == null) {
+                    shapeRenderSystem = new ShapeRenderSystem();
+                    engine.addSystem(shapeRenderSystem);
+                } else {
+                    engine.removeSystem(shapeRenderSystem);
+                    shapeRenderSystem = null;
+                }
+            }
+            return super.keyTyped(character); //To change body of generated methods, choose Tools | Templates.
+        }
+
+    };
 
     @Override
     public void create() {
@@ -56,19 +88,18 @@ public class RostyGame extends ApplicationAdapter {
         inputSystem = new InputSystem();
         physicsSystem = new PhysicsSystem();
 
+        inputSystem.addInputProcessor(new GameInputAdapter());
         engine.addSystem(inputSystem);
         engine.addSystem(physicsSystem);
         engine.addSystem(movementSystem);
         engine.addSystem(renderSystem);
         loadMap();
-        renderSystem.setWorldToDebug(physicsSystem.getWorld());
-
     }
 
     public void loadMap() {
         TmxMapLoader.Parameters paramters = new TmxMapLoader.Parameters();
         paramters.convertObjectToTileSpace = true;
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new LocalFileHandleResolver()));
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load("../android/assets/maps/test.tmx", TiledMap.class, paramters);
         assetManager.finishLoading();
         TiledMap map = assetManager.get("../android/assets/maps/test.tmx");
@@ -106,7 +137,7 @@ public class RostyGame extends ApplicationAdapter {
                         float h = Gdx.graphics.getHeight();
                         OrthographicCamera camera = new OrthographicCamera();
                         camera.setToOrtho(false, (w / h) * 10, 10);
-                        Texture tex = new Texture(Gdx.files.local("../android/assets/level/marble.png"));
+                        Texture tex = new Texture(Gdx.files.internal("../android/assets/level/marble.png"));
                         Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
                         MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
 
