@@ -82,7 +82,10 @@ public class RenderSystem extends EntitySystem implements EntityListener {
         for (int j = 0; j < this.spriteEntites.size(); j++) {
             PositionComponent cpPosition = cmPosition.get(spriteEntites.get(j));
             TextureComponent cpRender = cmRender.get(spriteEntites.get(j));
-            spriteBatch.draw(cpRender.texture, cpPosition.x, cpPosition.y, cpRender.texture.getHeight() * cpMap.renderer.getUnitScale(), cpRender.texture.getWidth() * cpMap.renderer.getUnitScale());
+            cpRender.texture.setCenter(cpPosition.x, cpPosition.y);
+            cpRender.texture.setScale(cpMap.renderer.getUnitScale());
+            cpRender.texture.setRotation((float) Math.toDegrees(cpPosition.rotation));
+            cpRender.texture.draw(spriteBatch);
         }
         spriteBatch.end();
     }

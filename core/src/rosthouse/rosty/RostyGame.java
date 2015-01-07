@@ -112,9 +112,9 @@ public class RostyGame extends ApplicationAdapter {
                         PolygonComponent plyCmp = new PolygonComponent(ply);
 
                         ChainShape polygonShape = new ChainShape();
-                        Vector2[] vertices = new Vector2[plyCmp.polygon.getTransformedVertices().length / 2];
+                        Vector2[] vertices = new Vector2[plyCmp.polygon.getVertices().length / 2];
                         for (int i = 0; i < plyCmp.polygon.getTransformedVertices().length; i += 2) {
-                            vertices[i / 2] = new Vector2(plyCmp.polygon.getTransformedVertices()[i], plyCmp.polygon.getTransformedVertices()[i + 1]);
+                            vertices[i / 2] = new Vector2(plyCmp.polygon.getVertices()[i], plyCmp.polygon.getVertices()[i + 1]);
                         }
                         try {
                             polygonShape.createLoop(vertices);
@@ -125,7 +125,7 @@ public class RostyGame extends ApplicationAdapter {
                         fixtureDef.density = 0;
                         fixtureDef.friction = 1;
                         fixtureDef.restitution = 0.2f;
-                        PhysicsComponent<ChainShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX() * unitScale, ply.getY() * unitScale), fixtureDef);
+                        PhysicsComponent<ChainShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX(), ply.getY()), fixtureDef);
                         engine.addEntity(new Entity().add(plyCmp).add(cmpPhys));
                     }
                     System.out.println(object);
@@ -152,22 +152,11 @@ public class RostyGame extends ApplicationAdapter {
                         entity.add(new OrthographicCameraComponent(camera));
                         engine.addEntity(entity);
                     }
-                    if (object instanceof PolygonMapObject) {
-                        PolygonMapObject obj = (PolygonMapObject) object;
-                        Polygon ply = obj.getPolygon();
-                        PolygonComponent plyCmp = new PolygonComponent(ply);
-                        plyCmp.polygon.getTransformedVertices();
-
-                        engine.addEntity(new Entity().add(plyCmp));
-                    }
-
-                    System.out.println(object);
                 }
             }
         }
         Entity mapEntity = new Entity();
         mapEntity.add(new TiledMapComponent(map, unitScale));
-//        mapEntity.add(new TiledMapComponent(map, 1));
         engine.addEntity(mapEntity);
     }
 

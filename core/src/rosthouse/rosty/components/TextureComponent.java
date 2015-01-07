@@ -7,18 +7,19 @@ package rosthouse.rosty.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
- * Component containing a {@link Texture}.
+ * Component containing a {@link Sprite}.
  *
  * @author Patrick
  */
 public class TextureComponent extends Component {
 
-    public final Texture texture;
+    public final Sprite texture;
 
     public TextureComponent(Texture texture) {
-        this.texture = texture;
+        this.texture = new Sprite(texture);
     }
 
 }

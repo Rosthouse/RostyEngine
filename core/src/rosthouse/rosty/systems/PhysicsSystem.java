@@ -63,6 +63,7 @@ public class PhysicsSystem extends EntitySystem {
             }
             cmpPosition.x = cmpPhysics.body.getPosition().x;
             cmpPosition.y = cmpPhysics.body.getPosition().y;
+            cmpPosition.rotation = cmpPhysics.body.getAngle();
         }
     }
 
@@ -70,6 +71,8 @@ public class PhysicsSystem extends EntitySystem {
         fixture.shape = shape;
         bodyDef.position.set(position);
         Body body = world.createBody(bodyDef);
+        body.setLinearDamping(0.1f);
+        body.setAngularDamping(0.1f);
         body.setType(type);
         body.createFixture(fixture);
         return new PhysicsComponent<T>(shape, body, fixture);

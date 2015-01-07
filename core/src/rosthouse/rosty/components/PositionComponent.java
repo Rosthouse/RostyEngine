@@ -17,4 +17,5 @@ public class PositionComponent extends Component {
 
     public float x = 0.0f;
     public float y = 0.0f;
+    public float rotation = 0.0f;
 }
