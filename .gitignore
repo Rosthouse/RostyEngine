@@ -62,3 +62,5 @@ build/
 ## OS Specific
 .DS_Store
 /.nb-gradle/private/
+/android/target/
+/core/target/

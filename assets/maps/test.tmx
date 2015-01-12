@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="Terrain.tsx"/>
+ <tileset firstgid="1025" name="Level" tilewidth="32" tileheight="32">
+  <tile id="0">
+   <image width="32" height="32" source="../Level/Start.bmp"/>
+  </tile>
+ </tileset>
+ <layer name="Base" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHL+v1DDJZDwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AUIN9PM=
+  </data>
+ </layer>
+ <layer name="floor" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2VFqg1AQBVCT/3Yn7U6bbKToRlqyiXxG3UJf4A0M0m8n4DnwyK94uTNqhoFX9XYeht/T/+f9XH11xzO2+z63c2tnbWfqv9d2fmSyu492v7/afb/0HJaezdQz+T5VX+ExPXvy6Gfuedx6R8yu/W17sqZc5p7LvfoiDyjnck25rGZXqdjz246YXTVyTx6pK4uelHrmcum7PZ679KTWmJ6DY5d4P6kzphyWNL9kUmO7S2J2LfZ8qZhb8e4euURGctlX7kl871pTLnPKRSb7iW8rc/9dUl8mz8S7i55EV2KGxezyLl9nTJ2QR71xs9vjmdhur5FnV971c8pFJnW234f9p/Uacm8+9QMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDkDx6wfaM=
+  </data>
+ </layer>
+ <layer name="fauna" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1tEJwjAUhtH0SZ3EOkl0ktRR3aRjeIsGggvkIufAfS/9+GlLAQAgi9NSyjnussx+Eg7X6NDibnqkcPRY4/ZiJxn0Hlvc89tFk3lqvPt73Kt8emy2kkIdmjRbSWHcSrOVNOrQpO/FVub6/a6s/olTGLeiRw59Kw89AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+0htL4xWX
+  </data>
+ </layer>
+ <objectgroup name="Collisions">
+  <object name="Bush1" type="collision" x="555" y="209">
+   <properties>
+    <property name="contactsound" value="raschel"/>
+   </properties>
+   <polygon points="0,0 -50,2 -52,115 -6,127 49,185 93,190 144,251 194,255 241,315 288,313 290,227 261,219 253,195 201,184 189,161 160,128 109,125 95,98 63,66 8,57"/>
+  </object>
+  <object name="Pot" type="collision" x="449" y="166" width="28" height="24"/>
+ </objectgroup>
+ <objectgroup name="Level">
+  <object name="Start" x="254" y="104" width="32" height="32">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <layer name="FrontOfPlayer" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6D1z2UwI+zTBxKQAMCd+Q4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAtQHQDF
+  </data>
+ </layer>
+ <objectgroup name="Sensors">
+  <object name="Sensor1" x="245" y="353" width="254" height="254">
+   <properties>
+    <property name="IsCircle" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
