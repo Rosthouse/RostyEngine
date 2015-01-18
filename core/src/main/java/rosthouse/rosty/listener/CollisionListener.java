@@ -5,6 +5,7 @@
  */
 package rosthouse.rosty.listener;
 
+
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -16,7 +17,7 @@ import rosthouse.rosty.components.ShaderComponent;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class CollisionListener implements ContactListener {
 
@@ -31,8 +32,8 @@ public class CollisionListener implements ContactListener {
 
         Long idA = (Long) cntct.getFixtureA().getUserData();
         Long idB = (Long) cntct.getFixtureB().getUserData();
-        Entity entityA = engine.getById(idA);
-        Entity entityB = engine.getById(idB);
+        Entity entityA = engine.getEntity(idA);
+        Entity entityB = engine.getEntity(idB);
         ImmutableArray components = entityA.getComponents();
         entityA.add(new ShaderComponent("shaders/basic"));
     }
@@ -42,7 +43,7 @@ public class CollisionListener implements ContactListener {
 
         Long idA = (Long) cntct.getFixtureA().getUserData();
         Long idB = (Long) cntct.getFixtureB().getUserData();
-        Entity entityA = engine.getById(idA);
+        Entity entityA = engine.getEntity(idA);
         ShaderComponent shader = entityA.getComponent(ShaderComponent.class);
         if (shader != null) {
             entityA.remove(ShaderComponent.class);
