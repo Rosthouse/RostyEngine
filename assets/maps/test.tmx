@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="6">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
  <tileset firstgid="1" source="Terrain.tsx"/>
  <tileset firstgid="1025" name="Level" tilewidth="32" tileheight="32">
   <tile id="0">
@@ -22,21 +22,20 @@
   </data>
  </layer>
  <objectgroup name="Collisions">
-  <object id="1" name="Bush1" type="collision" x="555" y="209">
+  <object name="Bush1" type="collision" x="555" y="209">
    <properties>
     <property name="contactsound" value="raschel"/>
    </properties>
    <polygon points="0,0 -50,2 -52,115 -6,127 49,185 93,190 144,251 194,255 241,315 288,313 290,227 261,219 253,195 201,184 189,161 160,128 109,125 95,98 63,66 8,57"/>
   </object>
   <object name="Pot" type="collision" x="449" y="163.5" width="30.5" height="26"/>
-  <object name="fire" type="FireTile" gid="16" x="355.508" y="186.244" rotation="-148.433"/>
   <object name="wood" type="WoodTile" gid="382" x="201" y="367"/>
  </objectgroup>
  <objectgroup name="Level">
-  <object id="3" name="Start" x="254" y="104" width="32" height="32">
+  <object name="Start" x="254" y="104" width="32" height="32">
    <ellipse/>
   </object>
-  <object id="5" name="Fire" type="FireTile" gid="16" x="321" y="226"/>
+  <object name="Fire" type="FireTile" gid="16" x="305" y="209"/>
  </objectgroup>
  <layer name="FrontOfPlayer" width="100" height="100">
   <data encoding="base64" compression="zlib">
@@ -44,7 +43,7 @@
   </data>
  </layer>
  <objectgroup name="Sensors">
-  <object name="Sensor1" x="257" y="444" width="254" height="254">
+  <object name="Sensor1" x="272" y="278" width="254" height="254">
    <properties>
     <property name="IsCircle" value="true"/>
    </properties>
