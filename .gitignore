@@ -64,3 +64,5 @@ build/
 /.nb-gradle/private/
 /android/target/
 /core/target/
+/core/.nb-gradle/private/
+/desktop/target/
