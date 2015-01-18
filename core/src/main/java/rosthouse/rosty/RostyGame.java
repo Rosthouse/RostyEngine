@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
 import rosthouse.rosty.listener.CollisionListener;
 import rosthouse.rosty.loader.MapLoader;
 import rosthouse.rosty.systems.InputSystem;
@@ -62,7 +61,7 @@ public class RostyGame extends ApplicationAdapter {
 
     @Override
     public void create() {
-        assetManager = new AssetManager(new LocalFileHandleResolver());
+        assetManager = new AssetManager();
         engine = new Engine();
         renderSystem = new RenderSystem(null);
         movementSystem = new MovementSystem();

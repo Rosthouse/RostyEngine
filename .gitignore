@@ -53,6 +53,17 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+nbactions-*.xml
+
+##Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+
 
 ## Gradle
 

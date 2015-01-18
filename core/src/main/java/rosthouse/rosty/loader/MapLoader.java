@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Ellipse;
@@ -28,9 +29,11 @@ import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import rosthouse.rosty.MapObjects;
 import rosthouse.rosty.components.OrthographicCameraComponent;
 import rosthouse.rosty.components.PhysicsComponent;
 import rosthouse.rosty.components.SensorComponent;
+import rosthouse.rosty.components.SpriteComponent;
 import rosthouse.rosty.components.TiledMapComponent;
 import rosthouse.rosty.components.collision.PolygonComponent;
 import rosthouse.rosty.components.collision.RectangleComponent;
@@ -48,6 +51,7 @@ public class MapLoader {
 
         TmxMapLoader.Parameters mapParameters = new TmxMapLoader.Parameters();
         mapParameters.convertObjectToTileSpace = true;
+
         assetManager.setLoader(TiledMap.class, new TmxMapLoader());
         assetManager.load(path, TiledMap.class, mapParameters);
         assetManager.finishLoading();
@@ -97,50 +101,86 @@ public class MapLoader {
 
     private void loadCollisionLayer(MapLayer layer, PhysicsSystem physicsSystem, Engine engine) {
         for (MapObject object : layer.getObjects()) {
+            MapProperties properties = object.getProperties();
+            Entity mapObjectEntity = new Entity();
+            engine.addEntity(mapObjectEntity);
             if (object instanceof PolygonMapObject) {
-                PolygonMapObject obj = (PolygonMapObject) object;
-                Polygon ply = obj.getPolygon();
-                PolygonComponent plyCmp = new PolygonComponent(ply);
-                ChainShape polygonShape = new ChainShape();
-                Vector2[] vertices = new Vector2[plyCmp.polygon.getVertices().length / 2];
-                for (int i = 0; i < plyCmp.polygon.getTransformedVertices().length; i += 2) {
-                    vertices[i / 2] = new Vector2(plyCmp.polygon.getVertices()[i], plyCmp.polygon.getVertices()[i + 1]);
-                }
-                try {
-                    polygonShape.createLoop(vertices);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                FixtureDef fixtureDef = new FixtureDef();
-                fixtureDef.density = 0;
-                fixtureDef.friction = 1;
-                fixtureDef.restitution = 0.2f;
-                Entity ent = new Entity();
-                PhysicsComponent<ChainShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX(), ply.getY()), fixtureDef);
-                engine.addEntity(ent.add(plyCmp).add(cmpPhys));
-                cmpPhys.fixture.setUserData(ent.getId());
+                createPolygon((PolygonMapObject) object, physicsSystem, mapObjectEntity);
             } else if (object instanceof RectangleMapObject) {
-                RectangleMapObject obj = (RectangleMapObject) object;
-                Rectangle rectangle = obj.getRectangle();
-                RectangleComponent plyCmp = new RectangleComponent(rectangle);
-                PolygonShape polygonShape = new PolygonShape();
-                Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f),
-                        (rectangle.y + rectangle.height * 0.5f));
-                polygonShape.setAsBox(rectangle.width * 0.5f,
-                        rectangle.height * 0.5f,
-                        size,
-                        0.0f);
-                FixtureDef fixtureDef = new FixtureDef();
-                fixtureDef.density = 0;
-                fixtureDef.friction = 1;
-                fixtureDef.restitution = 0.2f;
-                Entity ent = new Entity();
-                PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(rectangle.x, rectangle.y), fixtureDef);
-                engine.addEntity(ent.add(plyCmp).add(cmpPhys));
-                cmpPhys.fixture.setUserData(ent.getId());
+                createRectangle((RectangleMapObject) object, physicsSystem, mapObjectEntity);
+            } else if (object instanceof TextureMapObject) {
+                createTexture((TextureMapObject) object, physicsSystem, mapObjectEntity);
             }
+            if (properties.containsKey(MapObjects.TYPE.toString())) {
+                String type = properties.get(MapObjects.TYPE.toString(), String.class);
+
+            }
+
             System.out.println(object);
         }
+    }
+
+    private void createPolygon(PolygonMapObject polygon, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
+        Polygon ply = polygon.getPolygon();
+        PolygonComponent plyCmp = new PolygonComponent(ply);
+        ChainShape polygonShape = new ChainShape();
+        Vector2[] vertices = new Vector2[plyCmp.polygon.getVertices().length / 2];
+        for (int i = 0; i < plyCmp.polygon.getTransformedVertices().length; i += 2) {
+            vertices[i / 2] = new Vector2(plyCmp.polygon.getVertices()[i], plyCmp.polygon.getVertices()[i + 1]);
+        }
+        try {
+            polygonShape.createLoop(vertices);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 0;
+        fixtureDef.friction = 1;
+        fixtureDef.restitution = 0.2f;
+        PhysicsComponent<ChainShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX(), ply.getY()), fixtureDef);
+        mapObjectEntity.add(cmpPhys);
+        mapObjectEntity.add(plyCmp);
+        cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+    }
+
+    private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
+
+        SpriteComponent spriteComponent = new SpriteComponent(texture.getTextureRegion());
+        PolygonShape polygonShape = new PolygonShape();
+        Vector2 size = new Vector2((spriteComponent.sprite.getX() + spriteComponent.sprite.getWidth() * 0.5f),
+                (spriteComponent.sprite.getY() + spriteComponent.sprite.getHeight() * 0.5f));
+        polygonShape.setAsBox(spriteComponent.sprite.getHeight() * 0.5f,
+                spriteComponent.sprite.getWidth() * 0.5f,
+                size,
+                0.0f);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 0;
+        fixtureDef.friction = 1;
+        fixtureDef.restitution = 0.2f;
+        PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(spriteComponent.sprite.getX(), spriteComponent.sprite.getY()), fixtureDef);
+        mapObjectEntity.add(spriteComponent);
+        mapObjectEntity.add(cmpPhys);
+        cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+    }
+
+    private void createRectangle(RectangleMapObject rectangleObject, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
+        Rectangle rectangle = rectangleObject.getRectangle();
+        RectangleComponent plyCmp = new RectangleComponent(rectangle);
+        PolygonShape polygonShape = new PolygonShape();
+        Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f),
+                (rectangle.y + rectangle.height * 0.5f));
+        polygonShape.setAsBox(rectangle.width * 0.5f,
+                rectangle.height * 0.5f,
+                size,
+                0.0f);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 0;
+        fixtureDef.friction = 1;
+        fixtureDef.restitution = 0.2f;
+        PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(rectangle.x, rectangle.y), fixtureDef);
+        mapObjectEntity.add(plyCmp);
+        mapObjectEntity.add(cmpPhys);
+        cmpPhys.fixture.setUserData(mapObjectEntity.getId());
     }
 
     private void loadSensorLayer(MapLayer layer, PhysicsSystem physicsSystem, Engine engine) {
