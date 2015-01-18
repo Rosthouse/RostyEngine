@@ -175,7 +175,7 @@ public class MapLoader {
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
         fixtureDef.restitution = 0.2f;
-        PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(rectangle.x + rectangle.width/2, rectangle.y + rectangle.height/2), fixtureDef);
+        PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, rectangle.getCenter(Vector2.Zero), fixtureDef);
         mapObjectEntity.add(rectComponent);
         mapObjectEntity.add(cmpPhys);
         cmpPhys.fixture.setUserData(mapObjectEntity.getId());
