@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rosthouse.rosty.components;
+package rosthouse.rosty.components.shader;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Disposable;
 
 /**
  *
  * @author Pädda
  */
-public class ShaderComponent extends Component implements Pool.Poolable {
+public class ShaderComponent extends Component implements Disposable {
 
     public ShaderProgram shader;
 
@@ -25,7 +25,7 @@ public class ShaderComponent extends Component implements Pool.Poolable {
     }
 
     @Override
-    public void reset() {
+    public void dispose() {
         shader.dispose();
         shader = null;
     }

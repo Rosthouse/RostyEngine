@@ -15,6 +15,6 @@ const vec3 grayScaleMultiplier = vec3(0.299, 0.587, 0.114);
 void main() {
   vec4 texColor = texture2D(u_texture, v_texCoord);
   vec3 gray = vec3(dot(texColor.rgb, grayScaleMultiplier));
-  gl_FragColor = vec4(0, 255, 0, texColor.a);
+  gl_FragColor = vec4(0, 0, 255, texColor.a);
   //gl_FragColor = vec4(gray.r, gray.g, gray.b, texColor.a);
 }

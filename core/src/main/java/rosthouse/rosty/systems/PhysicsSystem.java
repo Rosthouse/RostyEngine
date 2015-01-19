@@ -83,7 +83,6 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
         body.setLinearDamping(0.1f);
         body.setAngularDamping(0.1f);
         body.setType(type);
-
         return new PhysicsComponent<>(shape, body.createFixture(fixture));
     }
 
@@ -95,7 +94,6 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
         body.setLinearDamping(0.1f);
         body.setAngularDamping(0.1f);
         body.setType(type);
-
         return new SensorComponent<>(shape, body.createFixture(fixture));
     }
 

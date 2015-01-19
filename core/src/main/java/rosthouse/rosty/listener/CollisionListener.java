@@ -8,12 +8,14 @@ package rosthouse.rosty.listener;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import rosthouse.rosty.components.ShaderComponent;
+import rosthouse.rosty.components.FireComponent;
+import rosthouse.rosty.components.WaterComponent;
+import rosthouse.rosty.components.shader.ShaderComponent;
+import rosthouse.rosty.entities.MovingPicture;
 
 /**
  *
@@ -34,8 +36,30 @@ public class CollisionListener implements ContactListener {
         Long idB = (Long) cntct.getFixtureB().getUserData();
         Entity entityA = engine.getEntity(idA);
         Entity entityB = engine.getEntity(idB);
-        ImmutableArray components = entityA.getComponents();
-        entityA.add(new ShaderComponent("shaders/basic"));
+        
+        if(entityA instanceof MovingPicture){
+            checkTile(entityB, entityA);
+        } else {
+            checkTile(entityA, entityB);
+        }
+    }
+
+    private void checkTile(Entity tileEntity, Entity marbleEntity) {
+        if(tileEntity.getComponent(FireComponent.class) != null){
+            ShaderComponent t;
+            if((t = tileEntity.getComponent(ShaderComponent.class)) != null){
+                marbleEntity.remove(ShaderComponent.class);
+                t.dispose();
+            }
+            marbleEntity.add(new ShaderComponent("shaders/fire")); 
+        }else if(tileEntity.getComponent(WaterComponent.class) != null){
+            ShaderComponent t;
+            if((t = tileEntity.getComponent(ShaderComponent.class)) != null){
+                marbleEntity.remove(ShaderComponent.class);
+                t.dispose();
+            }
+            marbleEntity.add(new ShaderComponent("shaders/water"));
+        } 
     }
 
     @Override

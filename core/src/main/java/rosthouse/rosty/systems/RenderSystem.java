@@ -19,10 +19,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import rosthouse.rosty.components.OrthographicCameraComponent;
 import rosthouse.rosty.components.PositionComponent;
-import rosthouse.rosty.components.ShaderComponent;
 import rosthouse.rosty.components.SpriteComponent;
 import rosthouse.rosty.components.TiledMapComponent;
 import rosthouse.rosty.components.collision.PolygonComponent;
+import rosthouse.rosty.components.shader.ShaderComponent;
 
 /**
  * Renders everything to a screen.
@@ -99,6 +99,7 @@ public class RenderSystem extends EntitySystem implements EntityListener {
                 if (cpShader.shader.isCompiled()) {
                     spriteBatch.setShader(cpShader.shader);
                     cpRender.sprite.draw(spriteBatch);
+                    spriteBatch.setShader(null);
                 }
             } else {
                 cpRender.sprite.draw(spriteBatch);

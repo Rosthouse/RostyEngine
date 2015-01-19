@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Shape;
 /**
  *
  * @author Patrick
+ * @param <T>
  */
 public class PhysicsComponent<T extends Shape> extends Component {
 

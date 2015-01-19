@@ -30,12 +30,14 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import rosthouse.rosty.MapObjects;
+import rosthouse.rosty.components.FireComponent;
 import rosthouse.rosty.components.OrthographicCameraComponent;
 import rosthouse.rosty.components.PhysicsComponent;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.SensorComponent;
 import rosthouse.rosty.components.SpriteComponent;
 import rosthouse.rosty.components.TiledMapComponent;
+import rosthouse.rosty.components.WaterComponent;
 import rosthouse.rosty.components.collision.PolygonComponent;
 import rosthouse.rosty.components.collision.RectangleComponent;
 import rosthouse.rosty.entities.MovingPicture;
@@ -99,7 +101,13 @@ public class MapLoader {
             } else {
                 Entity ent = new Entity();
                 engine.addEntity(ent);
-                loadObject(object, physicsSystem, ent);
+                loadObject(object, physicsSystem, ent, true);
+                String type = object.getProperties().get("type", String.class);
+                if(type.equals("FireTile")){
+                    ent.add(new FireComponent());
+                } else if(type.equals("WaterTile")){
+                    ent.add(new WaterComponent());
+                }
             }
         }
     }
@@ -109,7 +117,7 @@ public class MapLoader {
             MapProperties properties = object.getProperties();
             Entity mapObjectEntity = new Entity();
             engine.addEntity(mapObjectEntity);
-            loadObject(object, physicsSystem, mapObjectEntity);
+            loadObject(object, physicsSystem, mapObjectEntity, false);
             if (properties.containsKey(MapObjects.TYPE.toString())) {
                 String type = properties.get(MapObjects.TYPE.toString(), String.class);
             }
@@ -117,13 +125,13 @@ public class MapLoader {
         }
     }
 
-    private void loadObject(MapObject object, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
+    private void loadObject(MapObject object, PhysicsSystem physicsSystem, Entity mapObjectEntity, boolean isSensor) {
         if (object instanceof PolygonMapObject) {
             createPolygon((PolygonMapObject) object, physicsSystem, mapObjectEntity);
         } else if (object instanceof RectangleMapObject) {
             createRectangle((RectangleMapObject) object, physicsSystem, mapObjectEntity);
         } else if (object instanceof TextureMapObject) {
-            createTexture((TextureMapObject) object, physicsSystem, mapObjectEntity);
+            createTexture((TextureMapObject) object, physicsSystem, mapObjectEntity, isSensor);
         }
     }
 
@@ -150,7 +158,7 @@ public class MapLoader {
         cmpPhys.fixture.setUserData(mapObjectEntity.getId());
     }
 
-    private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
+    private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity, boolean isSensor) {
 
         SpriteComponent spriteComponent = new SpriteComponent(texture.getTextureRegion());
         PositionComponent positionComponent = new PositionComponent();
@@ -173,13 +181,22 @@ public class MapLoader {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
-        fixtureDef.restitution = 0.2f;
-        PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
-        cmpPhys.fixture.getBody().setTransform(x,y, texture.getRotation());
-        mapObjectEntity.add(spriteComponent);
-        mapObjectEntity.add(cmpPhys);
-        mapObjectEntity.add(positionComponent);
-        cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+        fixtureDef.restitution = 0.2f;        
+        if(isSensor){
+            SensorComponent<PolygonShape> cmpPhys = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
+            cmpPhys.fixture.getBody().setTransform(x,y, texture.getRotation());
+            mapObjectEntity.add(spriteComponent);
+            mapObjectEntity.add(cmpPhys);
+            mapObjectEntity.add(positionComponent);
+            cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+        } else {
+            PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
+            cmpPhys.fixture.getBody().setTransform(x,y, texture.getRotation());
+            mapObjectEntity.add(spriteComponent);
+            mapObjectEntity.add(cmpPhys);
+            mapObjectEntity.add(positionComponent);
+            cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+        }
     }
 
     private void createRectangle(RectangleMapObject rectangleObject, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
