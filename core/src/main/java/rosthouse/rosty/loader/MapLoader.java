@@ -32,6 +32,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import rosthouse.rosty.MapObjects;
 import rosthouse.rosty.components.OrthographicCameraComponent;
 import rosthouse.rosty.components.PhysicsComponent;
+import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.SensorComponent;
 import rosthouse.rosty.components.SpriteComponent;
 import rosthouse.rosty.components.TiledMapComponent;
@@ -95,6 +96,10 @@ public class MapLoader {
                 entity.add(new OrthographicCameraComponent(camera));
                 engine.addEntity(entity);
                 marble.fixture.setUserData(entity.getId());
+            } else {
+                Entity ent = new Entity();
+                engine.addEntity(ent);
+                loadObject(object, physicsSystem, ent);
             }
         }
     }
@@ -104,19 +109,21 @@ public class MapLoader {
             MapProperties properties = object.getProperties();
             Entity mapObjectEntity = new Entity();
             engine.addEntity(mapObjectEntity);
-            if (object instanceof PolygonMapObject) {
-                createPolygon((PolygonMapObject) object, physicsSystem, mapObjectEntity);
-            } else if (object instanceof RectangleMapObject) {
-                createRectangle((RectangleMapObject) object, physicsSystem, mapObjectEntity);
-            } else if (object instanceof TextureMapObject) {
-                createTexture((TextureMapObject) object, physicsSystem, mapObjectEntity);
-            }
+            loadObject(object, physicsSystem, mapObjectEntity);
             if (properties.containsKey(MapObjects.TYPE.toString())) {
                 String type = properties.get(MapObjects.TYPE.toString(), String.class);
-
             }
-
             System.out.println(object);
+        }
+    }
+
+    private void loadObject(MapObject object, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
+        if (object instanceof PolygonMapObject) {
+            createPolygon((PolygonMapObject) object, physicsSystem, mapObjectEntity);
+        } else if (object instanceof RectangleMapObject) {
+            createRectangle((RectangleMapObject) object, physicsSystem, mapObjectEntity);
+        } else if (object instanceof TextureMapObject) {
+            createTexture((TextureMapObject) object, physicsSystem, mapObjectEntity);
         }
     }
 
@@ -146,13 +153,21 @@ public class MapLoader {
     private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity) {
 
         SpriteComponent spriteComponent = new SpriteComponent(texture.getTextureRegion());
+        PositionComponent positionComponent = new PositionComponent();
         PolygonShape polygonShape = new PolygonShape();
         
         float x = texture.getX();
         float y = texture.getY();
         float width = texture.getTextureRegion().getRegionWidth() *texture.getScaleX();
         float height = texture.getTextureRegion().getRegionHeight() * texture.getScaleY();
-       
+        
+        spriteComponent.sprite.setX(x);
+        spriteComponent.sprite.setY(y);
+        spriteComponent.sprite.setRotation(texture.getRotation());
+        spriteComponent.sprite.setScale(texture.getScaleX(), texture.getScaleY());
+        positionComponent.x = x;
+        positionComponent.y = y;
+        positionComponent.rotation = (float) Math.toRadians(texture.getRotation());
         polygonShape.setAsBox(width * 0.5f,
                height * 0.5f);
         FixtureDef fixtureDef = new FixtureDef();
@@ -160,8 +175,10 @@ public class MapLoader {
         fixtureDef.friction = 1;
         fixtureDef.restitution = 0.2f;
         PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
+        cmpPhys.fixture.getBody().setTransform(x,y, texture.getRotation());
         mapObjectEntity.add(spriteComponent);
         mapObjectEntity.add(cmpPhys);
+        mapObjectEntity.add(positionComponent);
         cmpPhys.fixture.setUserData(mapObjectEntity.getId());
     }
 

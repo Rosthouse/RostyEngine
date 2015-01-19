@@ -101,7 +101,6 @@ public class RenderSystem extends EntitySystem implements EntityListener {
                     cpRender.sprite.draw(spriteBatch);
                 }
             } else {
-
                 cpRender.sprite.draw(spriteBatch);
             }
         }
