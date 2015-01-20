@@ -86,14 +86,13 @@ public class MapLoader {
                 Texture tex = new Texture(Gdx.files.internal("Level/marble.png"));
                 Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
                 MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
-
                 CircleShape circleShape = new CircleShape();
                 circleShape.setRadius((tex.getHeight() * unitScale) / 2);
                 FixtureDef fd = new FixtureDef();
                 fd.density = 5;
                 fd.friction = 5;
                 fd.restitution = 0.3f;
-                PhysicsComponent<CircleShape> marble = physicsSystem.createPhysicsComponent(BodyDef.BodyType.DynamicBody, circleShape, new Vector2(ellipse.x, ellipse.y), fd);
+                PhysicsComponent<CircleShape> marble = physicsSystem.createPhysicsComponent(BodyDef.BodyType.DynamicBody, circleShape, new Vector2(ellipse.x , ellipse.y), fd);
                 entity.add(marble);
                 entity.add(new OrthographicCameraComponent(camera));
                 engine.addEntity(entity);
@@ -227,7 +226,7 @@ public class MapLoader {
             fd.friction = 5;
             fd.restitution = 0.3f;
             Entity entity = new Entity();
-            SensorComponent<CircleShape> sensor = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, circleShape, new Vector2(obj.getEllipse().x, obj.getEllipse().y), fd);
+            SensorComponent<CircleShape> sensor = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, circleShape, new Vector2(obj.getEllipse().x + obj.getEllipse().width/2, obj.getEllipse().y + obj.getEllipse().height/2), fd);
             engine.addEntity(entity.add(sensor));
             sensor.fixture.setUserData(entity.getId());
 //            }

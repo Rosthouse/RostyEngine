@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="10">
  <tileset firstgid="1" source="Terrain.tsx"/>
  <tileset firstgid="1025" name="Level" tilewidth="32" tileheight="32">
   <tile id="0">
    <image width="32" height="32" source="../Level/Start.bmp"/>
+   <animation>
+    <frame tileid="0" duration="100"/>
+   </animation>
   </tile>
  </tileset>
  <layer name="Base" width="100" height="100">
@@ -30,6 +33,7 @@
   </object>
   <object id="2" name="Pot" type="collision" x="449" y="163.5" width="30.5" height="26"/>
   <object id="3" name="wood" type="WoodTile" gid="382" x="171.622" y="132.5" rotation="-136.266"/>
+  <object id="8" name="Animated" gid="1025" x="820" y="237"/>
  </objectgroup>
  <objectgroup name="Level">
   <object id="4" name="Start" x="254" y="104" width="32" height="32">
