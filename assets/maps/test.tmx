@@ -32,8 +32,8 @@
    <polygon points="0,0 -50,2 -52,115 -6,127 49,185 93,190 144,251 194,255 241,315 288,313 290,227 261,219 253,195 201,184 189,161 160,128 109,125 95,98 63,66 8,57"/>
   </object>
   <object id="2" name="Pot" type="collision" x="449" y="163.5" width="30.5" height="26"/>
-  <object id="3" name="wood" type="WoodTile" gid="382" x="171.622" y="132.5" rotation="-136.266"/>
   <object id="8" name="Animated" gid="1025" x="820" y="237"/>
+  <object id="3" name="wood" type="WoodTile" gid="382" x="171.622" y="132.5" rotation="-136.266"/>
  </objectgroup>
  <objectgroup name="Level">
   <object id="4" name="Start" x="254" y="104" width="32" height="32">
