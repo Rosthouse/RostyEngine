@@ -90,7 +90,7 @@ public class RostyGame extends ApplicationAdapter {
 
     public void loadMap() {
         MapLoader loader = new MapLoader();
-        loader.loadMap("maps/test.tmx", assetManager, engine, physicsSystem, unitScale);
+        loader.loadMap("maps/Level1/Level1.tmx", assetManager, engine, physicsSystem, unitScale);
     }
 
     @Override

@@ -105,12 +105,12 @@ public class MapLoader {
                 Entity ent = new Entity();
                 engine.addEntity(ent);
                 loadObject(object, physicsSystem, ent, true);
-                String type = object.getProperties().get("type", String.class);
-                if (type.equals("FireTile")) {
+                String type = object.getProperties().get("onCollision", "", String.class);
+                if (type.equals("FireScript")) {
                     ScriptComponent scriptComponent = new ScriptComponent();
                     scriptComponent.addScript(GameConstants.START_COLLISION, new FireTileScript());
                     ent.add(scriptComponent);
-                } else if (type.equals("WaterTile")) {
+                } else if (type.equals("WaterScript")) {
                     ScriptComponent scriptComponent = new ScriptComponent();
                     scriptComponent.addScript(GameConstants.START_COLLISION, new WaterTileScript());
                     ent.add(scriptComponent);
@@ -164,10 +164,21 @@ public class MapLoader {
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
         fixtureDef.restitution = 0.2f;
-        PhysicsComponent<ChainShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX(), ply.getY()), fixtureDef);
-        mapObjectEntity.add(cmpPhys);
+        String isSensorString = polygon.getProperties().get("isSensor", String.class);
+        Boolean isSensor = Boolean.valueOf(isSensorString);
+        if (isSensor) {
+            SensorComponent<ChainShape> cmpPhys = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX(), ply.getY()), fixtureDef);
+            cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+            mapObjectEntity.add(cmpPhys);
+            cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+        } else {
+            PhysicsComponent<ChainShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(ply.getX(), ply.getY()), fixtureDef);
+            cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+            mapObjectEntity.add(cmpPhys);
+            cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+        }
         mapObjectEntity.add(plyCmp);
-        cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+
     }
 
     private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity, boolean isSensor) {

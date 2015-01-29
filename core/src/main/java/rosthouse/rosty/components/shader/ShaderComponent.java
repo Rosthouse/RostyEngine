@@ -20,7 +20,6 @@ public class ShaderComponent extends Component implements Disposable {
 
     public ShaderComponent(String path) {
         shader = new ShaderProgram(Gdx.files.internal(path + ".vert"), Gdx.files.internal(path + ".frag"));
-
         Gdx.app.log("[SHADER]", shader.getLog());
     }
 
@@ -28,6 +27,7 @@ public class ShaderComponent extends Component implements Disposable {
     public void dispose() {
         shader.dispose();
         shader = null;
+
     }
 
 }
