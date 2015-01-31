@@ -25,9 +25,10 @@ public class ShaderComponent extends Component implements Disposable {
 
     @Override
     public void dispose() {
-        shader.dispose();
-        shader = null;
-
+        if (shader != null) {
+            shader.dispose();
+            shader = null;
+        }
     }
 
 }
