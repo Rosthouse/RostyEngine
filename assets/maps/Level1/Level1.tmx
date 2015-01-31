@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="23">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="24">
  <tileset firstgid="1" name="Walls" tilewidth="34" tileheight="34">
   <tile id="0">
    <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives0.png"/>
@@ -802,7 +802,7 @@
  </layer>
  <layer name="Floor" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt1FsKgzAQBdC4dHdgrW0tbrYKCpIm4EcfMJ4DA37mXpNJCQAAAIBP6JuU7utcm3+f5veGOXO7znjCDro576SDYgf9id5FqYPn7jvajij927yD0jyC5B8qeZYOboWZguYfD97rrZdLsPxt8/7GI73zmjx/PhF33t6RXRe9i9quy3dexP1/RFfo4Uz5N/t7EmX/AwAAAAAAAAB82wt8TUea
+   eJzt1FsKgzAQBdC49O7AWvuim62FFEJqih99wOQcGPDTe3UmJQAAAAA+YRpSOuU5DP9+m9+bl8y7PJcOOyjz99jBuGS9NTqYOtmLVgfX4jnajai/7VoHa3MOkn8eXvf90cExT6uLaPlbN6/sopx9wPz1jkfa85Y6fz0Rb15p672L3EVrx9/dwCj3b4txpYee8j+V/0mU+w8AAAAAAAAA8G13k5NMKA==
   </data>
  </layer>
  <layer name="Walls" width="64" height="64">
@@ -843,14 +843,14 @@
     <property name="isSensor" value="true"/>
     <property name="onCollision" value="WaterScript"/>
    </properties>
-   <polygon points="0,0 127,125 292,126 321,160 353,155 351,95 280,90 255,68 225,66 196,90 69,-31 8,-32"/>
+   <polygon points="2,31 97.3333,127 163.667,129.333 197.333,155.666 352.667,158.667 351,95 280,90 255,68 225,66 196,90 69,-31 0.333333,0"/>
   </object>
   <object id="8" name="Water1" type="WaterTiles" x="802" y="735">
    <properties>
     <property name="isSensor" value="true"/>
     <property name="onCollision" value="WaterScript"/>
    </properties>
-   <polygon points="0,0 29,0 30,48 58,72 96,70 120,102 217,101 247,136 317,133 350,169 410,164 405,216 354,219 331,185 288,190 255,156 24,155 0,124"/>
+   <polygon points="0,0 35,-0.666667 61,28.6667 78,51.3333 95.3333,61.3333 124.333,92.6667 220.667,100 256,128 318.333,125.667 347.667,157.333 410,164 405,216 354,219 331,185 288,190 255,156 24,155 0,124"/>
   </object>
   <object id="10" name="Finish" type="Level" x="1367" y="993" width="50" height="50">
    <ellipse/>

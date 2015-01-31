@@ -13,7 +13,7 @@ import rosthouse.rosty.scripting.NativeScript;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class FireTileScript extends NativeScript<CollisionEvent> {
 

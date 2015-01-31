@@ -92,6 +92,7 @@ public class MapLoader {
                 MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
                 CircleShape circleShape = new CircleShape();
                 circleShape.setRadius((tex.getHeight() * unitScale) / 2);
+//                circleShape.setRadius(circleShape.getRadius() * 0.90f);
                 FixtureDef fd = new FixtureDef();
                 fd.density = 5;
                 fd.friction = 5;

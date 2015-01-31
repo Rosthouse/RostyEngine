@@ -7,7 +7,7 @@ package rosthouse.rosty.scripting;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  * @param <T> A class of Interface {@link Event}.
  */
 public interface Script<T extends Event> {
