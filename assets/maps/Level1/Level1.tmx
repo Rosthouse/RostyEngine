@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="10">
+ <tileset firstgid="1" name="Walls" tilewidth="34" tileheight="34">
+  <tile id="0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives0.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives1.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives2.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives3.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives4.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives5.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives6.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives7.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives8.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives9.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown0.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown1.png"/>
+  </tile>
+  <tile id="12">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown2.png"/>
+  </tile>
+  <tile id="13">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown3.png"/>
+  </tile>
+  <tile id="14">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown4.png"/>
+  </tile>
+  <tile id="15">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown5.png"/>
+  </tile>
+  <tile id="16">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown6.png"/>
+  </tile>
+  <tile id="17">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown7.png"/>
+  </tile>
+  <tile id="18">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown-vines1.png"/>
+  </tile>
+  <tile id="19">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown-vines2.png"/>
+  </tile>
+  <tile id="20">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown-vines3.png"/>
+  </tile>
+  <tile id="21">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_brown-vines4.png"/>
+  </tile>
+  <tile id="22">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_dark0.png"/>
+  </tile>
+  <tile id="23">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_dark1.png"/>
+  </tile>
+  <tile id="24">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_dark2.png"/>
+  </tile>
+  <tile id="25">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_dark3.png"/>
+  </tile>
+  <tile id="26">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_dark4.png"/>
+  </tile>
+  <tile id="27">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_dark5.png"/>
+  </tile>
+  <tile id="28">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_dark6.png"/>
+  </tile>
+  <tile id="29">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_gray0.png"/>
+  </tile>
+  <tile id="30">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_gray1.png"/>
+  </tile>
+  <tile id="31">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_gray2.png"/>
+  </tile>
+  <tile id="32">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/brick_gray3.png"/>
+  </tile>
+  <tile id="33">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall00.png"/>
+  </tile>
+  <tile id="34">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall01.png"/>
+  </tile>
+  <tile id="35">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall02.png"/>
+  </tile>
+  <tile id="36">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall03.png"/>
+  </tile>
+  <tile id="37">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall04.png"/>
+  </tile>
+  <tile id="38">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall05.png"/>
+  </tile>
+  <tile id="39">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall06.png"/>
+  </tile>
+  <tile id="40">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall07.png"/>
+  </tile>
+  <tile id="41">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall08.png"/>
+  </tile>
+  <tile id="42">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall09.png"/>
+  </tile>
+  <tile id="43">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall10.png"/>
+  </tile>
+  <tile id="44">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall11.png"/>
+  </tile>
+  <tile id="45">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall12.png"/>
+  </tile>
+  <tile id="46">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/crystal_wall13.png"/>
+  </tile>
+  <tile id="47">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/dngn_green_crystal_wall.png"/>
+  </tile>
+  <tile id="48">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/dngn_metal_wall.png"/>
+  </tile>
+  <tile id="49">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/dngn_metal_wall_brown.png"/>
+  </tile>
+  <tile id="50">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/dngn_metal_wall_cracked.png"/>
+  </tile>
+  <tile id="51">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/dngn_mirrored_wall.png"/>
+  </tile>
+  <tile id="52">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/dngn_transparent_wall.png"/>
+  </tile>
+  <tile id="53">
+   <image width="34" height="34" source="../../Tiles/dc-dngn/wall/dngn_wax_wall.png"/>
+  </tile>
+  <tile id="54">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/hive0.png"/>
+  </tile>
+  <tile id="55">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/hive1.png"/>
+  </tile>
+  <tile id="56">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/hive2.png"/>
+  </tile>
+  <tile id="57">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/hive3.png"/>
+  </tile>
+  <tile id="58">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/lair0.png"/>
+  </tile>
+  <tile id="59">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/lair1.png"/>
+  </tile>
+  <tile id="60">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/lair2.png"/>
+  </tile>
+  <tile id="61">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/lair3.png"/>
+  </tile>
+  <tile id="62">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall1.png"/>
+  </tile>
+  <tile id="63">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall2.png"/>
+  </tile>
+  <tile id="64">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall3.png"/>
+  </tile>
+  <tile id="65">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall4.png"/>
+  </tile>
+  <tile id="66">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall5.png"/>
+  </tile>
+  <tile id="67">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall6.png"/>
+  </tile>
+  <tile id="68">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall7.png"/>
+  </tile>
+  <tile id="69">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall8.png"/>
+  </tile>
+  <tile id="70">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall9.png"/>
+  </tile>
+  <tile id="71">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall10.png"/>
+  </tile>
+  <tile id="72">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall11.png"/>
+  </tile>
+  <tile id="73">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/marble_wall12.png"/>
+  </tile>
+  <tile id="74">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/pebble_red0.png"/>
+  </tile>
+  <tile id="75">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/pebble_red1.png"/>
+  </tile>
+  <tile id="76">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/pebble_red2.png"/>
+  </tile>
+  <tile id="77">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/pebble_red3.png"/>
+  </tile>
+  <tile id="78">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/relief0.png"/>
+  </tile>
+  <tile id="79">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/relief1.png"/>
+  </tile>
+  <tile id="80">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/relief2.png"/>
+  </tile>
+  <tile id="81">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/relief3.png"/>
+  </tile>
+  <tile id="82">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall0.png"/>
+  </tile>
+  <tile id="83">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall1.png"/>
+  </tile>
+  <tile id="84">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall2.png"/>
+  </tile>
+  <tile id="85">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall3.png"/>
+  </tile>
+  <tile id="86">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall4.png"/>
+  </tile>
+  <tile id="87">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall5.png"/>
+  </tile>
+  <tile id="88">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall6.png"/>
+  </tile>
+  <tile id="89">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall7.png"/>
+  </tile>
+  <tile id="90">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall8.png"/>
+  </tile>
+  <tile id="91">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/sandstone_wall9.png"/>
+  </tile>
+  <tile id="92">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/shadow_e.png"/>
+  </tile>
+  <tile id="93">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/shadow_n.png"/>
+  </tile>
+  <tile id="94">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/shadow_ne.png"/>
+  </tile>
+  <tile id="95">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/shadow_nw.png"/>
+  </tile>
+  <tile id="96">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/shadow_w.png"/>
+  </tile>
+  <tile id="97">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/slime0.png"/>
+  </tile>
+  <tile id="98">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/slime1.png"/>
+  </tile>
+  <tile id="99">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/slime2.png"/>
+  </tile>
+  <tile id="100">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/slime3.png"/>
+  </tile>
+  <tile id="101">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked0.png"/>
+  </tile>
+  <tile id="102">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked1.png"/>
+  </tile>
+  <tile id="103">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked2.png"/>
+  </tile>
+  <tile id="104">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked3.png"/>
+  </tile>
+  <tile id="105">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked4.png"/>
+  </tile>
+  <tile id="106">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked5.png"/>
+  </tile>
+  <tile id="107">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked6.png"/>
+  </tile>
+  <tile id="108">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked7.png"/>
+  </tile>
+  <tile id="109">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_black_marked8.png"/>
+  </tile>
+  <tile id="110">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick1.png"/>
+  </tile>
+  <tile id="111">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick2.png"/>
+  </tile>
+  <tile id="112">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick3.png"/>
+  </tile>
+  <tile id="113">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick4.png"/>
+  </tile>
+  <tile id="114">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick5.png"/>
+  </tile>
+  <tile id="115">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick6.png"/>
+  </tile>
+  <tile id="116">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick7.png"/>
+  </tile>
+  <tile id="117">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick8.png"/>
+  </tile>
+  <tile id="118">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick9.png"/>
+  </tile>
+  <tile id="119">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick10.png"/>
+  </tile>
+  <tile id="120">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick11.png"/>
+  </tile>
+  <tile id="121">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_brick12.png"/>
+  </tile>
+  <tile id="122">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_dark0.png"/>
+  </tile>
+  <tile id="123">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_dark1.png"/>
+  </tile>
+  <tile id="124">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_dark2.png"/>
+  </tile>
+  <tile id="125">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_dark3.png"/>
+  </tile>
+  <tile id="126">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_gray0.png"/>
+  </tile>
+  <tile id="127">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_gray1.png"/>
+  </tile>
+  <tile id="128">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_gray2.png"/>
+  </tile>
+  <tile id="129">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone_gray3.png"/>
+  </tile>
+  <tile id="130">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_brown0.png"/>
+  </tile>
+  <tile id="131">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_brown1.png"/>
+  </tile>
+  <tile id="132">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_brown2.png"/>
+  </tile>
+  <tile id="133">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_brown3.png"/>
+  </tile>
+  <tile id="134">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_dark0.png"/>
+  </tile>
+  <tile id="135">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_dark1.png"/>
+  </tile>
+  <tile id="136">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_dark2.png"/>
+  </tile>
+  <tile id="137">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_dark3.png"/>
+  </tile>
+  <tile id="138">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_gray0.png"/>
+  </tile>
+  <tile id="139">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_gray1.png"/>
+  </tile>
+  <tile id="140">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_gray2.png"/>
+  </tile>
+  <tile id="141">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/stone2_gray3.png"/>
+  </tile>
+  <tile id="142">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tomb0.png"/>
+  </tile>
+  <tile id="143">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tomb1.png"/>
+  </tile>
+  <tile id="144">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tomb2.png"/>
+  </tile>
+  <tile id="145">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tomb3.png"/>
+  </tile>
+  <tile id="146">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tree1_lightred.png"/>
+  </tile>
+  <tile id="147">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tree1_red.png"/>
+  </tile>
+  <tile id="148">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tree1_yellow.png"/>
+  </tile>
+  <tile id="149">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tree2_lightred.png"/>
+  </tile>
+  <tile id="150">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tree2_red.png"/>
+  </tile>
+  <tile id="151">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/tree2_yellow.png"/>
+  </tile>
+  <tile id="152">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/undead0.png"/>
+  </tile>
+  <tile id="153">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/undead1.png"/>
+  </tile>
+  <tile id="154">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/undead2.png"/>
+  </tile>
+  <tile id="155">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/undead3.png"/>
+  </tile>
+  <tile id="156">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/vault0.png"/>
+  </tile>
+  <tile id="157">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/vault1.png"/>
+  </tile>
+  <tile id="158">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/vault2.png"/>
+  </tile>
+  <tile id="159">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/vault3.png"/>
+  </tile>
+  <tile id="160">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/volcanic_wall0.png"/>
+  </tile>
+  <tile id="161">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/volcanic_wall1.png"/>
+  </tile>
+  <tile id="162">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/volcanic_wall2.png"/>
+  </tile>
+  <tile id="163">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/volcanic_wall3.png"/>
+  </tile>
+  <tile id="164">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/volcanic_wall4.png"/>
+  </tile>
+  <tile id="165">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/volcanic_wall5.png"/>
+  </tile>
+  <tile id="166">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/volcanic_wall6.png"/>
+  </tile>
+  <tile id="167">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_flesh0.png"/>
+  </tile>
+  <tile id="168">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_flesh1.png"/>
+  </tile>
+  <tile id="169">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_flesh2.png"/>
+  </tile>
+  <tile id="170">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_flesh3.png"/>
+  </tile>
+  <tile id="171">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_flesh4.png"/>
+  </tile>
+  <tile id="172">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_flesh5.png"/>
+  </tile>
+  <tile id="173">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_flesh6.png"/>
+  </tile>
+  <tile id="174">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_vines0.png"/>
+  </tile>
+  <tile id="175">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_vines1.png"/>
+  </tile>
+  <tile id="176">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_vines2.png"/>
+  </tile>
+  <tile id="177">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_vines3.png"/>
+  </tile>
+  <tile id="178">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_vines4.png"/>
+  </tile>
+  <tile id="179">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_vines5.png"/>
+  </tile>
+  <tile id="180">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_vines6.png"/>
+  </tile>
+  <tile id="181">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_yellow_rock0.png"/>
+  </tile>
+  <tile id="182">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_yellow_rock1.png"/>
+  </tile>
+  <tile id="183">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_yellow_rock2.png"/>
+  </tile>
+  <tile id="184">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/wall_yellow_rock3.png"/>
+  </tile>
+  <tile id="185">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/zot_blue0.png"/>
+  </tile>
+  <tile id="186">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/zot_blue1.png"/>
+  </tile>
+  <tile id="187">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/zot_blue2.png"/>
+  </tile>
+  <tile id="188">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/wall/zot_blue3.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="190" name="Torches" tilewidth="1" tileheight="1"/>
+ <tileset firstgid="190" source="Floors.tsx"/>
+ <tileset firstgid="336" source="LevelObjects.tsx"/>
+ <tileset firstgid="340" name="Water" tilewidth="32" tileheight="32">
+  <terraintypes>
+   <terrain name="shallow_water" tile="45"/>
+   <terrain name="deep_water" tile="12"/>
+  </terraintypes>
+  <tile id="0" terrain=",1,,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_corner_NE.png"/>
+  </tile>
+  <tile id="1" terrain="1,,,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_corner_NW.png"/>
+  </tile>
+  <tile id="2" terrain=",,,1">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_corner_SE.png"/>
+  </tile>
+  <tile id="3" terrain=",,1,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_corner_SW.png"/>
+  </tile>
+  <tile id="4" terrain=",1,,1">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_E.png"/>
+  </tile>
+  <tile id="5" terrain="1,1,,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_N.png"/>
+  </tile>
+  <tile id="6" terrain=",,1,1">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_S.png"/>
+  </tile>
+  <tile id="7" terrain="1,,1,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/deep_water_wave_W.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_deep_water.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_deep_water_murky.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_deep_water_murky2.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_deep_water2.png"/>
+  </tile>
+  <tile id="12" terrain="1,1,1,1">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_open_sea.png"/>
+  </tile>
+  <tile id="13" terrain="1,1,1,1">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_open_sea2.png"/>
+  </tile>
+  <tile id="14">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_bl.png"/>
+  </tile>
+  <tile id="15">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_br.png"/>
+  </tile>
+  <tile id="16">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_btm.png"/>
+  </tile>
+  <tile id="17">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_lft.png"/>
+  </tile>
+  <tile id="18">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_rgt.png"/>
+  </tile>
+  <tile id="19">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_tl.png"/>
+  </tile>
+  <tile id="20">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_top.png"/>
+  </tile>
+  <tile id="21">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_bord_tr.png"/>
+  </tile>
+  <tile id="22">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water.png"/>
+  </tile>
+  <tile id="23">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water_disturbance.png"/>
+  </tile>
+  <tile id="24">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water_disturbance2.png"/>
+  </tile>
+  <tile id="25">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water_murky.png"/>
+  </tile>
+  <tile id="26">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water_murky_disturbance.png"/>
+  </tile>
+  <tile id="27">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water_murky_disturbance2.png"/>
+  </tile>
+  <tile id="28">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water_murky2.png"/>
+  </tile>
+  <tile id="29">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shallow_water2.png"/>
+  </tile>
+  <tile id="30">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water1.png"/>
+  </tile>
+  <tile id="31">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water1_shape.png"/>
+  </tile>
+  <tile id="32">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water2.png"/>
+  </tile>
+  <tile id="33">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water2_bubbles.png"/>
+  </tile>
+  <tile id="34">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water2_shape.png"/>
+  </tile>
+  <tile id="35">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water3.png"/>
+  </tile>
+  <tile id="36">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water3_bubbles.png"/>
+  </tile>
+  <tile id="37">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water4.png"/>
+  </tile>
+  <tile id="38">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_deep_water4_bubbles.png"/>
+  </tile>
+  <tile id="39">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_shallow_water_disturbance1.png"/>
+  </tile>
+  <tile id="40">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_shallow_water_disturbance2.png"/>
+  </tile>
+  <tile id="41">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_shallow_water_disturbance3.png"/>
+  </tile>
+  <tile id="42">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_shallow_water1.png"/>
+  </tile>
+  <tile id="43">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_shallow_water2.png"/>
+  </tile>
+  <tile id="44">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_shallow_water3.png"/>
+  </tile>
+  <tile id="45" terrain="0,0,0,0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/dngn_shoals_shallow_water4.png"/>
+  </tile>
+  <tile id="46">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/grey_dirt_bb.png"/>
+  </tile>
+  <tile id="47">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/grey_dirt_bcl.png"/>
+  </tile>
+  <tile id="48">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/grey_dirt_bcr.png"/>
+  </tile>
+  <tile id="49">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/grey_dirt_bl.png"/>
+  </tile>
+  <tile id="50">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/grey_dirt_br.png"/>
+  </tile>
+  <tile id="51">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_full.png"/>
+  </tile>
+  <tile id="52">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_corner_NE.png"/>
+  </tile>
+  <tile id="53">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_corner_NW.png"/>
+  </tile>
+  <tile id="54">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_corner_SE.png"/>
+  </tile>
+  <tile id="55">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_corner_SW.png"/>
+  </tile>
+  <tile id="56">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_E.png"/>
+  </tile>
+  <tile id="57">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_N.png"/>
+  </tile>
+  <tile id="58">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_S.png"/>
+  </tile>
+  <tile id="59">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/ink_wave_W.png"/>
+  </tile>
+  <tile id="60" terrain=",0,,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_NE.png"/>
+  </tile>
+  <tile id="61" terrain="0,,,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_NW.png"/>
+  </tile>
+  <tile id="62" terrain=",,,0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_SE.png"/>
+  </tile>
+  <tile id="63" terrain=",,0,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_SW.png"/>
+  </tile>
+  <tile id="64" terrain=",0,,0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_E.png"/>
+  </tile>
+  <tile id="65" terrain="0,0,,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_N.png"/>
+  </tile>
+  <tile id="66" terrain=",,0,0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_S.png"/>
+  </tile>
+  <tile id="67" terrain="0,,0,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_W.png"/>
+  </tile>
+  <tile id="68" terrain="0,,0,0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_NE_inv.png"/>
+  </tile>
+  <tile id="69" terrain=",0,0,0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_NW_inv.png"/>
+  </tile>
+  <tile id="70" terrain="0,0,0,">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_SE_inv.png"/>
+  </tile>
+  <tile id="71" terrain="0,0,,0">
+   <image width="32" height="32" source="../../Tiles/dc-dngn/water/shallow_water_wave_corner_SW_inv.png"/>
+  </tile>
+ </tileset>
+ <layer name="Base" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer name="Floor" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt1m0KwyAQRVFdeneQpvZ7szVgYCoaHAo1Y+4B//e9jFOdAwAAAAD0MHvnbulcfO9f838hZj6l8zhgF1PM+RYdyC7owG4H2nu9dHBNR3ZxN5o/v9ea7yjnwWr+fKa1HQT/vRMt3oNaB3NDJjk/o83Bs+H/zmr+0ret7fetfDL/K56zkfyhkkfud3lqey5sdLNn2r219pJ/X+v5S29azR6X82Jl9hd5/tKbbuQ3fsuuG72L2q4rvW8t3vFfTYUejpR/ZXXHAQAAAAAAAAAAAAAA9PQBQ0xumw==
+  </data>
+ </layer>
+ <layer name="Walls" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt1sEKgzAMBuDeZUx9/4fdAg3zsEO8TMy+D4Lgyb9NTccAAIC656GWd+2zHrO26z7tJ7ZZ6/hkjloO7zrKnBXZF51kv1dkf3QSmap7uo6e+auZllHvlbvIf35FrFO38x/7X81/5qzcRWQ/M9u7zcGc+/8qznS1/zvLe1Csx3Z4xtp0O/PfZPaYb5k/77376Df3AAAAAAAAAAAAAK72AgIxA+Y=
+  </data>
+ </layer>
+ <objectgroup name="Collisions">
+  <properties>
+   <property name="isSensor" value="true"/>
+   <property name="onCollision" value="WaterScript"/>
+  </properties>
+  <object id="3" name="StartWall" x="799.909" y="735.727">
+   <polygon points="0,0 -0.333333,-31.9318 -31.3333,-32.5303 -31.3333,-63.0606 -288.576,-64.3939 -287.242,-350.394 -1.24242,-351.061 -1.24242,-159.727 32.0909,-159.061 32.0909,-128.061 65.4242,-127.727 66.0909,-349.727 0.0909091,-415.727 -287.242,-415.727 -352.576,-351.727 -353.909,-63.0606 -288.576,0.272727"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Level">
+  <object id="4" name="Start" x="547.333" y="416.667" width="34" height="34">
+   <ellipse/>
+  </object>
+  <object id="6" name="Fire" type="FireTile" gid="339" x="705" y="450">
+   <properties>
+    <property name="isSensor" value="true"/>
+    <property name="onCollision" value="FireScript"/>
+   </properties>
+  </object>
+  <object id="7" name="Water" type="WaterTiles" x="861" y="610">
+   <properties>
+    <property name="isSensor" value="true"/>
+    <property name="onCollision" value="WaterScript"/>
+   </properties>
+   <polygon points="0,0 127,125 292,126 321,160 353,155 351,95 280,90 255,68 225,66 196,90 69,-31 8,-32"/>
+  </object>
+  <object id="8" name="Water1" type="WaterTiles" x="802" y="735">
+   <properties>
+    <property name="isSensor" value="true"/>
+    <property name="onCollision" value="WaterScript"/>
+   </properties>
+   <polygon points="0,0 29,0 30,48 58,72 96,70 120,102 217,101 247,136 317,133 350,169 410,164 405,216 354,219 331,185 288,190 255,156 24,155 0,124"/>
+  </object>
+ </objectgroup>
+</map>

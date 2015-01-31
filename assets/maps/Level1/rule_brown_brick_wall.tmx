@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" source="Walls.tsx"/>
+ <layer name="regions" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjZmBgAAAAMAAM
+  </data>
+ </layer>
+ <layer name="output1_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjZmBgAAAAMAAM
+  </data>
+ </layer>
+ <layer name="input1_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjZmBgAAAAMAAM
+  </data>
+ </layer>
+ <layer name="output2_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjZWBgAAAAOAAO
+  </data>
+ </layer>
+ <layer name="input2_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjZWBgAAAAOAAO
+  </data>
+ </layer>
+ <layer name="output3_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgAAAABAAB
+  </data>
+ </layer>
+ <layer name="input3_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgAAAABAAB
+  </data>
+ </layer>
+ <layer name="input4_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjY2BgAAAAPAAP
+  </data>
+ </layer>
+ <layer name="input4_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjY2BgAAAAPAAP
+  </data>
+ </layer>
+ <layer name="output5_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjZ2BgAAAAQAAQ
+  </data>
+ </layer>
+ <layer name="input5_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJzjZ2BgAAAAQAAQ
+  </data>
+ </layer>
+ <layer name="output6_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJwTYGBgAAAARAAR
+  </data>
+ </layer>
+ <layer name="input6_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJwTYGBgAAAARAAR
+  </data>
+ </layer>
+ <layer name="output7_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJwTZGBgAAAASAAS
+  </data>
+ </layer>
+ <layer name="input7_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJwTZGBgAAAASAAS
+  </data>
+ </layer>
+ <layer name="output8_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJwTYmBgAAAATAAT
+  </data>
+ </layer>
+ <layer name="input8_Walls" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJwTYmBgAAAATAAT
+  </data>
+ </layer>
+</map>

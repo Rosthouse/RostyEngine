@@ -115,4 +115,9 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
         }
     }
 
+    public void reloadWorld() {
+        world.dispose();
+        world = new World(new Vector2(0, 0), true);
+    }
+
 }

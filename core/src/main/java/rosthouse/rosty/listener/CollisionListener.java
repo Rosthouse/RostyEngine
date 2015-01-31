@@ -5,17 +5,15 @@
  */
 package rosthouse.rosty.listener;
 
-
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import rosthouse.rosty.components.FireComponent;
-import rosthouse.rosty.components.WaterComponent;
-import rosthouse.rosty.components.shader.ShaderComponent;
-import rosthouse.rosty.entities.MovingPicture;
+import rosthouse.rosty.GameConstants;
+import rosthouse.rosty.components.ScriptComponent;
+import rosthouse.rosty.scripting.Script;
 
 /**
  *
@@ -31,35 +29,25 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact cntct) {
-
         Long idA = (Long) cntct.getFixtureA().getUserData();
         Long idB = (Long) cntct.getFixtureB().getUserData();
         Entity entityA = engine.getEntity(idA);
         Entity entityB = engine.getEntity(idB);
-        
-        if(entityA instanceof MovingPicture){
-            checkTile(entityB, entityA);
-        } else {
-            checkTile(entityA, entityB);
+        ScriptComponent scriptComponent = null;
+        if ((scriptComponent = entityA.getComponent(ScriptComponent.class)) != null) {
+            handleStartCollision(scriptComponent, entityA, entityB);
+        }
+        if ((scriptComponent = entityB.getComponent(ScriptComponent.class)) != null) {
+            handleStartCollision(scriptComponent, entityB, entityA);
         }
     }
 
-    private void checkTile(Entity tileEntity, Entity marbleEntity) {
-        if(tileEntity.getComponent(FireComponent.class) != null){
-            ShaderComponent t;
-            if((t = tileEntity.getComponent(ShaderComponent.class)) != null){
-                marbleEntity.remove(ShaderComponent.class);
-                t.dispose();
-            }
-            marbleEntity.add(new ShaderComponent("shaders/fire")); 
-        }else if(tileEntity.getComponent(WaterComponent.class) != null){
-            ShaderComponent t;
-            if((t = tileEntity.getComponent(ShaderComponent.class)) != null){
-                marbleEntity.remove(ShaderComponent.class);
-                t.dispose();
-            }
-            marbleEntity.add(new ShaderComponent("shaders/water"));
-        } 
+    public void handleStartCollision(ScriptComponent scriptComponent, Entity self, Entity other) {
+        if (scriptComponent.hasScript(GameConstants.START_COLLISION)) {
+            Script script = scriptComponent.getScript(GameConstants.START_COLLISION);
+            CollisionEvent collisionEvent = new CollisionEvent(self, other);
+            script.execute(collisionEvent);
+        }
     }
 
     @Override
@@ -68,12 +56,22 @@ public class CollisionListener implements ContactListener {
         Long idA = (Long) cntct.getFixtureA().getUserData();
         Long idB = (Long) cntct.getFixtureB().getUserData();
         Entity entityA = engine.getEntity(idA);
-        ShaderComponent shader = entityA.getComponent(ShaderComponent.class);
-        if (shader != null) {
-            entityA.remove(ShaderComponent.class);
-            shader.shader.dispose();
+        Entity entityB = engine.getEntity(idB);
+        ScriptComponent scriptComponent = null;
+        if (entityA != null && (scriptComponent = entityA.getComponent(ScriptComponent.class)) != null) {
+            handleEndCollision(scriptComponent, entityA, entityB);
+        }
+        if (entityB != null && (scriptComponent = entityB.getComponent(ScriptComponent.class)) != null) {
+            handleEndCollision(scriptComponent, entityB, entityA);
         }
 
+    }
+
+    public void handleEndCollision(ScriptComponent scriptComponent, Entity self, Entity other) {
+        if (scriptComponent.hasScript(GameConstants.END_COLLISION)) {
+            Script script = scriptComponent.getScript(GameConstants.END_COLLISION);
+            script.execute(new CollisionEvent(self, other));
+        }
     }
 
     @Override
