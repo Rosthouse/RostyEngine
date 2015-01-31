@@ -54,6 +54,7 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 nbactions-*.xml
+*nb-gradle*
 
 ##Maven
 target/
