@@ -5,23 +5,20 @@
  */
 package rosthouse.rosty.scripting.scripts;
 
-import rosthouse.rosty.components.shader.ShaderComponent;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import static rosthouse.rosty.GameConstants.EventType.EndLevel;
 import rosthouse.rosty.listener.CollisionEvent;
-import rosthouse.rosty.scripting.NativeScript;
+import rosthouse.rosty.scripting.Script;
 
 /**
  *
  * @author Rosthouse
  */
-public class ClearMarbleScript extends NativeScript<CollisionEvent> {
+public class EndLevelScript implements Script<CollisionEvent> {
 
     @Override
     public Object execute(CollisionEvent event) {
-        ShaderComponent shader = event.other.getComponent(ShaderComponent.class);
-        if (shader != null) {
-            event.other.remove(ShaderComponent.class);
-            shader.shader.dispose();
-        }
+        MessageManager.getInstance().dispatchMessage(null, null, EndLevel.value);
         return null;
     }
 

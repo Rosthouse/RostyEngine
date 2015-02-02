@@ -7,7 +7,7 @@ package rosthouse.rosty.scripting;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public abstract class NativeScript<T extends Event> implements Script<T> {
 

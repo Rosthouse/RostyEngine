@@ -5,20 +5,18 @@
  */
 package rosthouse.rosty.components;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Shape;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
-public class SensorComponent<T> extends Component {
+public class SensorComponent<T extends Shape> extends PhysicsComponent {
 
-    public final T shape;
-    public final Fixture fixture;
-
+//    public final T shape;
+//    public final Fixture fixture;
     public SensorComponent(T shape, Fixture fixtureDef) {
-        this.fixture = fixtureDef;
-        this.shape = shape;
+        super(shape, fixtureDef);
     }
 }

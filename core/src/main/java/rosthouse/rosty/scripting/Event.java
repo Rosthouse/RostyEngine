@@ -7,7 +7,7 @@ package rosthouse.rosty.scripting;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public interface Event {
 }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class PropertiesComponent extends Component{
     public final ObjectMap<String, Object> properties;

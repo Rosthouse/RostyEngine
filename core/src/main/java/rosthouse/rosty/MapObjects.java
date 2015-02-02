@@ -7,7 +7,7 @@ package rosthouse.rosty;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public enum MapObjects {
 

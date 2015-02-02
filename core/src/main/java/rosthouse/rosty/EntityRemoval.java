@@ -9,7 +9,7 @@ import com.badlogic.ashley.core.Entity;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class EntityRemoval {
 

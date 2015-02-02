@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class RectangleComponent extends Component {
 

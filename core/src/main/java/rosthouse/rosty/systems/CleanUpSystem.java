@@ -13,14 +13,14 @@ import rosthouse.rosty.components.DeathComponent;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class CleanUpSystem extends IteratingSystem {
 
     private Engine engine;
 
     public CleanUpSystem() {
-        super(Family.all(DeathComponent.class).get());
+        super(Family.one(DeathComponent.class).get());
     }
 
     @Override
@@ -31,8 +31,8 @@ public class CleanUpSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float f) {
-        entity.removeAll();
         engine.removeEntity(entity);
+//        entity.removeAll();
     }
 
 }

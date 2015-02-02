@@ -10,7 +10,7 @@ import rosthouse.rosty.scripting.Event;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class CollisionEvent implements Event {
 

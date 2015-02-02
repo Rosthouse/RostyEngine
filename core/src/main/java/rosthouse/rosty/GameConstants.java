@@ -7,7 +7,7 @@ package rosthouse.rosty;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class GameConstants {
 
@@ -16,5 +16,16 @@ public class GameConstants {
 
     //Bit flags
     public static final int REMOVE = 0x00000001;
+
+    public enum EventType {
+
+        EndLevel(1);
+
+        public final int value;
+
+        private EventType(int value) {
+            this.value = value;
+        }
+    }
 
 }
