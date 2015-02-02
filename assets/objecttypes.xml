@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="WaterTiles" color="#0d2ea4"/>
+ <objecttype name="Wall" color="#fd0004"/>
+</objecttypes>
