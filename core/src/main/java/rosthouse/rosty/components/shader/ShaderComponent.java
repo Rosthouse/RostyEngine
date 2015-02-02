@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class ShaderComponent extends Component implements Disposable {
 

@@ -12,7 +12,7 @@ import rosthouse.rosty.scripting.NativeScript;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class WoodScript extends NativeScript<CollisionEvent> {
 

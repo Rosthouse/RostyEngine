@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.Array;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class ShaderLoader extends AssetLoader<ShaderProgram, AssetLoaderParameters<ShaderProgram>> {
 

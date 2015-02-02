@@ -13,7 +13,7 @@ import rosthouse.rosty.components.DeathComponent;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class CleanUpSystem extends IteratingSystem {
 

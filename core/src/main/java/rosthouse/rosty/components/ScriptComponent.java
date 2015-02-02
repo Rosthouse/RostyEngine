@@ -11,7 +11,7 @@ import rosthouse.rosty.scripting.Script;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class ScriptComponent extends Component {
 

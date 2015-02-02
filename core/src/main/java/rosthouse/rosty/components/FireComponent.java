@@ -9,7 +9,7 @@ import com.badlogic.ashley.core.Component;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class FireComponent extends Component{
     

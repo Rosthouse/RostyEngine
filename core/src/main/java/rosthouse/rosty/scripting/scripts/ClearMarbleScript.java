@@ -11,7 +11,7 @@ import rosthouse.rosty.scripting.NativeScript;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class ClearMarbleScript extends NativeScript<CollisionEvent> {
 
