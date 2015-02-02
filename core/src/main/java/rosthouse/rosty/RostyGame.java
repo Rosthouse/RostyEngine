@@ -1,10 +1,14 @@
 package rosthouse.rosty;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.assets.AssetManager;
 import rosthouse.rosty.loader.MapLoader;
 import rosthouse.rosty.systems.CleanUpSystem;
@@ -49,10 +53,7 @@ public class RostyGame extends ApplicationAdapter {
                 RostyGame.this.dispose();
                 return true;
             } else if (keycode == Input.Keys.F3) {
-                engine.removeAllEntities();
-                physicsSystem.reloadWorld();
-                physicsDebugSystem.setWorld(physicsSystem.getWorld());
-                loadMap();
+                reloadMap();
                 return true;
             }
 
@@ -61,8 +62,19 @@ public class RostyGame extends ApplicationAdapter {
 
     };
 
+    private final class EngineTelegraph implements Telegraph {
+
+        @Override
+        public boolean handleMessage(Telegram tlgrm) {
+            reloadMap();
+            return false;
+        }
+
+    }
+
     @Override
     public void create() {
+        setLogLevel(Application.LOG_DEBUG);
         assetManager = new AssetManager();
         engine = new Engine();
         renderSystem = new RenderSystem(null);
@@ -81,15 +93,25 @@ public class RostyGame extends ApplicationAdapter {
         engine.addSystem(physicsDebugSystem);
         engine.addSystem(shapeRenderSystem);
         engine.addSystem(cleanupSystem);
-        loadMap();
 
-//        collList = new CollisionListener(engine);
-//        physicsSystem.getWorld().setContactListener(collList);
+        MessageManager.getInstance().addListener(new EngineTelegraph(), GameConstants.EventType.EndLevel.value);
+        loadMap();
     }
 
     public void loadMap() {
         MapLoader loader = new MapLoader();
         loader.loadMap("maps/Level1/Level1.tmx", assetManager, engine, physicsSystem, unitScale);
+    }
+
+    public void setLogLevel(int logLevel) {
+        Gdx.app.setLogLevel(logLevel);
+    }
+
+    private void reloadMap() {
+        engine.removeAllEntities();
+        physicsSystem.reloadWorld();
+        physicsDebugSystem.setWorld(physicsSystem.getWorld());
+        loadMap();
     }
 
     @Override
