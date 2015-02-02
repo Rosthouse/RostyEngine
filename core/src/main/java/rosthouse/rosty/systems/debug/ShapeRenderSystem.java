@@ -12,7 +12,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import rosthouse.rosty.components.OrthographicCameraComponent;
@@ -22,11 +25,12 @@ import rosthouse.rosty.components.collision.RectangleComponent;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class ShapeRenderSystem extends IteratingSystem {
 
     private ShapeRenderer shapeRenderer;
+    private SpriteBatch spriteBatch;
     private final ComponentMapper<OrthographicCameraComponent> cmCamera = ComponentMapper.getFor(OrthographicCameraComponent.class);
     private final ComponentMapper<PolygonComponent> cmPolygon = ComponentMapper.getFor(PolygonComponent.class);
     private final ComponentMapper<RectangleComponent> cmRectangle = ComponentMapper.getFor(RectangleComponent.class);
@@ -34,6 +38,7 @@ public class ShapeRenderSystem extends IteratingSystem {
     private ImmutableArray<Entity> polygonEntites;
     private ImmutableArray<Entity> rectangleEntities;
     private ImmutableArray<Entity> spriteEntities;
+    private BitmapFont fpsFont;
 
     /**
      * Default contructor. Sets the system so that it won't be processed, so in
@@ -62,6 +67,10 @@ public class ShapeRenderSystem extends IteratingSystem {
         polygonEntites = engine.getEntitiesFor(Family.all(PolygonComponent.class).get());
         rectangleEntities = engine.getEntitiesFor(Family.all(RectangleComponent.class).get());
         spriteEntities = engine.getEntitiesFor(Family.all(SpriteComponent.class).get());
+        fpsFont = new BitmapFont();
+        fpsFont.setColor(Color.RED);
+        spriteBatch = new SpriteBatch();
+
     }
 
     @Override
@@ -71,6 +80,8 @@ public class ShapeRenderSystem extends IteratingSystem {
         rectangleEntities = null;
         spriteEntities = null;
         shapeRenderer.dispose();
+        fpsFont.dispose();
+        spriteBatch.dispose();
     }
 
     @Override
@@ -100,10 +111,32 @@ public class ShapeRenderSystem extends IteratingSystem {
             if (cmSprite.has(this.spriteEntities.get(i))) {
                 SpriteComponent spSprite = cmSprite.get(spriteEntities.get(i));
                 Rectangle boundingRectangle = spSprite.sprite.getBoundingRectangle();
-                shapeRenderer.rect(boundingRectangle.x, boundingRectangle.y,boundingRectangle.width,boundingRectangle.height);
+                shapeRenderer.rect(boundingRectangle.x, boundingRectangle.y, boundingRectangle.width, boundingRectangle.height);
             }
         }
+
         shapeRenderer.end();
+        spriteBatch.begin();
+        renderGuiFpsCounter(spriteBatch, cmpCamera.camera);
+        spriteBatch.end();
+    }
+
+    private void renderGuiFpsCounter(SpriteBatch batch, Camera camera) {
+        float x = camera.viewportWidth;
+        float y = camera.viewportHeight + 10;
+        int fps = Gdx.graphics.getFramesPerSecond();
+        if (fps >= 45) {
+            // 45 or more FPS show up in green
+            fpsFont.setColor(0, 1, 0, 1);
+        } else if (fps >= 30) {
+            // 30 or more FPS show up in yellow
+            fpsFont.setColor(1, 1, 0, 1);
+        } else {
+            // less than 30 FPS show up in red
+            fpsFont.setColor(1, 0, 0, 1);
+        }
+        fpsFont.draw(batch, "FPS: " + fps, x, y);
+        fpsFont.setColor(1, 1, 1, 1); // white
     }
 
 }
