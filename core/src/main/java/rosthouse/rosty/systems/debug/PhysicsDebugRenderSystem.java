@@ -16,7 +16,7 @@ import rosthouse.rosty.components.OrthographicCameraComponent;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class PhysicsDebugRenderSystem extends IteratingSystem {
 
@@ -45,6 +45,15 @@ public class PhysicsDebugRenderSystem extends IteratingSystem {
     public void processEntity(Entity entity, float deltaTime) {
         OrthographicCameraComponent cmpCamera = cmCamera.get(entity);
         debugRenderer.render(debugWorld, cmpCamera.camera.combined);
+    }
+
+    /**
+     * Sets the world which is to be rendered for debugging.
+     *
+     * @param world A initialized world.
+     */
+    public void setWorld(World world) {
+        this.debugWorld = world;
     }
 
 }

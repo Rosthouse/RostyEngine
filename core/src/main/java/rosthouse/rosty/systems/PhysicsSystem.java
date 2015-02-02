@@ -22,6 +22,7 @@ import rosthouse.rosty.components.PhysicsComponent;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.SensorComponent;
 import rosthouse.rosty.components.VelocityComponent;
+import rosthouse.rosty.listener.CollisionListener;
 
 /**
  *
@@ -36,6 +37,7 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
     private final ComponentMapper<PhysicsComponent> cmPhysics = ComponentMapper.getFor(PhysicsComponent.class);
     private final ComponentMapper<PositionComponent> cmPosition = ComponentMapper.getFor(PositionComponent.class);
     private final ComponentMapper<VelocityComponent> cmVelocity = ComponentMapper.getFor(VelocityComponent.class);
+    private CollisionListener collList;
 
     public PhysicsSystem() {
         super();
@@ -50,6 +52,8 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
         super.addedToEngine(engine);
         engine.addEntityListener(Family.getFor(PhysicsComponent.class), this);
         entities = engine.getEntitiesFor(Family.getFor(PhysicsComponent.class, PositionComponent.class));
+        collList = new CollisionListener(engine);
+        world.setContactListener(collList);
     }
 
     @Override
@@ -118,6 +122,7 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
     public void reloadWorld() {
         world.dispose();
         world = new World(new Vector2(0, 0), true);
+        world.setContactListener(collList);
     }
 
 }

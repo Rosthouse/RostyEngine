@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.assets.AssetManager;
-import rosthouse.rosty.listener.CollisionListener;
 import rosthouse.rosty.loader.MapLoader;
 import rosthouse.rosty.systems.CleanUpSystem;
 import rosthouse.rosty.systems.InputSystem;
@@ -31,7 +30,6 @@ public class RostyGame extends ApplicationAdapter {
     PhysicsSystem physicsSystem;
     PhysicsDebugRenderSystem physicsDebugSystem;
     ShapeRenderSystem shapeRenderSystem;
-    CollisionListener collList;
     CleanUpSystem cleanupSystem;
 
     private final float unitScale = 1f / 32f;
@@ -53,6 +51,7 @@ public class RostyGame extends ApplicationAdapter {
             } else if (keycode == Input.Keys.F3) {
                 engine.removeAllEntities();
                 physicsSystem.reloadWorld();
+                physicsDebugSystem.setWorld(physicsSystem.getWorld());
                 loadMap();
                 return true;
             }
@@ -84,8 +83,8 @@ public class RostyGame extends ApplicationAdapter {
         engine.addSystem(cleanupSystem);
         loadMap();
 
-        collList = new CollisionListener(engine);
-        physicsSystem.getWorld().setContactListener(collList);
+//        collList = new CollisionListener(engine);
+//        physicsSystem.getWorld().setContactListener(collList);
     }
 
     public void loadMap() {
