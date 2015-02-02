@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="24">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="30">
  <tileset firstgid="1" name="Walls" tilewidth="34" tileheight="34">
   <tile id="0">
    <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives0.png"/>
@@ -829,10 +829,10 @@
   </object>
  </objectgroup>
  <objectgroup name="Level">
-  <object id="4" name="Start" type="Level" x="547.333" y="416.667" width="34" height="34">
+  <object id="4" name="Start" type="Start" x="547.333" y="416.667" width="34" height="34">
    <ellipse/>
   </object>
-  <object id="6" name="Fire" type="FireTile" gid="339" x="705" y="450">
+  <object id="6" name="Fire" type="FireTile" gid="339" x="704" y="448">
    <properties>
     <property name="isSensor" value="true"/>
     <property name="onCollision" value="FireScript"/>
@@ -852,8 +852,26 @@
    </properties>
    <polygon points="0,0 35,-0.666667 61,28.6667 78,51.3333 95.3333,61.3333 124.333,92.6667 220.667,100 256,128 318.333,125.667 347.667,157.333 410,164 405,216 354,219 331,185 288,190 255,156 24,155 0,124"/>
   </object>
-  <object id="10" name="Finish" type="Level" x="1367" y="993" width="50" height="50">
+  <object id="10" name="Finish" type="Finish" x="1367" y="993" width="50" height="50">
+   <properties>
+    <property name="isSensor" value="true"/>
+   </properties>
    <ellipse/>
+  </object>
+  <object id="25" name="Wood1" type="WoodTile" gid="134" x="1280" y="864">
+   <properties>
+    <property name="onCollision" value="WoodScript"/>
+   </properties>
+  </object>
+  <object id="26" name="Wood2" type="WoodTile" gid="134" x="1280" y="896">
+   <properties>
+    <property name="onCollision" value="WoodScript"/>
+   </properties>
+  </object>
+  <object id="27" name="Wood3" type="WoodTile" gid="134" x="1280" y="832">
+   <properties>
+    <property name="onCollision" value="WoodScript"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

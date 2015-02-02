@@ -14,7 +14,7 @@ import rosthouse.rosty.scripting.NativeScript;
  *
  * @author Pädda
  */
-public class WoodTileScript extends NativeScript<CollisionEvent> {
+public class WoodScript extends NativeScript<CollisionEvent> {
 
     @Override
     public Object execute(CollisionEvent event) {

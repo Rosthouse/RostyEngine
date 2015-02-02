@@ -44,7 +44,7 @@ import rosthouse.rosty.entities.MovingPicture;
 import rosthouse.rosty.scripting.scripts.ClearMarbleScript;
 import rosthouse.rosty.scripting.scripts.FireTileScript;
 import rosthouse.rosty.scripting.scripts.WaterTileScript;
-import rosthouse.rosty.scripting.scripts.WoodTileScript;
+import rosthouse.rosty.scripting.scripts.WoodScript;
 import rosthouse.rosty.systems.PhysicsSystem;
 
 /**
@@ -105,16 +105,23 @@ public class MapLoader {
             } else {
                 Entity ent = new Entity();
                 engine.addEntity(ent);
-                loadObject(object, physicsSystem, ent, true);
-                String type = object.getProperties().get("onCollision", "", String.class);
-                if (type.equals("FireScript")) {
+                Boolean isSensor = Boolean.valueOf(object.getProperties().get("isSensor", "false", String.class));
+                loadObject(object, physicsSystem, ent, isSensor);
+                String onCollisionScript = object.getProperties().get("onCollision", "", String.class);
+                if (onCollisionScript.equals("FireScript")) {
                     ScriptComponent scriptComponent = new ScriptComponent();
                     scriptComponent.addScript(GameConstants.START_COLLISION, new FireTileScript());
                     ent.add(scriptComponent);
-                } else if (type.equals("WaterScript")) {
+                } else if (onCollisionScript.equals("WaterScript")) {
                     ScriptComponent scriptComponent = new ScriptComponent();
                     scriptComponent.addScript(GameConstants.START_COLLISION, new WaterTileScript());
                     ent.add(scriptComponent);
+                } else if (onCollisionScript.equals("WoodScript")) {
+                    ScriptComponent scriptComponent = new ScriptComponent();
+                    scriptComponent.addScript(GameConstants.START_COLLISION, new WoodScript());
+                    ent.add(scriptComponent);
+                } else if (onCollisionScript.equals("Finish")) {
+
                 }
             }
         }
@@ -130,7 +137,7 @@ public class MapLoader {
                 String type = properties.get(MapObjects.TYPE.toString(), String.class);
                 if (type.equals("WoodTile")) {
                     ScriptComponent scriptComponent = new ScriptComponent();
-                    scriptComponent.addScript(GameConstants.START_COLLISION, new WoodTileScript());
+                    scriptComponent.addScript(GameConstants.START_COLLISION, new WoodScript());
                     mapObjectEntity.add(scriptComponent);
                 }
             }
@@ -214,12 +221,12 @@ public class MapLoader {
             mapObjectEntity.add(positionComponent);
             cmpPhys.fixture.setUserData(mapObjectEntity.getId());
         } else {
-            PhysicsComponent<PolygonShape> cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
-            cmpPhys.fixture.getBody().setTransform(x, y, texture.getRotation());
+            PhysicsComponent<PolygonShape> cmpSensor = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
+            cmpSensor.fixture.getBody().setTransform(x, y, texture.getRotation());
             mapObjectEntity.add(spriteComponent);
-            mapObjectEntity.add(cmpPhys);
+            mapObjectEntity.add(cmpSensor);
             mapObjectEntity.add(positionComponent);
-            cmpPhys.fixture.setUserData(mapObjectEntity.getId());
+            cmpSensor.fixture.setUserData(mapObjectEntity.getId());
         }
     }
 

@@ -35,6 +35,7 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
     float fixedStep;
     private ImmutableArray<Entity> entities;
     private final ComponentMapper<PhysicsComponent> cmPhysics = ComponentMapper.getFor(PhysicsComponent.class);
+    private final ComponentMapper<SensorComponent> cmSensor = ComponentMapper.getFor(SensorComponent.class);
     private final ComponentMapper<PositionComponent> cmPosition = ComponentMapper.getFor(PositionComponent.class);
     private final ComponentMapper<VelocityComponent> cmVelocity = ComponentMapper.getFor(VelocityComponent.class);
     private CollisionListener collList;
@@ -50,8 +51,8 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
     @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
-        engine.addEntityListener(Family.getFor(PhysicsComponent.class), this);
-        entities = engine.getEntitiesFor(Family.getFor(PhysicsComponent.class, PositionComponent.class));
+        engine.addEntityListener(Family.one(PhysicsComponent.class, SensorComponent.class).get(), this);
+        entities = engine.getEntitiesFor(Family.all(PhysicsComponent.class, PositionComponent.class).get());
         collList = new CollisionListener(engine);
         world.setContactListener(collList);
     }
@@ -114,6 +115,10 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
     public void entityRemoved(Entity entity) {
         if (cmPhysics.has(entity)) {
             PhysicsComponent cmpPhysics = cmPhysics.get(entity);
+            world.destroyBody(cmpPhysics.fixture.getBody());
+            cmpPhysics.shape.dispose();
+        } else if (cmSensor.has(entity)) {
+            SensorComponent cmpPhysics = cmSensor.get(entity);
             world.destroyBody(cmpPhysics.fixture.getBody());
             cmpPhysics.shape.dispose();
         }
