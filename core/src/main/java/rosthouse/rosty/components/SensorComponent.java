@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 
 /**
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class SensorComponent<T> extends Component {
 

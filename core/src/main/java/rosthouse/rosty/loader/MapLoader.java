@@ -50,7 +50,7 @@ import rosthouse.rosty.systems.PhysicsSystem;
 /**
  * Loads a TMX map
  *
- * @author Pädda
+ * @author Rosthouse
  */
 public class MapLoader {
 
