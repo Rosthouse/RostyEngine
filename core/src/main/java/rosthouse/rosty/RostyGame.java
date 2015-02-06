@@ -35,6 +35,7 @@ public class RostyGame extends ApplicationAdapter {
     PhysicsDebugRenderSystem physicsDebugSystem;
     ShapeRenderSystem shapeRenderSystem;
     CleanUpSystem cleanupSystem;
+    private boolean reloadMap;
 
     private final float unitScale = 1f / 32f;
 
@@ -66,7 +67,7 @@ public class RostyGame extends ApplicationAdapter {
 
         @Override
         public boolean handleMessage(Telegram tlgrm) {
-            reloadMap();
+            reloadMap = true;
             return false;
         }
 
@@ -117,6 +118,10 @@ public class RostyGame extends ApplicationAdapter {
     @Override
     public void render() {
         engine.update(Gdx.graphics.getDeltaTime());
+        if (reloadMap) {
+            reloadMap();
+            reloadMap = false;
+        }
     }
 
     @Override

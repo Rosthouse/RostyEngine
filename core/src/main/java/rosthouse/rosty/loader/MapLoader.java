@@ -256,16 +256,16 @@ public class MapLoader {
         EllipseComponent cmpEllipse = new EllipseComponent(ellipse);
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(ellipse.height / 2f);
-        circleShape.setPosition(new Vector2(ellipse.x, ellipse.y));
+//        circleShape.setPosition(new Vector2(ellipse.x, ellipse.y));
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
         fixtureDef.restitution = 0.2f;
         PhysicsComponent<CircleShape> cmpPhys;
         if (isSensor) {
-            cmpPhys = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, circleShape, circleShape.getPosition(), fixtureDef);
+            cmpPhys = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, circleShape, new Vector2(ellipse.x + ellipse.height / 2, ellipse.y + ellipse.height / 2), fixtureDef);
         } else {
-            cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, circleShape, circleShape.getPosition(), fixtureDef);
+            cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, circleShape, new Vector2(ellipse.x, ellipse.y), fixtureDef);
         }
         entity.add(cmpEllipse);
         entity.add(cmpPhys);

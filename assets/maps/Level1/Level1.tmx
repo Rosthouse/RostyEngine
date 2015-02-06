@@ -852,7 +852,7 @@
    </properties>
    <polygon points="0,0 35,-0.666667 61,28.6667 78,51.3333 95.3333,61.3333 124.333,92.6667 220.667,100 256,128 318.333,125.667 347.667,157.333 410,164 405,216 354,219 331,185 288,190 255,156 24,155 0,124"/>
   </object>
-  <object id="10" name="Finish" type="Finish" x="768" y="608" width="32" height="32">
+  <object id="10" name="Finish" type="Finish" x="1376" y="992" width="32" height="32">
    <properties>
     <property name="isSensor" value="true"/>
     <property name="onCollision" value="EndLevelScript"/>
