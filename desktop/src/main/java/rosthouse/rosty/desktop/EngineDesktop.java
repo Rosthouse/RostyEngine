@@ -8,6 +8,9 @@ public class EngineDesktop {
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.height = 480;
+        config.width = 800;
+//        config.fullscreen = true;
         new LwjglApplication(new RostyGame(), config);
     }
 }

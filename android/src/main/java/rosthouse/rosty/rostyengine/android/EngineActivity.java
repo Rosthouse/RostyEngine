@@ -11,6 +11,8 @@ public class EngineActivity extends AndroidApplication {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+        config.useWakelock = true;
+        RostyGame game = new RostyGame();
         initialize(new RostyGame(), config);
     }
 }

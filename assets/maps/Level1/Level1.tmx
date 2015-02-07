@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="30">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="44">
  <tileset firstgid="1" name="Walls" tilewidth="34" tileheight="34">
   <tile id="0">
    <image width="32" height="32" source="../../Tiles/dc-dngn/wall/beehives0.png"/>
@@ -802,12 +802,12 @@
  </layer>
  <layer name="Floor" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt1FsKgzAQBdC49O7AWvuim62FFEJqih99wOQcGPDTe3UmJQAAAAA+YRpSOuU5DP9+m9+bl8y7PJcOOyjz99jBuGS9NTqYOtmLVgfX4jnajai/7VoHa3MOkn8eXvf90cExT6uLaPlbN6/sopx9wPz1jkfa85Y6fz0Rb15p672L3EVrx9/dwCj3b4txpYee8j+V/0mU+w8AAAAAAAAA8G13k5NMKA==
+   eJzt1oEKgjAQxvHt7Xqt3kBNK+1lc7TBdWxqENnO/w8OQhD6jt055wAAAAAAAPANnXfuGuvi9/43v9fPmc+x7gfsgcx/xB40c9ZHoQed0bmQMx9qVPlTD0bx29KO0Gc+1JQ5B7m6Gcivz3zI3vrX8yFWqRcW8gdb9/7g38sKfQbSjFuY7zVp/5X2nuU+dCr3VJh3K3Mu5bK3MafcfYN4Lt+t+Ru4lH3pndwdocY7Yr8xeylz7d/BPpNd3wPXMtecP823zL41q4X8mp4Hfc9Zq7Xd8e8aQ1k+dTpYXgAAAAAAAAAAAAD7egKMA3he
   </data>
  </layer>
  <layer name="Walls" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJztmOsKwyAMRv1fZHbv/7BbwI+KlKK9zMvOAena2WJiTD51DgAAAACgnHdsr2/zyf0any3thvYTzFaz0Wxf49XHZ9ZCu6E9iuwrwXzgHxxLCzTfJVi/2eJAcV9CiP1nwnJb6Zz62H8mauyfcf2b/aUxrVoon9l7yh/BleeRnjBbasateiG/LW6rl/pvpBgxG+7I6WvyLemoEeJBeu9OgtvWwyj1wnygudNVv89o3zw39I7ZmGrgdA6v5P0ZNMOVOM5rhfKC9hQj6AnFxtl35T/Fl3KO9pm9U6ORa787Qq1c3TO1THWyd2o0Yg1aA71zZf6P6uhI5yqqi8rfaa080rzK8Xu5bpT4N1SztBZkl7SB7nN7jvTwXdq7NekZabo/zJ/lvpntXFVrQfEuvyh29tb/KPF/FX/Q/oV/th0AAAAAAAAAAAAAAAAAoJQPBxMMIw==
+   eJzt2OGugjAMhuH9J4vg/V+sp8m+uBDkDC3SzfdJFj0cNHQrayUlAAAAoN29jNvfyNXfSzk2XXdpX2GxWowW+1JeczlmY77u0k6l+FrYHOQTr+UKWu8Wdt5oeaC8bzGX80die1vrmuZy/kiOxD/i/W/xt+a0aqHmzD6n/WNO7ftIJBbLketWvdC8TelZL/W/nnLEYvDY05fqu9RH9ZAP6vc8zel5P/RSL2wOtHZ61ft3et/13hCdxVj3wPUafrLv99gzHOmJ/7OuFdoX9JsiYj/hGb/qg+4n1Q79voqYG57x71FORPPN+EfP/z26B6LxjH+vjkZ9ruK9/vUztdov5f9WP+zVe3s7K/71Wkd9rjol/znY+j71AhGpH14fe3fknRHRq/X65PO9xG5e1atfspXHAAAAAAAAAAAAAM73AHduC2Q=
   </data>
  </layer>
  <objectgroup name="Collisions">
@@ -818,61 +818,58 @@
   <object id="15" type="Wall" x="1440" y="1056">
    <polygon points="0,0 64,0 64,-320 -160,-320 -160,-384 -192,-384 -192,-416 -224,-416 -224,-448 -288,-448 -288,-480 -352,-480 -352,-512 -576,-512 -576,-448 -416,-448 -416,-416 -320,-416 -320,-384 -288,-384 -288,-352 -224,-352 -224,-256 0,-256"/>
   </object>
-  <object id="17" type="Wall" x="1344" y="896">
-   <polygon points="0,0 0,160 -288,160 -288,128 -352,128 -352,96 -576,96 -576,32 -608,32 -608,-160 -544,-160 -544,32 -288,32 -288,64 -224,64 -224,96 -128,96 -128,0"/>
-  </object>
   <object id="20" type="Wall" x="832" y="608">
    <polygon points="0,0 32,0 32,-224 -32,-288 -320,-288 -384,-224 -384,64 -320,128 -32,128 -32,96 -64,96 -64,64 -320,64 -320,-224 -32,-224 -32,-32 0,-32"/>
   </object>
-  <object id="22" type="Wall" x="1280" y="1056">
-   <polygon points="0,0 224,0 224,32 192,32 192,64 32,64 32,32 0,32"/>
+  <object id="30" type="Wall" x="1504" y="1088">
+   <polygon points="0,0 -32,0 -32,32 -192,32 -192,0 -288,0 -288,32 -352,32 -352,0 -672,0 -672,96 -832,96 -832,64 -864,64 -864,-32 -896,-32 -896,-352 -832,-352 -832,-64 -800,-64 -800,64 -704,64 -704,-32 -224,-32 -224,-128 -256,-128 -256,-160 -288,-160 -288,-192 -160,-192 -160,-32 0,-32"/>
+  </object>
+  <object id="32" name="Wood1" type="WoodTile" gid="134" x="704" y="1088">
+   <properties>
+    <property name="onCollision" value="WoodScript"/>
+   </properties>
+  </object>
+  <object id="33" name="Wood1" type="WoodTile" gid="134" x="736" y="1088">
+   <properties>
+    <property name="onCollision" value="WoodScript"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup name="Level">
   <object id="4" name="Start" type="Start" x="547.333" y="416.667" width="34" height="34">
    <ellipse/>
   </object>
-  <object id="6" name="Fire" type="FireTile" gid="339" x="704" y="448">
+  <object id="6" name="Fire" type="FireTile" gid="339" x="1376" y="928">
    <properties>
     <property name="isSensor" value="true"/>
     <property name="onCollision" value="FireScript"/>
    </properties>
   </object>
-  <object id="7" name="Water" type="WaterTiles" x="861" y="610">
-   <properties>
-    <property name="isSensor" value="true"/>
-    <property name="onCollision" value="WaterScript"/>
-   </properties>
-   <polygon points="2,31 97.3333,127 163.667,129.333 197.333,155.666 352.667,158.667 351,95 280,90 255,68 225,66 196,90 69,-31 0.333333,0"/>
-  </object>
-  <object id="8" name="Water1" type="WaterTiles" x="802" y="735">
-   <properties>
-    <property name="isSensor" value="true"/>
-    <property name="onCollision" value="WaterScript"/>
-   </properties>
-   <polygon points="0,0 35,-0.666667 61,28.6667 78,51.3333 95.3333,61.3333 124.333,92.6667 220.667,100 256,128 318.333,125.667 347.667,157.333 410,164 405,216 354,219 331,185 288,190 255,156 24,155 0,124"/>
-  </object>
-  <object id="10" name="Finish" type="Finish" x="768" y="608" width="32" height="32">
+  <object id="10" name="Finish" type="Finish" x="736" y="1120" width="32" height="32">
    <properties>
     <property name="isSensor" value="true"/>
     <property name="onCollision" value="EndLevelScript"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="25" name="Wood1" type="WoodTile" gid="134" x="1280" y="864">
+  <object id="35" name="Wood1" type="WoodTile" gid="134" x="768" y="1088">
    <properties>
     <property name="onCollision" value="WoodScript"/>
    </properties>
   </object>
-  <object id="26" name="Wood2" type="WoodTile" gid="134" x="1280" y="896">
+  <object id="38" name="Water" type="WaterTiles" x="1184.67" y="927.333">
    <properties>
-    <property name="onCollision" value="WoodScript"/>
+    <property name="isSensor" value="true"/>
+    <property name="onCollision" value="WaterScript"/>
    </properties>
+   <polygon points="0,0 -32.6667,32.6667 -96.6667,32.6667 -128.667,64.6667 -192.667,64.6667 -224.667,96.6667 -352.667,96.6667 -384.667,128.667 95.3333,128.667 95.3333,32.6667 63.3333,32.6667 63.3333,0.666667"/>
   </object>
-  <object id="27" name="Wood3" type="WoodTile" gid="134" x="1280" y="832">
+  <object id="42" name="Water" type="WaterTiles" x="864" y="608">
    <properties>
-    <property name="onCollision" value="WoodScript"/>
+    <property name="isSensor" value="true"/>
+    <property name="onCollision" value="WaterScript"/>
    </properties>
+   <polygon points="0,0 0,32 32,64 0,96 -64,96 -64,128 -96,128 -64,160 -64,192 -32,224 -64,256 -96,256 -192,352 -192,416 -160,416 0,256 32,256 64,288 160,288 160,256 128,256 96,224 64,224 32,192 0,160 64,96 96,128 160,128 192,160 352,160 352,96 288,96 256,64 224,64 192,96 96,0"/>
   </object>
  </objectgroup>
 </map>

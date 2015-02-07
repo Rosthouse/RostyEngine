@@ -59,20 +59,6 @@
             <version>${gdx.version}</version>
             <scope>compile</scope>
         </dependency>
-        <!--        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-box2d-platform</artifactId>
-            <classifier>natives-armeabi-v7a</classifier>
-            <version>${gdx.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-box2d-platform</artifactId>
-            <classifier>natives-x86</classifier>
-            <version>${gdx.version}</version>
-            <scope>compile</scope>
-        </dependency>-->
     </dependencies>
 
     <build>
@@ -136,6 +122,12 @@
                         <phase>install</phase>
                         <goals>
                             <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>connect</goal>
                         </goals>
                     </execution>
                 </executions>

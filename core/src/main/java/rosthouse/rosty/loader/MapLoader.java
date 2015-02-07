@@ -89,6 +89,8 @@ public class MapLoader {
                 float h = Gdx.graphics.getHeight();
                 OrthographicCamera camera = new OrthographicCamera();
                 camera.setToOrtho(false, (w / h) * 10, 10);
+//                Viewport viewPort = new FillViewport(50, 50, camera);
+//                viewPort.apply();
                 Texture tex = new Texture(Gdx.files.internal("Level/marble.png"));
                 Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
                 MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
@@ -256,16 +258,16 @@ public class MapLoader {
         EllipseComponent cmpEllipse = new EllipseComponent(ellipse);
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(ellipse.height / 2f);
-        circleShape.setPosition(new Vector2(ellipse.x, ellipse.y));
+//        circleShape.setPosition(new Vector2(ellipse.x, ellipse.y));
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
         fixtureDef.restitution = 0.2f;
         PhysicsComponent<CircleShape> cmpPhys;
         if (isSensor) {
-            cmpPhys = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, circleShape, circleShape.getPosition(), fixtureDef);
+            cmpPhys = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, circleShape, new Vector2(ellipse.x + ellipse.height / 2, ellipse.y + ellipse.height / 2), fixtureDef);
         } else {
-            cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, circleShape, circleShape.getPosition(), fixtureDef);
+            cmpPhys = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, circleShape, new Vector2(ellipse.x, ellipse.y), fixtureDef);
         }
         entity.add(cmpEllipse);
         entity.add(cmpPhys);
