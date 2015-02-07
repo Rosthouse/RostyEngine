@@ -38,11 +38,10 @@ public class RenderSystem extends EntitySystem implements EntityListener {
     private final ComponentMapper<ShaderComponent> cmShader = ComponentMapper.getFor(ShaderComponent.class);
     private ImmutableArray<Entity> spriteEntites;
     private ImmutableArray<Entity> cameraEntities;
-    private ImmutableArray<Entity> shaderEntities;
     private SpriteBatch spriteBatch;
     private TiledMapComponent cpMap;
 
-    public RenderSystem(OrthographicCamera camera) {
+    public RenderSystem() {
         super();
         this.spriteBatch = new SpriteBatch();
     }
@@ -61,7 +60,6 @@ public class RenderSystem extends EntitySystem implements EntityListener {
         engine.addEntityListener(this);
         spriteEntites = engine.getEntitiesFor(Family.getFor(ComponentType.getBitsFor(PositionComponent.class), ComponentType.getBitsFor(SpriteComponent.class, PolygonComponent.class), ComponentType.getBitsFor()));
         cameraEntities = engine.getEntitiesFor(Family.getFor(OrthographicCameraComponent.class));
-        shaderEntities = engine.getEntitiesFor(Family.getFor(ShaderComponent.class));
     }
 
     @Override

@@ -44,16 +44,16 @@ public class RostyGame extends ApplicationAdapter {
         @Override
         public boolean keyDown(int keycode) {
 
-            if (keycode == Input.Keys.P) {
+            if (keycode == Input.Keys.P || keycode == Input.Keys.MENU) {
                 physicsDebugSystem.setProcessing(!physicsDebugSystem.checkProcessing());
                 return true;
-            } else if (keycode == Input.Keys.O) {
+            } else if (keycode == Input.Keys.O || keycode == Input.Keys.MENU) {
                 shapeRenderSystem.setProcessing(!shapeRenderSystem.checkProcessing());
             } else if (keycode == Input.Keys.ESCAPE) {
                 dispose();
                 RostyGame.this.dispose();
                 return true;
-            } else if (keycode == Input.Keys.F3) {
+            } else if (keycode == Input.Keys.F3 || keycode == Input.Keys.BACK) {
                 reloadMap();
                 return true;
             }
@@ -78,7 +78,7 @@ public class RostyGame extends ApplicationAdapter {
         setLogLevel(Application.LOG_DEBUG);
         assetManager = new AssetManager();
         engine = new Engine();
-        renderSystem = new RenderSystem(null);
+        renderSystem = new RenderSystem();
         movementSystem = new MovementSystem();
         inputSystem = new InputSystem();
         physicsSystem = new PhysicsSystem();

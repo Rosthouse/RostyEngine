@@ -44,6 +44,8 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
         super(Family.getFor(VelocityComponent.class));
         multiplexer = new InputMultiplexer(this);
         Gdx.input.setInputProcessor(multiplexer);
+        Gdx.input.setCatchMenuKey(true);
+        Gdx.input.setCatchBackKey(true);
     }
 
     public void addInputProcessor(InputProcessor processor) {
@@ -151,9 +153,10 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     public void processEntity(Entity entity, float deltaTime) {
         VelocityComponent cpVelocity = cmVelocity.get(entity);
         if (Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer)) {
-            cpVelocity.xAxis = (int) Gdx.input.getAccelerometerX();
-            cpVelocity.yAxis = (int) Gdx.input.getAccelerometerY();
-            cpVelocity.zAxis = (int) Gdx.input.getAccelerometerZ();
+            cpVelocity.xAxis = (int) Gdx.input.getAccelerometerY();
+            cpVelocity.yAxis = (int) Gdx.input.getAccelerometerX();
+            cpVelocity.yAxis *= -1;
+//            cpVelocity.zAxis = (int) Gdx.input.getAccelerometerZ();
         } else {
             cpVelocity.xAxis = horizontalModifier;
             cpVelocity.yAxis = verticalModifier;

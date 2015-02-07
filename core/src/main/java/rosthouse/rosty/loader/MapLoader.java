@@ -89,6 +89,8 @@ public class MapLoader {
                 float h = Gdx.graphics.getHeight();
                 OrthographicCamera camera = new OrthographicCamera();
                 camera.setToOrtho(false, (w / h) * 10, 10);
+//                Viewport viewPort = new FillViewport(50, 50, camera);
+//                viewPort.apply();
                 Texture tex = new Texture(Gdx.files.internal("Level/marble.png"));
                 Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
                 MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
