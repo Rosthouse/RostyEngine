@@ -7,7 +7,7 @@ package rosthouse.rosty.scripting.scripts;
 
 import rosthouse.rosty.components.DeathComponent;
 import rosthouse.rosty.components.FireComponent;
-import rosthouse.rosty.listener.CollisionEvent;
+import rosthouse.rosty.collision.events.CollisionEvent;
 import rosthouse.rosty.scripting.NativeScript;
 
 /**

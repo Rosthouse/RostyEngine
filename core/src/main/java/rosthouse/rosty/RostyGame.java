@@ -96,12 +96,12 @@ public class RostyGame extends ApplicationAdapter {
         engine.addSystem(cleanupSystem);
 
         MessageManager.getInstance().addListener(new EngineTelegraph(), GameConstants.EventType.EndLevel.value);
-        loadMap();
+        loadMap("maps/Level1/Level1.tmx");
     }
 
-    public void loadMap() {
+    public void loadMap(String mapName) {
         MapLoader loader = new MapLoader();
-        loader.loadMap("maps/Level1/Level1.tmx", assetManager, engine, physicsSystem, unitScale);
+        loader.loadMap(mapName, assetManager, engine, physicsSystem, unitScale);
     }
 
     public void setLogLevel(int logLevel) {
@@ -112,7 +112,7 @@ public class RostyGame extends ApplicationAdapter {
         engine.removeAllEntities();
         physicsSystem.reloadWorld();
         physicsDebugSystem.setWorld(physicsSystem.getWorld());
-        loadMap();
+        loadMap("maps/Level1/Level1.tmx");
     }
 
     @Override

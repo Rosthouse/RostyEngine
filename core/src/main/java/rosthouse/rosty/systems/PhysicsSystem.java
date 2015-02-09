@@ -22,7 +22,7 @@ import rosthouse.rosty.components.PhysicsComponent;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.SensorComponent;
 import rosthouse.rosty.components.VelocityComponent;
-import rosthouse.rosty.listener.CollisionListener;
+import rosthouse.rosty.collision.CollisionListener;
 
 /**
  *
@@ -125,6 +125,7 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
     }
 
     public void reloadWorld() {
+        world.clearForces();
         world.dispose();
         world = new World(new Vector2(0, 0), true);
         world.setContactListener(collList);

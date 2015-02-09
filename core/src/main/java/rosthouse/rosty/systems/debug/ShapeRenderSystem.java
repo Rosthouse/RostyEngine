@@ -119,8 +119,8 @@ public class ShapeRenderSystem extends IteratingSystem {
     }
 
     private void renderGuiFpsCounter(SpriteBatch batch, Camera camera) {
-        float x = camera.viewportWidth;
-        float y = camera.viewportHeight + 10;
+        float x = Gdx.graphics.getWidth();
+        float y = Gdx.graphics.getHeight();
         int fps = Gdx.graphics.getFramesPerSecond();
         if (fps >= 45) {
             // 45 or more FPS show up in green

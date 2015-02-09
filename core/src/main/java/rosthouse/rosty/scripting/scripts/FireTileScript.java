@@ -8,7 +8,7 @@ package rosthouse.rosty.scripting.scripts;
 import rosthouse.rosty.components.FireComponent;
 import rosthouse.rosty.components.WaterComponent;
 import rosthouse.rosty.components.shader.ShaderComponent;
-import rosthouse.rosty.listener.CollisionEvent;
+import rosthouse.rosty.collision.events.CollisionEvent;
 import rosthouse.rosty.scripting.NativeScript;
 
 /**

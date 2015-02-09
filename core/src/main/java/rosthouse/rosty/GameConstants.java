@@ -13,6 +13,8 @@ public class GameConstants {
 
     public final static String START_COLLISION = "StartCollision";
     public final static String END_COLLISION = "EndCollision";
+    public final static String POST_SOLVE = "PostSolve";
+    public final static String PRE_SOLVE = "PreSolve";
 
     //Bit flags
     public static final int REMOVE = 0x00000001;

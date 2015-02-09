@@ -156,7 +156,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             cpVelocity.xAxis = (int) Gdx.input.getAccelerometerY();
             cpVelocity.yAxis = (int) Gdx.input.getAccelerometerX();
             cpVelocity.yAxis *= -1;
-//            cpVelocity.zAxis = (int) Gdx.input.getAccelerometerZ();
         } else {
             cpVelocity.xAxis = horizontalModifier;
             cpVelocity.yAxis = verticalModifier;

@@ -802,7 +802,7 @@
  </layer>
  <layer name="Floor" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt1oEKgjAQxvHt7Xqt3kBNK+1lc7TBdWxqENnO/w8OQhD6jt055wAAAAAAAPANnXfuGuvi9/43v9fPmc+x7gfsgcx/xB40c9ZHoQed0bmQMx9qVPlTD0bx29KO0Gc+1JQ5B7m6Gcivz3zI3vrX8yFWqRcW8gdb9/7g38sKfQbSjFuY7zVp/5X2nuU+dCr3VJh3K3Mu5bK3MafcfYN4Lt+t+Ru4lH3pndwdocY7Yr8xeylz7d/BPpNd3wPXMtecP823zL41q4X8mp4Hfc9Zq7Xd8e8aQ1k+dTpYXgAAAAAAAAAAAAD7egKMA3he
+   eJzt1oEKwiAQxnF9u16rN9iWq7ZetkkKdmgziIbn/wcHMQj2HXo7YwAAAAAAAPALkzXmGupij36b/3Nb5nOoe4c9SPP32INhy/oo9GBSei/SO+9rEfljD5bkt6YZIc+8rzVzDnJ1U5BfnnmffbSv53OoUi805Pdq5/5s30sLeQbiHddwv/fE+Veae5r7MBVyy1k4Ksxfyr6KO57L3vqenGavyRv/k9sRWtwRXZL9k1Lm1r+DLvPecg/cy9xy/rjbxLNeMwc15ZfS/UfOg5pq/fswKMryrVNneQEAAAAAAAAAAAAc6wnSQHei
   </data>
  </layer>
  <layer name="Walls" width="64" height="64">
@@ -816,12 +816,21 @@
    <property name="onCollision" value="WaterScript"/>
   </properties>
   <object id="15" type="Wall" x="1440" y="1056">
+   <properties>
+    <property name="onCollision" value="WallCollisionScript"/>
+   </properties>
    <polygon points="0,0 64,0 64,-320 -160,-320 -160,-384 -192,-384 -192,-416 -224,-416 -224,-448 -288,-448 -288,-480 -352,-480 -352,-512 -576,-512 -576,-448 -416,-448 -416,-416 -320,-416 -320,-384 -288,-384 -288,-352 -224,-352 -224,-256 0,-256"/>
   </object>
   <object id="20" type="Wall" x="832" y="608">
+   <properties>
+    <property name="onCollision" value="WallCollisionScript"/>
+   </properties>
    <polygon points="0,0 32,0 32,-224 -32,-288 -320,-288 -384,-224 -384,64 -320,128 -32,128 -32,96 -64,96 -64,64 -320,64 -320,-224 -32,-224 -32,-32 0,-32"/>
   </object>
   <object id="30" type="Wall" x="1504" y="1088">
+   <properties>
+    <property name="onCollision" value="WallCollisionScript"/>
+   </properties>
    <polygon points="0,0 -32,0 -32,32 -192,32 -192,0 -288,0 -288,32 -352,32 -352,0 -672,0 -672,96 -832,96 -832,64 -864,64 -864,-32 -896,-32 -896,-352 -832,-352 -832,-64 -800,-64 -800,64 -704,64 -704,-32 -224,-32 -224,-128 -256,-128 -256,-160 -288,-160 -288,-192 -160,-192 -160,-32 0,-32"/>
   </object>
   <object id="32" name="Wood1" type="WoodTile" gid="134" x="704" y="1088">
@@ -869,7 +878,7 @@
     <property name="isSensor" value="true"/>
     <property name="onCollision" value="WaterScript"/>
    </properties>
-   <polygon points="0,0 0,32 32,64 0,96 -64,96 -64,128 -96,128 -64,160 -64,192 -32,224 -64,256 -96,256 -192,352 -192,416 -160,416 0,256 32,256 64,288 160,288 160,256 128,256 96,224 64,224 32,192 0,160 64,96 96,128 160,128 192,160 352,160 352,96 288,96 256,64 224,64 192,96 96,0"/>
+   <polygon points="0,0 0,32 32,64 0,96 -64,96 -64,128 -96,128 -64,160 -64,192 -32,224 -64,256 -96,256 -192,352 -192,416 -160,416 -160,384 -96,320 0,320 32,288 128,288 160,256 128,256 96,224 64,224 32,192 0,160 64,96 96,128 160,128 192,160 352,160 352,96 288,96 256,64 224,64 192,96 96,0"/>
   </object>
  </objectgroup>
 </map>

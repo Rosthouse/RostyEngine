@@ -45,6 +45,7 @@ import rosthouse.rosty.entities.MovingPicture;
 import rosthouse.rosty.scripting.scripts.ClearMarbleScript;
 import rosthouse.rosty.scripting.scripts.EndLevelScript;
 import rosthouse.rosty.scripting.scripts.FireTileScript;
+import rosthouse.rosty.scripting.scripts.WallCollisionScript;
 import rosthouse.rosty.scripting.scripts.WaterTileScript;
 import rosthouse.rosty.scripting.scripts.WoodScript;
 import rosthouse.rosty.systems.PhysicsSystem;
@@ -110,28 +111,6 @@ public class MapLoader {
                 engine.addEntity(ent);
                 Boolean isSensor = Boolean.valueOf(object.getProperties().get("isSensor", "false", String.class));
                 loadObject(object, physicsSystem, ent, isSensor);
-                String onCollisionScript = object.getProperties().get("onCollision", "", String.class);
-                if (onCollisionScript.equals("FireScript")) {
-                    ScriptComponent scriptComponent = new ScriptComponent();
-                    scriptComponent.addScript(GameConstants.START_COLLISION, new FireTileScript());
-                    ent.add(scriptComponent);
-                    Gdx.app.debug("MAPLOADING", "Loading Fire script");
-                } else if (onCollisionScript.equals("WaterScript")) {
-                    ScriptComponent scriptComponent = new ScriptComponent();
-                    scriptComponent.addScript(GameConstants.START_COLLISION, new WaterTileScript());
-                    ent.add(scriptComponent);
-                    Gdx.app.debug("MAPLOADING", "Loading Water script");
-                } else if (onCollisionScript.equals("WoodScript")) {
-                    ScriptComponent scriptComponent = new ScriptComponent();
-                    scriptComponent.addScript(GameConstants.START_COLLISION, new WoodScript());
-                    ent.add(scriptComponent);
-                    Gdx.app.debug("MAPLOADING", "Loading Wood script");
-                } else if (onCollisionScript.equals("EndLevelScript")) {
-                    ScriptComponent scriptComponent = new ScriptComponent();
-                    scriptComponent.addScript(GameConstants.START_COLLISION, new EndLevelScript());
-                    ent.add(scriptComponent);
-                    Gdx.app.debug("MAPLOADING", "Loading Finish script");
-                }
             }
         }
     }
@@ -163,6 +142,10 @@ public class MapLoader {
             createTexture((TextureMapObject) object, physicsSystem, mapObjectEntity, isSensor);
         } else if (object instanceof EllipseMapObject) {
             createEllipse((EllipseMapObject) object, physicsSystem, mapObjectEntity, isSensor);
+        }
+        if (object.getProperties().containsKey("onCollision")) {
+            ScriptComponent script = createCollisionScript(object.getProperties().get("onCollision", "", String.class));
+            mapObjectEntity.add(script);
         }
     }
 
@@ -295,4 +278,32 @@ public class MapLoader {
         }
     }
 
+    private ScriptComponent createCollisionScript(String collisionScriptName) {
+        ScriptComponent cmpScript = new ScriptComponent();
+        switch (collisionScriptName) {
+            case "FireScript":
+                cmpScript.addScript(GameConstants.START_COLLISION, new FireTileScript());
+                Gdx.app.debug("MAPLOADING", "Loading Fire script");
+                break;
+            case "WaterScript":
+                cmpScript.addScript(GameConstants.START_COLLISION, new WaterTileScript());
+                Gdx.app.debug("MAPLOADING", "Loading Water script");
+                break;
+            case "WoodScript":
+                cmpScript.addScript(GameConstants.START_COLLISION, new WoodScript());
+                Gdx.app.debug("MAPLOADING", "Loading Wood script");
+                break;
+            case "EndLevelScript":
+                cmpScript.addScript(GameConstants.START_COLLISION, new EndLevelScript());
+                Gdx.app.debug("MAPLOADING", "Loading Finish script");
+                break;
+            case "WallCollisionScript":
+                cmpScript.addScript(GameConstants.POST_SOLVE, new WallCollisionScript());
+                Gdx.app.debug("MAPLOADING", "Loading WallCollisionScript");
+                break;
+            default:
+                break;
+        }
+        return cmpScript;
+    }
 }
