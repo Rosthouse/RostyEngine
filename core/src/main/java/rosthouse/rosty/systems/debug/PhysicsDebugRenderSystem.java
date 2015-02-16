@@ -26,7 +26,7 @@ public class PhysicsDebugRenderSystem extends IteratingSystem {
     private final ComponentMapper<OrthographicCameraComponent> cmCamera = ComponentMapper.getFor(OrthographicCameraComponent.class);
 
     public PhysicsDebugRenderSystem(World world, Boolean processing) {
-        super(Family.getFor(OrthographicCameraComponent.class));
+        super(Family.all(OrthographicCameraComponent.class).get());
         this.debugRenderer = new Box2DDebugRenderer();
         this.debugWorld = world;
         setProcessing(processing);

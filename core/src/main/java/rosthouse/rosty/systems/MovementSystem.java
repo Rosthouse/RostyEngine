@@ -28,7 +28,7 @@ public class MovementSystem extends IteratingSystem {
     private ComponentMapper<OrthographicCameraComponent> cmCamera = ComponentMapper.getFor(OrthographicCameraComponent.class);
 
     public MovementSystem() {
-        super(Family.getFor(PositionComponent.class, VelocityComponent.class));
+        super(Family.all(PositionComponent.class, VelocityComponent.class).get());
         Gdx.app.log("MOVEMENTSYSTEM", "Loading Movement System");
     }
 

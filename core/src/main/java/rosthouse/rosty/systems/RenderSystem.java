@@ -59,8 +59,8 @@ public class RenderSystem extends EntitySystem implements EntityListener {
     @Override
     public void addedToEngine(Engine engine) {
         engine.addEntityListener(this);
-        spriteEntites = engine.getEntitiesFor(Family.getFor(ComponentType.getBitsFor(PositionComponent.class), ComponentType.getBitsFor(SpriteComponent.class, PolygonComponent.class), ComponentType.getBitsFor()));
-        cameraEntities = engine.getEntitiesFor(Family.getFor(OrthographicCameraComponent.class));
+        spriteEntites = engine.getEntitiesFor(Family.all(PositionComponent.class).one(SpriteComponent.class, PolygonComponent.class).get());
+        cameraEntities = engine.getEntitiesFor(Family.all(OrthographicCameraComponent.class).get());
     }
 
     @Override

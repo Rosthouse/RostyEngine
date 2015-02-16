@@ -33,9 +33,7 @@ public class CleanUpSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float f) {
-        entity.scheduleForRemoval();
         engine.removeEntity(entity);
-//        entity.removeAll();
     }
 
 }

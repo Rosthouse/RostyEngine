@@ -58,7 +58,7 @@ public class ShapeRenderSystem extends IteratingSystem {
      * @param processing Wheter the system should be processed.
      */
     public ShapeRenderSystem(Boolean processing) {
-        super(Family.getFor(OrthographicCameraComponent.class));
+        super(Family.all(OrthographicCameraComponent.class).get());
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
         setProcessing(false);
