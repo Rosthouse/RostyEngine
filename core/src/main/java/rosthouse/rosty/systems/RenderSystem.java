@@ -43,6 +43,7 @@ public class RenderSystem extends EntitySystem implements EntityListener {
 
     public RenderSystem() {
         super();
+        Gdx.app.log("RENDERSYSTEM", "Loading Rendering System");
         this.spriteBatch = new SpriteBatch();
     }
 

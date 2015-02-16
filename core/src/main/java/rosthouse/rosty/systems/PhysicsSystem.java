@@ -12,17 +12,18 @@ import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
+import rosthouse.rosty.collision.CollisionListener;
 import rosthouse.rosty.components.PhysicsComponent;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.SensorComponent;
 import rosthouse.rosty.components.VelocityComponent;
-import rosthouse.rosty.collision.CollisionListener;
 
 /**
  *
@@ -42,6 +43,7 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
 
     public PhysicsSystem() {
         super();
+        Gdx.app.log("PHYSICSSYSTEM", "Loading Physics System");
         world = new World(new Vector2(0, 0), true);
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;

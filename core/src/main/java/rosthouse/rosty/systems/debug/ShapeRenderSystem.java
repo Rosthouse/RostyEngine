@@ -49,6 +49,7 @@ public class ShapeRenderSystem extends IteratingSystem {
      */
     public ShapeRenderSystem() {
         this(false);
+        Gdx.app.debug("SHAPERENDERSYSTEM", "Loading Debug Shape Render System");
     }
 
     /**

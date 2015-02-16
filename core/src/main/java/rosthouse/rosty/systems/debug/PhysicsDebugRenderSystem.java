@@ -10,6 +10,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import rosthouse.rosty.components.OrthographicCameraComponent;
@@ -33,6 +34,7 @@ public class PhysicsDebugRenderSystem extends IteratingSystem {
 
     public PhysicsDebugRenderSystem(World world) {
         this(world, Boolean.FALSE);
+        Gdx.app.debug("PHYSICSDEBUGSYSTEM", "Loading PhysicsDebug System");
     }
 
     @Override

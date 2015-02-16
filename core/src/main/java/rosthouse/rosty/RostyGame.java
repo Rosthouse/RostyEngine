@@ -76,6 +76,7 @@ public class RostyGame extends ApplicationAdapter {
     @Override
     public void create() {
         setLogLevel(Application.LOG_DEBUG);
+        Gdx.app.log("ENGINE", "Starting Engine");
         assetManager = new AssetManager();
         engine = new Engine();
         renderSystem = new RenderSystem();
