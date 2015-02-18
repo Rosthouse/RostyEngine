@@ -112,9 +112,10 @@ public class RenderSystem extends EntitySystem implements EntityListener {
     private void renderShader(Entity entity, SpriteComponent cpRender) {
         ShaderComponent cpShader = cmShader.get(entity);
         if (cpShader.shader.isCompiled()) {
-            spriteBatch.setShader(cpShader.shader); 
+            cpShader.shader.pedantic = false;
+            spriteBatch.setShader(cpShader.shader);
             cpShader.definition.applyUniformsToShaderProgram(cpShader.shader, timeSinceStart);
-            cpRender.sprite.getTexture().bind(0);
+            cpShader.definition.bindTextures(cpRender.sprite);
             cpRender.sprite.draw(spriteBatch);
             spriteBatch.setShader(null);
         }

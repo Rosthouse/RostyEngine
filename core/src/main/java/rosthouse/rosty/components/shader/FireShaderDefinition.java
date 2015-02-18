@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package rosthouse.rosty.components.shader;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 /**
@@ -15,12 +16,17 @@ public class FireShaderDefinition implements ShaderDefinition{
 
     @Override
     public String getPath() {
-        return "shaders/fire";
+        return "shaders/fire_better";
     }
 
     @Override
     public void applyUniformsToShaderProgram(ShaderProgram shader, float time) {
-      
+        shader.setUniformf("Time", time);
+    }
+
+    @Override
+    public void bindTextures(Sprite sprite) {
+    
     }
 
 

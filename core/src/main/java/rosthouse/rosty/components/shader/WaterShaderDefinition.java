@@ -6,6 +6,7 @@
 package rosthouse.rosty.components.shader;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 /**
@@ -24,6 +25,11 @@ public class WaterShaderDefinition implements ShaderDefinition{
         shader.setUniformf("Time", time);
         shader.setUniformf("Amplitude", 6);
         shader.setUniformf("WaveSpeed", 6);
+    }
+
+    @Override
+    public void bindTextures(Sprite sprite) {
+        sprite.getTexture().bind(0);
     }
     
 }

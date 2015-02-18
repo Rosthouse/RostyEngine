@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package rosthouse.rosty.components.shader;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 /**
@@ -14,5 +15,6 @@ public interface ShaderDefinition {
     
     public String getPath();
     public void applyUniformsToShaderProgram(ShaderProgram shader, float time);
+    public void bindTextures(Sprite sprite);
     
 }
