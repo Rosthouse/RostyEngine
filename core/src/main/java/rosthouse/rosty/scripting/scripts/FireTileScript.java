@@ -24,7 +24,7 @@ public class FireTileScript extends NativeScript<CollisionEvent> {
         if (event.other.getComponent(FireComponent.class) == null) {
             ShaderComponent t;
             if ((t = event.other.getComponent(ShaderComponent.class)) != null) {
-                event.other.remove(ShaderComponent.class);
+//                event.other.remove(ShaderComponent.class);
                 t.dispose();
             }
             if (event.other.getComponent(WaterComponent.class) != null) {

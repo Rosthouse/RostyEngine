@@ -1,7 +1,7 @@
 #version 400
 
 // Uniform values
-uniform sampler2D u_texture;
+uniform sampler2D MarbleTexture;
 uniform float Time;
 uniform float WaveSpeed;
 uniform float Amplitude;
@@ -30,6 +30,6 @@ void main()
   uv.y += verticalDistortion(uv);
   uv.x += horizontalDistortion(uv);  
 
-  vec4 texColor = texture2D(u_texture, uv);
+  vec4 texColor = texture2D(MarbleTexture, uv);
   OutputColor = texColor;
 }
