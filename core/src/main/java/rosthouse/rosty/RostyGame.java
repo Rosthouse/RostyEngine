@@ -77,6 +77,8 @@ public class RostyGame extends ApplicationAdapter {
     public void create() {
         setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ENGINE", "Starting Engine");
+        Gdx.app.log("OPENGLVERSION 2.0", Gdx.graphics.getGL20().toString());
+        Gdx.app.log("OPENGLVERSION 3.0", Gdx.graphics.getGL30().toString());
         assetManager = new AssetManager();
         engine = new Engine();
         renderSystem = new RenderSystem();
