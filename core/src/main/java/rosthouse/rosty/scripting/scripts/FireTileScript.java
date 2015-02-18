@@ -9,6 +9,7 @@ import rosthouse.rosty.components.FireComponent;
 import rosthouse.rosty.components.WaterComponent;
 import rosthouse.rosty.components.shader.ShaderComponent;
 import rosthouse.rosty.collision.events.CollisionEvent;
+import rosthouse.rosty.components.shader.FireShaderDefinition;
 import rosthouse.rosty.scripting.NativeScript;
 
 /**
@@ -30,7 +31,7 @@ public class FireTileScript extends NativeScript<CollisionEvent> {
                 event.other.remove(WaterComponent.class);
             }
             event.other.add(new FireComponent());
-            event.other.add(new ShaderComponent("shaders/fire"));
+            event.other.add(new ShaderComponent(new FireShaderDefinition()));
         }
 
         return null;

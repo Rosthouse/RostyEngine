@@ -15,7 +15,7 @@ import rosthouse.rosty.scripting.NativeScript;
  * @author Rosthouse
  */
 public class WoodScript extends NativeScript<CollisionEvent> {
-
+ 
     @Override
     public Object execute(CollisionEvent event) {
         if (event.other.getComponent(FireComponent.class) != null) {
@@ -23,5 +23,4 @@ public class WoodScript extends NativeScript<CollisionEvent> {
         }
         return null;
     }
-
 }
