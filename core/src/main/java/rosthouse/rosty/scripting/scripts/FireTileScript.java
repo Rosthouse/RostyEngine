@@ -8,7 +8,8 @@ package rosthouse.rosty.scripting.scripts;
 import rosthouse.rosty.components.FireComponent;
 import rosthouse.rosty.components.WaterComponent;
 import rosthouse.rosty.components.shader.ShaderComponent;
-import rosthouse.rosty.listener.CollisionEvent;
+import rosthouse.rosty.collision.events.CollisionEvent;
+import rosthouse.rosty.components.shader.FireShaderDefinition;
 import rosthouse.rosty.scripting.NativeScript;
 
 /**
@@ -23,14 +24,14 @@ public class FireTileScript extends NativeScript<CollisionEvent> {
         if (event.other.getComponent(FireComponent.class) == null) {
             ShaderComponent t;
             if ((t = event.other.getComponent(ShaderComponent.class)) != null) {
-                event.other.remove(ShaderComponent.class);
+//                event.other.remove(ShaderComponent.class);
                 t.dispose();
             }
             if (event.other.getComponent(WaterComponent.class) != null) {
                 event.other.remove(WaterComponent.class);
             }
             event.other.add(new FireComponent());
-            event.other.add(new ShaderComponent("shaders/fire"));
+            event.other.add(new ShaderComponent(new FireShaderDefinition()));
         }
 
         return null;

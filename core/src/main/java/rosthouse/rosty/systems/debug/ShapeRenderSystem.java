@@ -49,6 +49,7 @@ public class ShapeRenderSystem extends IteratingSystem {
      */
     public ShapeRenderSystem() {
         this(false);
+        Gdx.app.debug("SHAPERENDERSYSTEM", "Loading Debug Shape Render System");
     }
 
     /**
@@ -57,7 +58,7 @@ public class ShapeRenderSystem extends IteratingSystem {
      * @param processing Wheter the system should be processed.
      */
     public ShapeRenderSystem(Boolean processing) {
-        super(Family.getFor(OrthographicCameraComponent.class));
+        super(Family.all(OrthographicCameraComponent.class).get());
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
         setProcessing(false);
@@ -119,8 +120,8 @@ public class ShapeRenderSystem extends IteratingSystem {
     }
 
     private void renderGuiFpsCounter(SpriteBatch batch, Camera camera) {
-        float x = camera.viewportWidth;
-        float y = camera.viewportHeight + 10;
+        float x = Gdx.graphics.getWidth();
+        float y = Gdx.graphics.getHeight();
         int fps = Gdx.graphics.getFramesPerSecond();
         if (fps >= 45) {
             // 45 or more FPS show up in green

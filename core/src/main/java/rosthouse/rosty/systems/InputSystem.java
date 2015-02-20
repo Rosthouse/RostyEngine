@@ -41,7 +41,8 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     private int zoomModifier = 0;
 
     public InputSystem() {
-        super(Family.getFor(VelocityComponent.class));
+        super(Family.one(VelocityComponent.class).get());
+        Gdx.app.log("INPUTSYSTEM", "Loading Input System");
         multiplexer = new InputMultiplexer(this);
         Gdx.input.setInputProcessor(multiplexer);
         Gdx.input.setCatchMenuKey(true);
@@ -156,7 +157,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             cpVelocity.xAxis = (int) Gdx.input.getAccelerometerY();
             cpVelocity.yAxis = (int) Gdx.input.getAccelerometerX();
             cpVelocity.yAxis *= -1;
-//            cpVelocity.zAxis = (int) Gdx.input.getAccelerometerZ();
         } else {
             cpVelocity.xAxis = horizontalModifier;
             cpVelocity.yAxis = verticalModifier;

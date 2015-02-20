@@ -7,7 +7,7 @@ package rosthouse.rosty.scripting.scripts;
 
 import com.badlogic.gdx.ai.msg.MessageManager;
 import static rosthouse.rosty.GameConstants.EventType.EndLevel;
-import rosthouse.rosty.listener.CollisionEvent;
+import rosthouse.rosty.collision.events.CollisionEvent;
 import rosthouse.rosty.scripting.Script;
 
 /**

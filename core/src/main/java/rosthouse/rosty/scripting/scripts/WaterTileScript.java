@@ -8,7 +8,9 @@ package rosthouse.rosty.scripting.scripts;
 import rosthouse.rosty.components.FireComponent;
 import rosthouse.rosty.components.WaterComponent;
 import rosthouse.rosty.components.shader.ShaderComponent;
-import rosthouse.rosty.listener.CollisionEvent;
+import rosthouse.rosty.collision.events.CollisionEvent;
+import rosthouse.rosty.components.SpriteComponent;
+import rosthouse.rosty.components.shader.WaterShaderDefinition;
 import rosthouse.rosty.scripting.NativeScript;
 
 /**
@@ -29,7 +31,10 @@ public class WaterTileScript extends NativeScript<CollisionEvent> {
             if (event.other.getComponent(FireComponent.class) != null) {
                 event.other.remove(FireComponent.class);
             }
-            event.other.add(new ShaderComponent("shaders/water"));
+            
+            SpriteComponent sprite = event.other.getComponent(SpriteComponent.class);
+            ShaderComponent cpShader = new ShaderComponent(new WaterShaderDefinition());
+            event.other.add(cpShader);            
             event.other.add(new WaterComponent());
         }
         return null;

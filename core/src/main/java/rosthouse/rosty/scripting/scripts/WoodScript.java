@@ -7,7 +7,7 @@ package rosthouse.rosty.scripting.scripts;
 
 import rosthouse.rosty.components.DeathComponent;
 import rosthouse.rosty.components.FireComponent;
-import rosthouse.rosty.listener.CollisionEvent;
+import rosthouse.rosty.collision.events.CollisionEvent;
 import rosthouse.rosty.scripting.NativeScript;
 
 /**
@@ -15,7 +15,7 @@ import rosthouse.rosty.scripting.NativeScript;
  * @author Rosthouse
  */
 public class WoodScript extends NativeScript<CollisionEvent> {
-
+ 
     @Override
     public Object execute(CollisionEvent event) {
         if (event.other.getComponent(FireComponent.class) != null) {
@@ -23,5 +23,4 @@ public class WoodScript extends NativeScript<CollisionEvent> {
         }
         return null;
     }
-
 }

@@ -9,6 +9,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import rosthouse.rosty.components.DeathComponent;
 
 /**
@@ -21,6 +22,7 @@ public class CleanUpSystem extends IteratingSystem {
 
     public CleanUpSystem() {
         super(Family.one(DeathComponent.class).get());
+        Gdx.app.log("CLEANUP", "Loading Cleanup System");
     }
 
     @Override
@@ -32,7 +34,6 @@ public class CleanUpSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float f) {
         engine.removeEntity(entity);
-//        entity.removeAll();
     }
 
 }

@@ -14,12 +14,14 @@ import com.badlogic.gdx.utils.Disposable;
  *
  * @author Rosthouse
  */
-public class ShaderComponent extends Component implements Disposable {
+public  class ShaderComponent extends Component implements Disposable {
 
     public ShaderProgram shader;
+    public ShaderDefinition definition;
 
-    public ShaderComponent(String path) {
-        shader = new ShaderProgram(Gdx.files.internal(path + ".vert"), Gdx.files.internal(path + ".frag"));
+    public ShaderComponent(ShaderDefinition definition) {
+        this.definition = definition;
+        shader = new ShaderProgram(Gdx.files.internal(definition.getPath() + ".vert"), Gdx.files.internal(definition.getPath() + ".frag"));
         Gdx.app.log("[SHADER]", shader.getLog());
     }
 
@@ -30,5 +32,4 @@ public class ShaderComponent extends Component implements Disposable {
             shader = null;
         }
     }
-
 }

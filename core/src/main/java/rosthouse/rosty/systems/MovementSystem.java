@@ -9,6 +9,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import rosthouse.rosty.components.OrthographicCameraComponent;
@@ -27,7 +28,8 @@ public class MovementSystem extends IteratingSystem {
     private ComponentMapper<OrthographicCameraComponent> cmCamera = ComponentMapper.getFor(OrthographicCameraComponent.class);
 
     public MovementSystem() {
-        super(Family.getFor(PositionComponent.class, VelocityComponent.class));
+        super(Family.all(PositionComponent.class, VelocityComponent.class).get());
+        Gdx.app.log("MOVEMENTSYSTEM", "Loading Movement System");
     }
 
     @Override
