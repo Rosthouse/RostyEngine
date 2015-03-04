@@ -29,6 +29,11 @@ import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import rosthouse.rosty.GameConstants;
 import rosthouse.rosty.MapObjects;
 import rosthouse.rosty.components.OrthographicCameraComponent;
@@ -280,7 +285,9 @@ public class MapLoader {
 
     private ScriptComponent createCollisionScript(String collisionScriptName) {
         ScriptComponent cmpScript = new ScriptComponent();
-        switch (collisionScriptName) {
+        String scriptName = getScriptName(collisionScriptName);
+
+        switch (scriptName) {
             case "FireScript":
                 cmpScript.addScript(GameConstants.START_COLLISION, new FireTileScript());
                 Gdx.app.debug("MAPLOADING", "Loading Fire script");
@@ -305,5 +312,25 @@ public class MapLoader {
                 break;
         }
         return cmpScript;
+    }
+
+    String getScriptName(String collisionScriptDefinition) {
+        Pattern pattern = Pattern.compile("([a-z,A-Z]{1}[a-z,A-Z,0-9]*)[\\(]{0}");
+        Matcher matcher = pattern.matcher(collisionScriptDefinition);
+        if (matcher.find()) {
+            return matcher.group();
+        } else {
+            return "";
+        }
+    }
+
+    Collection<String> getScriptParameters(String collisionScriptDefinition) {
+        Pattern pattern = Pattern.compile(".*\\(([ ,a-z,A-Z]*),([ ,a-z,A-Z]*)\\)");
+        Matcher matcher = pattern.matcher(collisionScriptDefinition);
+        ArrayList<String> results = new ArrayList<String>();
+        while (matcher.find()) {
+            results.add(matcher.group());
+        }
+        return results;
     }
 }
