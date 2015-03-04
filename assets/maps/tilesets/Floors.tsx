@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="Floors" tilewidth="32" tileheight="32">
+ <terraintypes>
+  <terrain name="Lava" tile="-1"/>
+ </terraintypes>
  <tile id="0">
   <image width="32" height="32" source="../../Tiles/dc-dngn/floor/bog_green0.png"/>
  </tile>
@@ -228,16 +231,16 @@
  <tile id="75">
   <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lair3.png"/>
  </tile>
- <tile id="76">
+ <tile id="76" terrain="0,0,0,0">
   <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava0.png"/>
  </tile>
- <tile id="77">
+ <tile id="77" terrain="0,0,0,0">
   <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava1.png"/>
  </tile>
- <tile id="78">
+ <tile id="78" terrain="0,0,0,0">
   <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava2.png"/>
  </tile>
- <tile id="79">
+ <tile id="79" terrain="0,0,0,0">
   <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava3.png"/>
  </tile>
  <tile id="80">
@@ -437,5 +440,41 @@
  </tile>
  <tile id="145">
   <image width="32" height="32" source="../../Tiles/dc-dngn/floor/volcanic_floor6.png"/>
+ </tile>
+ <tile id="146" terrain=",0,,">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_NE.png"/>
+ </tile>
+ <tile id="147" terrain="0,,0,0">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_NE_inv.png"/>
+ </tile>
+ <tile id="148" terrain="0,,,">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_NW.png"/>
+ </tile>
+ <tile id="149" terrain=",0,0,0">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_NW_inv.png"/>
+ </tile>
+ <tile id="150" terrain=",,,0">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_SE.png"/>
+ </tile>
+ <tile id="151" terrain="0,0,0,">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_SE_inv.png"/>
+ </tile>
+ <tile id="152" terrain=",,0,">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_SW.png"/>
+ </tile>
+ <tile id="153" terrain="0,0,,0">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_corner_SW_inv.png"/>
+ </tile>
+ <tile id="154" terrain=",0,,0">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_E.png"/>
+ </tile>
+ <tile id="155" terrain="0,0,,">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_N.png"/>
+ </tile>
+ <tile id="156" terrain=",,0,0">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_S.png"/>
+ </tile>
+ <tile id="157" terrain="0,,0,">
+  <image width="32" height="32" source="../../Tiles/dc-dngn/floor/lava_W.png"/>
  </tile>
 </tileset>
