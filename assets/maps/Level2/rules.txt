@@ -1,4 +1,4 @@
-# Defines rules for Level 1
+# Basic ruleset
 ../rules/rule_white_floor.tmx
 ../rules/rule_brown_brick_wall.tmx
 #./rule_lava.tmx

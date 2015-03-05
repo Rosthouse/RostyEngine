@@ -45,5 +45,5 @@ void main(void)
     float power = pow(2.0, float(i));
     color += (1.5 / power) * snoise(coord + vec3(0.,-Time*.05, Time*.01), power*16.);
   }
-  OutputColor = vec4( color, pow(max(color,0.),2.)*0.4, pow(max(color,0.),3.)*0.15 , 1.0);
+  OutputColor = vec4( color, pow(max(color,0.),2.)*0.4, pow(max(color,0.),3.)*0.15 , color);
 }
