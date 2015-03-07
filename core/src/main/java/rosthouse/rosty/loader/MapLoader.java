@@ -325,11 +325,14 @@ public class MapLoader {
     }
 
     Collection<String> getScriptParameters(String collisionScriptDefinition) {
-        Pattern pattern = Pattern.compile(".*\\(([ ,a-z,A-Z]*),([ ,a-z,A-Z]*)\\)");
+        Pattern pattern = Pattern.compile("\\(([ A-Za-z]+),([ A-Za-z]*)");
         Matcher matcher = pattern.matcher(collisionScriptDefinition);
         ArrayList<String> results = new ArrayList<String>();
-        while (matcher.find()) {
-            results.add(matcher.group());
+        int groupCount = matcher.groupCount();
+        for(int i = 1; i<= groupCount; i++){
+            if(matcher.find(i)) {
+                results.add(matcher.group(i));
+            }
         }
         return results;
     }
