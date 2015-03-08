@@ -14,7 +14,7 @@
   </data>
  </layer>
  <objectgroup name="Level">
-  <object id="1" name="Start" type="Start" x="4380" y="7772" width="32" height="32">
+  <object id="1" name="Start" type="Start" x="4384" y="7744" width="32" height="32">
    <ellipse/>
   </object>
  </objectgroup>

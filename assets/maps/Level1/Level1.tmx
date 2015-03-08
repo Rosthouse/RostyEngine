@@ -636,7 +636,7 @@
   <object id="10" name="Finish" type="Finish" x="736" y="1120" width="32" height="32">
    <properties>
     <property name="isSensor" value="true"/>
-    <property name="onCollision" value="EndLevelScript(Level2)"/>
+    <property name="onCollision" value="EndLevelScript(maps/Level2/Level2.tmx)"/>
    </properties>
    <ellipse/>
   </object>

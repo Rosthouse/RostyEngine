@@ -30,8 +30,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.regex.MatchResult;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import rosthouse.rosty.GameConstants;
@@ -283,9 +282,10 @@ public class MapLoader {
         }
     }
 
-    private ScriptComponent createCollisionScript(String collisionScriptName) {
+    private ScriptComponent createCollisionScript(String collisionScriptDefinition) {
         ScriptComponent cmpScript = new ScriptComponent();
-        String scriptName = getScriptName(collisionScriptName);
+        String scriptName = getScriptName(collisionScriptDefinition);
+        List<String> parameters = getScriptParameters(collisionScriptDefinition);
 
         switch (scriptName) {
             case "FireScript":
@@ -301,7 +301,7 @@ public class MapLoader {
                 Gdx.app.debug("MAPLOADING", "Loading Wood script");
                 break;
             case "EndLevelScript":
-                cmpScript.addScript(GameConstants.START_COLLISION, new EndLevelScript());
+                cmpScript.addScript(GameConstants.START_COLLISION, new EndLevelScript(parameters));
                 Gdx.app.debug("MAPLOADING", "Loading Finish script");
                 break;
             case "WallCollisionScript":
@@ -324,16 +324,18 @@ public class MapLoader {
         }
     }
 
-    Collection<String> getScriptParameters(String collisionScriptDefinition) {
-        Pattern pattern = Pattern.compile("\\(([ A-Za-z]+),([ A-Za-z]*)");
-        Matcher matcher = pattern.matcher(collisionScriptDefinition);
+    List<String> getScriptParameters(final String collisionScriptDefinition) {
         ArrayList<String> results = new ArrayList<String>();
-        int groupCount = matcher.groupCount();
-        for(int i = 1; i<= groupCount; i++){
-            if(matcher.find(i)) {
-                results.add(matcher.group(i));
+        if(collisionScriptDefinition.contains("(")){
+            int index = collisionScriptDefinition.indexOf("(");
+            String parameters = collisionScriptDefinition.substring(index);
+            parameters = parameters.replace("(", "");
+            parameters = parameters.replace(")", "");
+            String[] parameterList = parameters.split(",");
+            for(String parameter:parameterList){
+                results.add(parameter.trim());
             }
-        }
+        } 
         return results;
     }
 }

@@ -76,4 +76,10 @@ public class MapLoaderTest {
         assertThat(parameters, contains(hasToString("Hello"), hasToString("World")));
     }
     
+    @Test
+    public void testGetParametersMoreThan2() {
+        Collection parameters = instance.getScriptParameters("EndLevelScript( Hello, Beautiful, World)");
+        assertThat(parameters, contains("Hello","Beautiful", "World"));
+    }
+    
 }

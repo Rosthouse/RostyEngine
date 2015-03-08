@@ -36,6 +36,8 @@ public class RostyGame extends ApplicationAdapter {
     ShapeRenderSystem shapeRenderSystem;
     CleanUpSystem cleanupSystem;
     private boolean reloadMap;
+    private String nextLevel = "maps/Level1/Level1.tmx";
+    
 
     private final float unitScale = 1f / 32f;
 
@@ -54,10 +56,9 @@ public class RostyGame extends ApplicationAdapter {
                 RostyGame.this.dispose();
                 return true;
             } else if (keycode == Input.Keys.F3 || keycode == Input.Keys.BACK) {
-                reloadMap();
+                reloadMap(nextLevel);
                 return true;
             }
-
             return super.keyDown(keycode); //To change body of generated methods, choose Tools | Templates.
         }
 
@@ -67,10 +68,12 @@ public class RostyGame extends ApplicationAdapter {
 
         @Override
         public boolean handleMessage(Telegram tlgrm) {
-            reloadMap = true;
+            if(tlgrm.message == GameConstants.EventType.EndLevel.value){
+               reloadMap = true; 
+               nextLevel = (String) tlgrm.extraInfo;
+            }            
             return false;
         }
-
     }
 
     @Override
@@ -99,7 +102,7 @@ public class RostyGame extends ApplicationAdapter {
         engine.addSystem(cleanupSystem);
 
         MessageManager.getInstance().addListener(new EngineTelegraph(), GameConstants.EventType.EndLevel.value);
-        loadMap("maps/Level1/Level1.tmx");
+        loadMap(nextLevel);
     }
 
     public void loadMap(String mapName) {
@@ -111,19 +114,19 @@ public class RostyGame extends ApplicationAdapter {
         Gdx.app.setLogLevel(logLevel);
     }
 
-    private void reloadMap() {
+    private void reloadMap(String mapName) {
         engine.removeAllEntities();
         physicsSystem.reloadWorld();
         physicsDebugSystem.setWorld(physicsSystem.getWorld());
-        loadMap("maps/Level1/Level1.tmx");
+        loadMap(mapName);
     }
 
     @Override
     public void render() {
         engine.update(Gdx.graphics.getDeltaTime());
         if (reloadMap) {
-            reloadMap();
             reloadMap = false;
+            reloadMap(nextLevel);
         }
     }
 
