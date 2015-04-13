@@ -36,8 +36,15 @@ public class RostyGame extends ApplicationAdapter {
     ShapeRenderSystem shapeRenderSystem;
     CleanUpSystem cleanupSystem;
     private boolean reloadMap;
-    private String nextLevel = "maps/Level1/Level1.tmx";
-    
+    private String nextLevel;
+
+    public RostyGame() {
+        this("maps/Level1/Level1.tmx");
+    }
+
+    public RostyGame(String nextLevel) {
+        this.nextLevel = nextLevel;
+    }
 
     private final float unitScale = 1f / 32f;
 
@@ -68,10 +75,10 @@ public class RostyGame extends ApplicationAdapter {
 
         @Override
         public boolean handleMessage(Telegram tlgrm) {
-            if(tlgrm.message == GameConstants.EventType.EndLevel.value){
-               reloadMap = true; 
-               nextLevel = (String) tlgrm.extraInfo;
-            }            
+            if (tlgrm.message == GameConstants.EventType.EndLevel.value) {
+                reloadMap = true;
+                nextLevel = (String) tlgrm.extraInfo;
+            }
             return false;
         }
     }
@@ -81,7 +88,7 @@ public class RostyGame extends ApplicationAdapter {
         setLogLevel(Application.LOG_DEBUG);
         Gdx.app.log("ENGINE", "Starting Engine");
         Gdx.app.log("OPENGLVERSION 2.0", Gdx.graphics.getGL20().toString());
-        Gdx.app.log("OPENGLVERSION 3.0", Gdx.graphics.getGL30().toString());
+//        Gdx.app.log("OPENGLVERSION 3.0", Gdx.graphics.getGL30().toString());
         assetManager = new AssetManager();
         engine = new Engine();
         renderSystem = new RenderSystem();

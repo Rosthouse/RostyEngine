@@ -11,6 +11,12 @@ public class EngineDesktop {
         config.height = 480;
         config.width = 800;
 //        config.fullscreen = true;
-        new LwjglApplication(new RostyGame(), config);
+        RostyGame game;
+        if (args.length > 0) {
+            game = new RostyGame(args[0]);
+        } else {
+            game = new RostyGame();
+        }
+        new LwjglApplication(game, config);
     }
 }

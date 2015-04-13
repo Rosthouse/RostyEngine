@@ -65,7 +65,6 @@ public class MapLoader {
 
         TmxMapLoader.Parameters mapParameters = new TmxMapLoader.Parameters();
         mapParameters.convertObjectToTileSpace = true;
-
         assetManager.setLoader(TiledMap.class, new TmxMapLoader());
         assetManager.load(path, TiledMap.class, mapParameters);
         assetManager.finishLoading();
@@ -94,8 +93,6 @@ public class MapLoader {
                 float h = Gdx.graphics.getHeight();
                 OrthographicCamera camera = new OrthographicCamera();
                 camera.setToOrtho(false, (w / h) * 10, 10);
-//                Viewport viewPort = new FillViewport(50, 50, camera);
-//                viewPort.apply();
                 Texture tex = new Texture(Gdx.files.internal("Level/marble.png"));
                 Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
                 MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
@@ -326,16 +323,16 @@ public class MapLoader {
 
     List<String> getScriptParameters(final String collisionScriptDefinition) {
         ArrayList<String> results = new ArrayList<String>();
-        if(collisionScriptDefinition.contains("(")){
+        if (collisionScriptDefinition.contains("(")) {
             int index = collisionScriptDefinition.indexOf("(");
             String parameters = collisionScriptDefinition.substring(index);
             parameters = parameters.replace("(", "");
             parameters = parameters.replace(")", "");
             String[] parameterList = parameters.split(",");
-            for(String parameter:parameterList){
+            for (String parameter : parameterList) {
                 results.add(parameter.trim());
             }
-        } 
+        }
         return results;
     }
 }
