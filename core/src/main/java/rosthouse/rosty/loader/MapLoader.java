@@ -7,6 +7,7 @@ package rosthouse.rosty.loader;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -75,7 +76,7 @@ public class MapLoader {
             if (layerName.equals("Collisions")) {
                 loadCollisionLayer(layer, physicsSystem, engine);
             } else if (layerName.equals("Level")) {
-                loadLevelLayer(layer, unitScale, physicsSystem, engine);
+                loadLevelLayer(map, layer, unitScale, physicsSystem, engine);
             } else if (layerName.equals("Sensors")) {
                 loadSensorLayer(layer, physicsSystem, engine);
             }
@@ -86,7 +87,7 @@ public class MapLoader {
 
     }
 
-    private void loadLevelLayer(MapLayer layer, final float unitScale, PhysicsSystem physicsSystem, Engine engine) {
+    private void loadLevelLayer(TiledMap map, MapLayer layer, final float unitScale, PhysicsSystem physicsSystem, Engine engine) {
         for (MapObject object : layer.getObjects()) {
             if (object.getName().equals("Start")) {
                 float w = Gdx.graphics.getWidth();
@@ -96,15 +97,18 @@ public class MapLoader {
                 Texture tex = new Texture(Gdx.files.internal("Level/marble.png"));
                 Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
                 MovingPicture entity = new MovingPicture(tex, ellipse.x, ellipse.y);
+                entity.setSize(new Vector2(ellipse.width, ellipse.height));
+                Gdx.app.debug("LOADING", String.format("START: Position [X: %s|Y: %s]", ellipse.x, ellipse.y));
                 CircleShape circleShape = new CircleShape();
-                circleShape.setRadius((tex.getHeight() * unitScale) / 2);
+                circleShape.setRadius(ellipse.height / 2);
                 FixtureDef fd = new FixtureDef();
                 fd.density = 5;
                 fd.friction = 5;
                 fd.restitution = 0.3f;
                 PhysicsComponent<CircleShape> marble = physicsSystem.createPhysicsComponent(BodyDef.BodyType.DynamicBody, circleShape, new Vector2(ellipse.x, ellipse.y), fd);
                 entity.add(marble);
-                entity.add(new OrthographicCameraComponent(camera));
+                Vector2 mapSize = new Vector2(map.getProperties().get("width", Integer.class), map.getProperties().get("height", Integer.class));
+                entity.add(new OrthographicCameraComponent(camera, mapSize));
                 engine.addEntity(entity);
                 marble.fixture.setUserData(entity.getId());
             } else {

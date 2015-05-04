@@ -7,6 +7,7 @@ package rosthouse.rosty.entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.SpriteComponent;
 import rosthouse.rosty.components.VelocityComponent;
@@ -19,17 +20,27 @@ import rosthouse.rosty.components.VelocityComponent;
  */
 public class MovingPicture extends Entity {
 
+    private final SpriteComponent spriteComponent;
+    private final PositionComponent positionComponent;
+
     public MovingPicture(Texture texture) {
         this(texture, 0, 0);
     }
 
     public MovingPicture(Texture texture, float x, float y) {
         super();
-        PositionComponent pos = new PositionComponent();
-        pos.x = x;
-        pos.y = y;
-        this.add(pos);
+        this.spriteComponent = new SpriteComponent(texture);
+        positionComponent = new PositionComponent();
+        positionComponent.x = x;
+        positionComponent.y = y;
+        this.add(positionComponent);
         this.add(new VelocityComponent());
-        this.add(new SpriteComponent(texture));
+        this.add(spriteComponent);
+        spriteComponent.sprite.setOriginCenter();
+    }
+
+    public void setSize(Vector2 size) {
+        this.spriteComponent.sprite.setSize(size.x, size.y);
+        this.spriteComponent.sprite.setPosition(positionComponent.x, positionComponent.y);
     }
 }

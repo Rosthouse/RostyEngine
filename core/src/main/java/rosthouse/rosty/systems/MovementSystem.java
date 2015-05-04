@@ -36,18 +36,13 @@ public class MovementSystem extends IteratingSystem {
     public void processEntity(Entity entity, float deltaTime) {
         VelocityComponent cpVelocity = cmMovement.get(entity);
         PositionComponent cpPosition = cmPosition.get(entity);
-//        float xTranslation = cpVelocity.xAxis * deltaTime * cpVelocity.speed;
-//        float yTranslation = cpVelocity.yAxis * deltaTime * cpVelocity.speed;
-//        cpPosition.x += xTranslation;
-//        cpPosition.y += yTranslation;
-
         if (cmCamera.has(entity)) {
-            OrthographicCameraComponent cpCamera = cmCamera.get(entity);
-            updateCamera((OrthographicCamera) cpCamera.camera, cpPosition.x, cpPosition.y, cpVelocity.zAxis * deltaTime);
+            updateCamera(cmCamera.get(entity), cpPosition.x, cpPosition.y, cpVelocity.zAxis * deltaTime);
         }
     }
 
-    private void updateCamera(OrthographicCamera camera, float x, float y, float zoom) {
+    private void updateCamera(OrthographicCameraComponent cmCamera, float x, float y, float zoom) {
+        OrthographicCamera camera = cmCamera.camera;
         camera.zoom += zoom;
         camera.translate(x, y, priority);
 
@@ -55,12 +50,8 @@ public class MovementSystem extends IteratingSystem {
         float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
 
         camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 100 / camera.viewportWidth);
-        camera.position.x = MathUtils.clamp(x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
-//        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
-//        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
-//        Gdx.app.log("Camera Position", String.format("X: %f, Y: %f, Z: %f", camera.position.x, camera.position.y, camera.position.z));
-
+        camera.position.x = MathUtils.clamp(x, effectiveViewportWidth / 2f, cmCamera.getMapSize().x - effectiveViewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(y, effectiveViewportHeight / 2f, cmCamera.getMapSize().y - effectiveViewportHeight / 2f);
+        Gdx.app.debug("CAMERA POSITION", String.format("X: %f; Y: %f", camera.position.x, camera.position.y));
     }
-
 }
