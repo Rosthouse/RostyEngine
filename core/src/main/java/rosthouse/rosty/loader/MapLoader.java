@@ -184,25 +184,28 @@ public class MapLoader {
     }
 
     private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity, boolean isSensor) {
-
         SpriteComponent spriteComponent = new SpriteComponent(texture.getTextureRegion());
         PositionComponent positionComponent = new PositionComponent();
         PolygonShape polygonShape = new PolygonShape();
 
-        float width = texture.getTextureRegion().getRegionWidth() * texture.getScaleX();
-        float height = texture.getTextureRegion().getRegionHeight() * texture.getScaleY();
+        String name = texture.getName();
+
+        float scaleX = texture.getProperties().get("width", Float.class) * texture.getScaleX();
+        float scaleY = texture.getProperties().get("height", Float.class) * texture.getScaleY();
+
+        float width = texture.getTextureRegion().getRegionWidth() * scaleX;
+        float height = texture.getTextureRegion().getRegionHeight() * scaleY;
         float x = texture.getX() + width / 2;
         float y = texture.getY() + height / 2;
 
         spriteComponent.sprite.setX(x);
         spriteComponent.sprite.setY(y);
         spriteComponent.sprite.setRotation(texture.getRotation());
-        spriteComponent.sprite.setScale(texture.getScaleX(), texture.getScaleY());
+        spriteComponent.sprite.setScale(scaleX, scaleY);
         positionComponent.x = x;
         positionComponent.y = y;
         positionComponent.rotation = (float) Math.toRadians(texture.getRotation());
-        polygonShape.setAsBox(width * 0.5f,
-                height * 0.5f);
+        polygonShape.setAsBox(width * 0.5f, height * 0.5f);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
