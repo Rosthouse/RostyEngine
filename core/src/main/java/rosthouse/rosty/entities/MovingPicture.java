@@ -31,6 +31,8 @@ public class MovingPicture extends Entity {
         super();
         this.spriteComponent = new SpriteComponent(texture);
         positionComponent = new PositionComponent();
+        spriteComponent.sprite.setOrigin(texture.getWidth() / 2, texture.getHeight() / 2);
+
         positionComponent.x = x;
         positionComponent.y = y;
         this.add(positionComponent);

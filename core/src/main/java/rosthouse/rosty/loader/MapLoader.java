@@ -89,7 +89,7 @@ public class MapLoader {
 
     private void loadLevelLayer(TiledMap map, MapLayer layer, final float unitScale, PhysicsSystem physicsSystem, Engine engine) {
         for (MapObject object : layer.getObjects()) {
-            if (object.getName().equals("Start")) {
+            if ("Start".equals(object.getName())) {
                 float w = Gdx.graphics.getWidth();
                 float h = Gdx.graphics.getHeight();
                 OrthographicCamera camera = new OrthographicCamera();
@@ -180,7 +180,6 @@ public class MapLoader {
         entity.add(plyCmp);
         entity.add(cmpPhys);
         cmpPhys.fixture.setUserData(entity.getId());
-
     }
 
     private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity, boolean isSensor) {
@@ -193,14 +192,15 @@ public class MapLoader {
         float scaleX = texture.getProperties().get("width", Float.class) * texture.getScaleX();
         float scaleY = texture.getProperties().get("height", Float.class) * texture.getScaleY();
 
-        float width = texture.getTextureRegion().getRegionWidth() * scaleX;
-        float height = texture.getTextureRegion().getRegionHeight() * scaleY;
-        float x = texture.getX() + width / 2;
-        float y = texture.getY() + height / 2;
+        float width = texture.getProperties().get("width", Float.class);
+        float height = texture.getProperties().get("height", Float.class);
+        float x = texture.getX();
+        float y = texture.getY();
 
-        spriteComponent.sprite.setX(x);
-        spriteComponent.sprite.setY(y);
-        spriteComponent.sprite.setRotation(texture.getRotation());
+        spriteComponent.sprite.setOrigin(
+                texture.getOriginX() - width * 0.5f,
+                texture.getOriginY() - height * 0.5f);
+        spriteComponent.sprite.setPosition(x, y);
         spriteComponent.sprite.setScale(scaleX, scaleY);
         positionComponent.x = x;
         positionComponent.y = y;
@@ -282,7 +282,6 @@ public class MapLoader {
             ScriptComponent scriptComponent = new ScriptComponent();
             scriptComponent.addScript(GameConstants.END_COLLISION, new ClearMarbleScript());
             entity.add(scriptComponent);
-//            }
         }
     }
 

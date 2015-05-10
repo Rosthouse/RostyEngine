@@ -99,8 +99,7 @@ public class RenderSystem extends EntitySystem implements EntityListener {
     private void renderSprite(Entity entity) {
         PositionComponent cpPosition = cmPosition.get(entity);
         SpriteComponent cpRender = cmRender.get(entity);
-        cpRender.sprite.setCenter(cpPosition.x, cpPosition.y);
-//        cpRender.sprite.setScale(cpMap.renderer.getUnitScale());
+        cpRender.sprite.setPosition(cpPosition.x, cpPosition.y);
         cpRender.sprite.setRotation((float) Math.toDegrees(cpPosition.rotation));
         if (cmShader.has(entity)) {
             renderShader(entity, cpRender);

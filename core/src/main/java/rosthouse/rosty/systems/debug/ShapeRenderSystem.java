@@ -17,8 +17,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import rosthouse.rosty.components.OrthographicCameraComponent;
+import rosthouse.rosty.components.PositionComponent;
 import rosthouse.rosty.components.SpriteComponent;
 import rosthouse.rosty.components.collision.EllipseComponent;
 import rosthouse.rosty.components.collision.PolygonComponent;
@@ -37,10 +40,9 @@ public class ShapeRenderSystem extends IteratingSystem {
     private final ComponentMapper<RectangleComponent> cmRectangle = ComponentMapper.getFor(RectangleComponent.class);
     private final ComponentMapper<SpriteComponent> cmSprite = ComponentMapper.getFor(SpriteComponent.class);
     private final ComponentMapper<EllipseComponent> cmEllipse = ComponentMapper.getFor(EllipseComponent.class);
+    private final ComponentMapper<PositionComponent> cmPosition = ComponentMapper.getFor(PositionComponent.class);
     private ImmutableArray<Entity> entities;
-//    private ImmutableArray<Entity> rectangleEntities;
-//    private ImmutableArray<Entity> spriteEntities;
-    private BitmapFont fpsFont;
+    private BitmapFont systemFont;
 
     /**
      * Default contructor. Sets the system so that it won't be processed, so in
@@ -68,8 +70,8 @@ public class ShapeRenderSystem extends IteratingSystem {
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
         entities = engine.getEntitiesFor(Family.one(PolygonComponent.class, RectangleComponent.class, SpriteComponent.class, EllipseComponent.class).get());
-        fpsFont = new BitmapFont();
-        fpsFont.setColor(Color.RED);
+        systemFont = new BitmapFont();
+        systemFont.setColor(Color.RED);
         spriteBatch = new SpriteBatch();
     }
 
@@ -78,7 +80,7 @@ public class ShapeRenderSystem extends IteratingSystem {
         super.removedFromEngine(engine); //To change body of generated methods, choose Tools | Templates.
         entities = null;
         shapeRenderer.dispose();
-        fpsFont.dispose();
+        systemFont.dispose();
         spriteBatch.dispose();
     }
 
@@ -91,6 +93,7 @@ public class ShapeRenderSystem extends IteratingSystem {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         for (int i = 0; i < this.entities.size(); i++) {
             Entity current = entities.get(i);
+            drawEntityInformation(spriteBatch, cmpCamera.camera, current);
             if (cmPolygon.has(current)) {
                 shapeRenderer.setColor(Color.BLUE);
                 PolygonComponent cpPolygon = cmPolygon.get(current);
@@ -106,6 +109,8 @@ public class ShapeRenderSystem extends IteratingSystem {
                 SpriteComponent spSprite = cmSprite.get(current);
                 Rectangle boundingRectangle = spSprite.sprite.getBoundingRectangle();
                 shapeRenderer.rect(boundingRectangle.x, boundingRectangle.y, boundingRectangle.width, boundingRectangle.height);
+                shapeRenderer.setColor(Color.PURPLE);
+                shapeRenderer.point(spSprite.sprite.getOriginX(), spSprite.sprite.getOriginY(), 0);
             }
             if (cmEllipse.has(current)) {
                 shapeRenderer.setColor(Color.WHITE);
@@ -125,16 +130,30 @@ public class ShapeRenderSystem extends IteratingSystem {
         int fps = Gdx.graphics.getFramesPerSecond();
         if (fps >= 45) {
             // 45 or more FPS show up in green
-            fpsFont.setColor(0, 1, 0, 1);
+            systemFont.setColor(0, 1, 0, 1);
         } else if (fps >= 30) {
             // 30 or more FPS show up in yellow
-            fpsFont.setColor(1, 1, 0, 1);
+            systemFont.setColor(1, 1, 0, 1);
         } else {
             // less than 30 FPS show up in red
-            fpsFont.setColor(1, 0, 0, 1);
+            systemFont.setColor(1, 0, 0, 1);
         }
-        fpsFont.draw(batch, "FPS: " + fps, x, y);
-        fpsFont.setColor(1, 1, 1, 1); // white
+        systemFont.draw(batch, "FPS: " + fps, x, y);
+        systemFont.setColor(1, 1, 1, 1); // white
+    }
+
+    private void drawEntityInformation(SpriteBatch batch, Camera camera, Entity current) {
+        if (cmPosition.has(current)) {
+            batch.begin();
+            PositionComponent cpPosition = cmPosition.get(current);
+            String positonString = String.format("Pos: [%f|%f]", cpPosition.x, cpPosition.y);
+            String rotationString = String.format("Rot: [%f]", (float) Math.toDegrees(cpPosition.rotation));
+            StringBuilder builder = new StringBuilder();
+            builder.append(positonString).append("\n").append(rotationString);
+            Vector3 screenCoordinates = camera.project(new Vector3(cpPosition.x, cpPosition.y, 0));
+            systemFont.draw(batch, builder.toString(), screenCoordinates.x, screenCoordinates.y);
+            batch.end();
+        }
     }
 
 }
