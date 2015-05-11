@@ -14,7 +14,7 @@
    <ellipse/>
   </object>
   <object id="9" gid="6" x="96" y="256" width="32" height="32"/>
-  <object id="10" gid="36" x="288.804" y="254.059" width="160" height="64" rotation="-315"/>
+  <object id="10" gid="36" x="336" y="208" width="160" height="64" rotation="90"/>
   <object id="11" gid="53" x="160" y="288" width="64" height="64"/>
   <object id="12" x="512" y="32" width="64" height="64"/>
   <object id="13" x="512" y="256">

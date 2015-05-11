@@ -22,6 +22,7 @@ import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Ellipse;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -185,27 +186,29 @@ public class MapLoader {
     private void createTexture(TextureMapObject texture, PhysicsSystem physicsSystem, Entity mapObjectEntity, boolean isSensor) {
         SpriteComponent spriteComponent = new SpriteComponent(texture.getTextureRegion());
         PositionComponent positionComponent = new PositionComponent();
-        PolygonShape polygonShape = new PolygonShape();
-
-        String name = texture.getName();
-
-        float scaleX = texture.getProperties().get("width", Float.class) * texture.getScaleX();
-        float scaleY = texture.getProperties().get("height", Float.class) * texture.getScaleY();
-
+        
         float width = texture.getProperties().get("width", Float.class);
         float height = texture.getProperties().get("height", Float.class);
-        float x = texture.getX();
-        float y = texture.getY();
+        float rotation = texture.getRotation();
+        float x = texture.getX() ;
+        float y = texture.getY() + height;
+        
 
+        String name = texture.getName();
         spriteComponent.sprite.setOrigin(
                 texture.getOriginX() - width * 0.5f,
                 texture.getOriginY() - height * 0.5f);
-        spriteComponent.sprite.setPosition(x, y);
-        spriteComponent.sprite.setScale(scaleX, scaleY);
-        positionComponent.x = x;
-        positionComponent.y = y;
-        positionComponent.rotation = (float) Math.toRadians(texture.getRotation());
-        polygonShape.setAsBox(width * 0.5f, height * 0.5f);
+        spriteComponent.sprite.setSize(width, height);
+        PolygonShape polygonShape = new PolygonShape();
+        polygonShape.setAsBox(
+                width * 0.5f, 
+                height * 0.5f, 
+                new Vector2(
+                        width * 0.5f, 
+                        height * 0.5f
+                ), 
+                MathUtils.degreesToRadians * rotation
+        );
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
@@ -213,11 +216,21 @@ public class MapLoader {
 
         PhysicsComponent<PolygonShape> cmpSensor;
         if (isSensor) {
-            cmpSensor = physicsSystem.createSensorComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
+            cmpSensor = physicsSystem.createSensorComponent(
+                    BodyDef.BodyType.StaticBody, 
+                    polygonShape, 
+                    new Vector2(x, y), 
+                    fixtureDef
+            );
         } else {
-            cmpSensor = physicsSystem.createPhysicsComponent(BodyDef.BodyType.StaticBody, polygonShape, new Vector2(x, y), fixtureDef);
+            cmpSensor = physicsSystem.createPhysicsComponent(
+                    BodyDef.BodyType.StaticBody, 
+                    polygonShape, 
+                    new Vector2(x, y), 
+                    fixtureDef
+            );
         }
-        cmpSensor.fixture.getBody().setTransform(x, y, texture.getRotation());
+        cmpSensor.fixture.getBody().setTransform(x, y, MathUtils.degreesToRadians * rotation);
         mapObjectEntity.add(cmpSensor);
         cmpSensor.fixture.setUserData(mapObjectEntity.getId());
         mapObjectEntity.add(spriteComponent);
@@ -249,7 +262,6 @@ public class MapLoader {
         EllipseComponent cmpEllipse = new EllipseComponent(ellipse);
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(ellipse.height / 2f);
-//        circleShape.setPosition(new Vector2(ellipse.x, ellipse.y));
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 0;
         fixtureDef.friction = 1;
